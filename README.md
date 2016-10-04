@@ -20,6 +20,7 @@ TODO:
   - preferable with vim bindings (enabled through those dotfiles)
   - some kind of syncing capabilities 
   - high security and anonymity
+  - Check out https://wiki.archlinux.org/index.php/List_of_applications/Internet#Web_browsers
 - [ ] Hook the YouCompleteMe compile into the script
 - [ ] Look for a file syncing utility that is 
   - open source
