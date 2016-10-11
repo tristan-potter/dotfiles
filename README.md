@@ -33,6 +33,8 @@ TODO:
   - Apple has encryption baked into the OS. Can encrypt folders as new drives (.dmg). 
   - Can encrypt USB keys as well, password protected. Only works on OSX propreitary file system though. 
   - Probably want to look for / write an application that encrypts a drive, but has a program on it that will work cross platform to un-encrypt. 
+  - https://camlistore.org/
+  - https://bazil.org/ https://bazil.org/fuse/ Check out talks on this. Also just Bazil in general is a sweet project.
 - [ ] Better email management (same qualities as above)
   - Host on email on Digital Ocean or Linode. 
   - See https://github.com/DrTeePot/sovereign 
