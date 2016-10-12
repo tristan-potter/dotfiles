@@ -81,6 +81,7 @@ let g:vundle_default_git_proto = 'git'
 " NerdTree
 " autocmd vimenter * NERDTree " sets nerdtree to open on start
 map <C-n> :NERDTreeToggle<CR>
+let NERDTreeQuitOnOpen=1
 
 " airline
 set laststatus=2
