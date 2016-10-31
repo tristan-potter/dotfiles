@@ -15,6 +15,12 @@ safety on my computer.
 
 TODO:
 
+- [ ] Install:
+  - fzf, fzf-zsh, fzf-vim
+  - look at https://github.com/amix/vimrc
+  - https://github.com/nicknisi/dotfiles/blob/master/tmux/tmux.conf.symlink
+  - read up on https://github.com/tpope/vim-dispatch
+  - read https://github.com/fatih/vim-go-tutorial
 - [ ] Look for a browser that:
   - has dotfiles configuration, 
   - preferable with vim bindings (enabled through those dotfiles)

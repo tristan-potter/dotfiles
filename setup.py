@@ -1,5 +1,9 @@
 import os
 
+# TODO add brew install stuff
+# install you complete me stuff
+# set git config stuff like global exclude
+
 # files and folders to ignore
 ignore_list = ['.git', 'README.md', os.path.basename(__file__)]
 

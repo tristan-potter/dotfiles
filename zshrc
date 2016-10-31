@@ -98,3 +98,5 @@ alias gstat="git status"
 
 [ -f /opt/dev/dev.sh ] && source /opt/dev/dev.sh
 
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
