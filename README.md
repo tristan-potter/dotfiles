@@ -28,6 +28,9 @@ TODO:
   - high security and anonymity
   - Check out https://wiki.archlinux.org/index.php/List_of_applications/Internet#Web_browsers
 - [ ] Hook the YouCompleteMe compile into the script
+- [ ] When on macOS do all teh brew stuff
+  - `brew cask install qlcolorcode qlstephen qlmarkdown quicklook-json qlprettypatch quicklook-csv betterzipql qlimagesize webpquicklook suspicious-package`
+  
 - [ ] Investigate YubiKey or other USB-based secondary protection, either for entire OS or specific folders. 
   - Lots of Golang packages to interface with YubiKey. Also some Go packages for GUI's which will be useful.
 - [ ] Look for a file syncing utility that is 
