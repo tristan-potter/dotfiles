@@ -2,7 +2,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH=/Users/tristan-shopify/.oh-my-zsh
+export ZSH=$HOME/.oh-my-zsh
 
 export GOPATH=$HOME
 export PATH=$GOPATH/bin:$PATH
@@ -11,6 +11,10 @@ export PATH=$GOPATH/bin:$PATH
 # zsh options
 setopt autocd histignoredups notify 
 unsetopt beep
+
+# vi-mode
+bindkey -v
+#export KEYTIMEOUT=1 #make escape delay 0.1s
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
@@ -59,9 +63,13 @@ ZSH_THEME="intheloop"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git, colored-man-pages, vi-mode, history-substring-search)
+plugins=(git, vi-mode, colored-man-pages, history-substring-search)
 
 source $ZSH/oh-my-zsh.sh
+source $ZSH/plugins/git/git.plugin.zsh
+source $ZSH/plugins/vi-mode/vi-mode.plugin.zsh
+source $ZSH/plugins/colored-man-pages/colored-man-pages.plugin.zsh
+
 
 # User configuration
 
