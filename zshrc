@@ -2,11 +2,11 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH=/Users/tristan-shopify/.oh-my-zsh
+export ZSH=$HOME/.oh-my-zsh
 
 export GOPATH=$HOME
+export GOBIN=$GOPATH/bin
 export PATH=$GOPATH/bin:$PATH
-
 
 # zsh options
 setopt autocd histignoredups notify 

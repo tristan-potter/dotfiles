@@ -1,5 +1,11 @@
 import os
 
+# install programs
+
+# install vundle
+# install ctags
+# compile youcompleteme
+
 # files and folders to ignore
 ignore_list = ['.git', 'README.md', os.path.basename(__file__)]
 
@@ -40,3 +46,4 @@ for config in dotfiles:
     except Exception as e:
         print e
 
+# TODO run vundel install

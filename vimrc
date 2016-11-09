@@ -18,7 +18,7 @@ Plugin 'gregsexton/gitv'
 " git gutter
 Plugin 'airblade/vim-gitgutter'
 " Check code syntax
-Plugin 'tscrooloose/syntastic'
+Plugin 'scrooloose/syntastic'
 " comment stuff out
 Plugin 'tpope/vim-commentary' 
 " misc functions for plugins
