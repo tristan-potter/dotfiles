@@ -21,6 +21,8 @@ TODO:
   - https://github.com/nicknisi/dotfiles/blob/master/tmux/tmux.conf.symlink
   - read up on https://github.com/tpope/vim-dispatch
   - read https://github.com/fatih/vim-go-tutorial
+  - try and get rid of Vundle by using native plugins like https://github.com/etiennebarrie/dotfiles
+  - or use viml to install vundle like https://github.com/thegedge/dotfiles/blob/60b09c51693f5a9f9aaf0ad3045ce5c17a3d8115/vim/plugins.vimrc#L3-L10
 - [ ] Look for a browser that:
   - has dotfiles configuration, 
   - preferable with vim bindings (enabled through those dotfiles)
