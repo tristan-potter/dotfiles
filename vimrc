@@ -43,15 +43,19 @@ Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'ctrlpvim/ctrlp.vim'
 " Buffergator (leader-b to display a list of buffers)
 Plugin 'jeetsukumaran/vim-buffergator'
+
 " Code completion
 " On servers, probably want to use ervandew/supertab since it's 
 "   more lightweight and doesn't require compilations
 Plugin 'Valloric/YouCompleteMe'
+Plugin 'SirVer/ultisnips'
 
 " Program support
 Plugin 'dgryski/vim-godef'
 Plugin 'fatih/vim-go'
 Plugin 'vim-ruby/vim-ruby'
+Plugin 'xuhdev/vim-latex-live-preview'
+Plugin 'lervag/vimtex'
 
 " TMUX 
 Plugin 'edkolev/tmuxline.vim'
@@ -105,6 +109,9 @@ let g:gitgutter_sign_column_always = 1
 
 " set ruby to not do expensive syntax highlighting 
 let ruby_no_expensive=1
+
+" set latex preview 
+let g:livepreview_previewer = 'open -a Preview'
 
 " Set easytags to use project-dependent tags
 set tags=./.tags;,~/.vimtags
