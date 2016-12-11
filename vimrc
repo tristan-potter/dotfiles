@@ -113,6 +113,9 @@ let ruby_no_expensive=1
 " set latex preview 
 let g:livepreview_previewer = 'open -a Preview'
 
+" vimtex
+let g:vimtex_latexmk_enabled = 0
+
 " Set easytags to use project-dependent tags
 set tags=./.tags;,~/.vimtags
 
