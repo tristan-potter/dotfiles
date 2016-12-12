@@ -47,6 +47,10 @@ Plugin 'jeetsukumaran/vim-buffergator'
 " On servers, probably want to use ervandew/supertab since it's 
 "   more lightweight and doesn't require compilations
 Plugin 'Valloric/YouCompleteMe'
+" Easy movement along a line with f and t
+Plugin 'unblevable/quick-scope'
+" window resizing
+Plugin 'roman/golden-ratio'
 
 " Program support
 Plugin 'dgryski/vim-godef'
@@ -73,7 +77,21 @@ filetype plugin indent on    " required
 "
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
-"
+
+" switch because 0 is easier to hit and ^ is more useful
+nnoremap ^ 0
+nnoremap 0 ^
+
+" allow seemless search of visual selection
+vnoremap // y/<C-R>"<CR>
+
+" QuickScope options
+" Trigger a highlight in the appropriate direction when pressing these keys:
+let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
+" Trigger a highlight only when pressing f and F.
+let g:qs_highlight_on_keys = ['f', 'F']
+let g:qs_first_occurrence_highlight_color = 155
+let g:qs_second_occurrence_highlight_color = 81
 
 " Set Vundle to use ssh
 let g:vundle_default_git_proto = 'git'
@@ -126,35 +144,9 @@ let g:go_highlight_methods = 1
 let g:go_highlight_structs = 1
 
 nmap <F8> :TagbarToggle<CR>
-"let g:tagbar_type_go = {  
-"   \ 'ctagstype' : 'go',
-"   \ 'kinds'     : [
-"       \ 'p:package',
-"       \ 'i:imports:1',
-"       \ 'c:constants',
-"       \ 'v:variables',
-"       \ 't:types',
-"       \ 'n:interfaces',
-"       \ 'w:fields',
-"       \ 'e:embedded',
-"       \ 'm:methods',
-"       \ 'r:constructor',
-"       \ 'f:functions'
-"   \ ],
-"   \ 'sro' : '.',
-"   \ 'kind2scope' : {
-"       \ 't' : 'ctype',
-"       \ 'n' : 'ntype'
-"   \ },
-"   \ 'scope2kind' : {
-"       \ 'ctype' : 't',
-"       \ 'ntype' : 'n'
-"   \ },
-"   \ 'ctagsbin'  : 'gotags',
-"   \ 'ctagsargs' : '-sort -silent'
-"   \ }
 
 " Auto line numbers
+set relativenumber
 set number
 
 " Improved indentation on newline
