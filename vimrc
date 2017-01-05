@@ -20,11 +20,11 @@ Plugin 'airblade/vim-gitgutter'
 " Check code syntax
 Plugin 'scrooloose/syntastic'
 " comment stuff out
-Plugin 'tpope/vim-commentary' 
+Plugin 'tpope/vim-commentary'
 " misc functions for plugins
 Plugin 'xolox/vim-misc'
 " easy ctag management for 'go-to-definition' support
-Plugin 'xolox/vim-easytags' 
+"Plugin 'ludovicchabant/vim-gutentags'
 " browse tags in the current file
 Plugin 'majutsushi/tagbar'
 " allow easy surrouding
@@ -36,6 +36,8 @@ Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 " solarized
 Plugin 'altercation/vim-colors-solarized'
+" multiple cursors
+" Plugin 'terryma/vim-multiple-cursors'
 " nerdtree
 Plugin 'scrooloose/nerdtree'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
@@ -45,14 +47,17 @@ Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'jeetsukumaran/vim-buffergator'
 "Tables
 Plugin 'dhruvasagar/vim-table-mode'
+" Plugin 'Chiel92/vim-autoformat'
 
 " Code completion
-" On servers, probably want to use ervandew/supertab since it's 
+" On servers, probably want to just use ervandew/supertab since it's
 "   more lightweight and doesn't require compilations
+Plugin 'ervandew/supertab'
 Plugin 'Valloric/YouCompleteMe'
+Plugin 'SirVer/ultisnips'
+
 " Easy movement along a line with f and t
 Plugin 'unblevable/quick-scope'
-Plugin 'SirVer/ultisnips'
 
 " Program support
 Plugin 'dgryski/vim-godef'
@@ -61,7 +66,7 @@ Plugin 'vim-ruby/vim-ruby'
 Plugin 'xuhdev/vim-latex-live-preview'
 Plugin 'lervag/vimtex'
 
-" TMUX 
+" TMUX
 Plugin 'edkolev/tmuxline.vim'
 
 
@@ -82,12 +87,38 @@ filetype plugin indent on    " required
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
 
-" switch because 0 is easier to hit and ^ is more useful
-nnoremap ^ 0
-nnoremap 0 ^
+" map capitals, cause my pinky is slow
+:command! WQ wq
+:command! Wq wq
+:command! W w
+:command! -bang Q  quit<bang>
 
-" allow seemless search of visual selection
-vnoremap // y/<C-R>"<CR>
+" set a map leader for more key combos
+let mapleader = '\'
+
+" shortcut to save
+nmap <leader>\ :w<cr>
+
+" map ctrl-[ to exit with no checks, and ctrl-c to exit 
+noremap <C-[> <C-c>
+noremap <C-c> <Esc>
+
+" switch because 0 is easier to hit and ^ is more useful
+" commented out in favour of using _ for ^. same behaviour when no count
+" nnoremap ^ 0
+" nnoremap 0 ^
+
+" vim-autoformat
+" auto run formatting on save
+" au BufWrite * :Autoformat
+
+" TODO change vim-multiple-cursors bindings?
+" Change Ctrl-P to Ctrl-Space and use fzy or fzf for everythign
+let g:multi_cursor_use_default_mapping=0
+let g:multi_cursor_next_key='<C-n>'
+let g:multi_cursor_prev_key='<C-p>'
+let g:multi_cursor_skip_key='<C-x>'
+let g:multi_cursor_quit_key='<C-c>'
 
 " QuickScope options
 " Trigger a highlight in the appropriate direction when pressing these keys:
@@ -102,7 +133,7 @@ let g:vundle_default_git_proto = 'git'
 
 " NerdTree
 " autocmd vimenter * NERDTree " sets nerdtree to open on start
-map <C-n> :NERDTreeToggle<CR>
+map <leader>n :NERDTreeToggle<CR>
 let NERDTreeQuitOnOpen=1
 
 " airline
@@ -113,8 +144,22 @@ let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = ' '
 
 " you complete me
+" compatability https://github.com/SirVer/ultisnips/issues/512
 let g:ycm_allow_changing_updatetime = 1         " leave my updatetime alone
 let g:ycm_collect_identifiers_from_tags_files = 1
+let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']  
+let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+
+"supertab
+let g:SuperTabDefaultCompletionType = '<C-n>'
+let g:SuperTabNoCompleteAfter = ['^', ',', '\s']
+
+" UtilSnips
+" better key bindings for UltiSnipsExpandTrigger
+let g:UltiSnipsExpandTrigger = "<tab>"
+let g:UltiSnipsJumpForwardTrigger = "<tab>"
+let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+
 set completeopt="menu"                          " remove preview from completeopt
 
 
@@ -125,7 +170,7 @@ let g:tmuxline_powerline_separators = 0
 set updatetime=100
 let g:gitgutter_sign_column_always = 1
 
-" set ruby to not do expensive syntax highlighting 
+" set ruby to not do expensive syntax highlighting
 let ruby_no_expensive=1
 
 " set latex preview 
@@ -135,25 +180,27 @@ let ruby_no_expensive=1
 let g:vimtex_latexmk_enabled = 0
 
 " Set easytags to use project-dependent tags
-set tags=./.tags;,~/.vimtags
+" set tags=./.tags;,~/.vimtags
 
-"Set easytags to compile go-tags
-let g:easytags_languages = {
-	\   'language': {
-	\     'go': 'gotags',
-	\       'fileoutput_opt': '-f',
-	\       'stdout_opt': '-f-',
-	\       'recurse_flag': '-R'
-	\   }
-	\}
+" "Set easytags to compile go-tags
+" let g:easytags_languages = {
+" 			\   'language': {
+" 			\     'go': 'gotags',
+" 			\       'fileoutput_opt': '-f',
+" 			\       'stdout_opt': '-f-',
+" 			\       'recurse_flag': '-R'
+" 			\   }
+" 			\}
 
 "Tagbar Options
-
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
 let g:go_highlight_structs = 1
 
 nmap <F8> :TagbarToggle<CR>
+
+"ruby indentation
+autocmd FileType ruby setlocal expandtab shiftwidth=2 tabstop=2
 
 " Auto line numbers
 set relativenumber
@@ -168,7 +215,7 @@ set autoindent
 set smartindent
 
 " Tab control
-set expandtab               " insert tabs rather than spaces for <Tab>
+set expandtab               " insert spaces for tabs
 set smarttab                " tab respects 'tabstop', 'shiftwidth', and 'softtabstop'
 set tabstop=4               " the visible width of tabs
 set softtabstop=4           " edit as if the tabs are 4 characters wide
@@ -192,22 +239,18 @@ set hlsearch                " highlight search results
 set incsearch               " set incremental search, like modern browsers
 set nolazyredraw            " don't redraw while executing macros
 
-" set a map leader for more key combos
-let mapleader = '\'
-
-" shortcut to save
-nmap <leader>\ :w<cr>
 
 " Set colours
 syntax on                   " switch syntax highlighting on
 
 set t_Co=256                " Explicitly tell vim that the terminal supports 256 colors"
 set background=dark
-colorscheme solarized		" Set the colorscheme
+colorscheme solarized       " Set the colorscheme
 call togglebg#map("<F5>")
 
 " set line the cursor is on to be highlighted
 set cursorline
+set colorcolumn=80 " line end guide
 
 " make comments and HTML attributes italic
 highlight htmlArg cterm=italic

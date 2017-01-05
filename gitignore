@@ -1,5 +1,6 @@
 # vim
 *.swp
+.ruby-beautify
 
 # Folder view configuration files
 .DS_Store

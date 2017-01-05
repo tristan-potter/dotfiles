@@ -6,7 +6,7 @@ export ZSH=$HOME/.oh-my-zsh
 
 export GOPATH=$HOME
 export GOBIN=$GOPATH/bin
-export PATH=$GOPATH/bin:$PATH
+export PATH=$GOBIN:$PATH
 
 # zsh options
 setopt autocd histignoredups notify 
