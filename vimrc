@@ -43,6 +43,8 @@ Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'ctrlpvim/ctrlp.vim'
 " Buffergator (leader-b to display a list of buffers)
 Plugin 'jeetsukumaran/vim-buffergator'
+"Tables
+Plugin 'dhruvasagar/vim-table-mode'
 
 " Code completion
 " On servers, probably want to use ervandew/supertab since it's 
@@ -127,7 +129,7 @@ let g:gitgutter_sign_column_always = 1
 let ruby_no_expensive=1
 
 " set latex preview 
-let g:livepreview_previewer = 'open -a Preview'
+" let g:livepreview_previewer = 'open -a Preview'
 
 " vimtex
 let g:vimtex_latexmk_enabled = 0
@@ -156,6 +158,10 @@ nmap <F8> :TagbarToggle<CR>
 " Auto line numbers
 set relativenumber
 set number
+
+" column length
+" this is for readability
+set colorcolumn=80
 
 " Improved indentation on newline
 set autoindent
