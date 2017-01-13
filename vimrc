@@ -4,21 +4,22 @@ filetype off                  " required
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
+" Keep Plugin commands between vundle#begin/end.
+
 " alternatively, pass a path where Vundle should install plugins
 "call vundle#begin('~/some/path/here')
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
-" Keep Plugin commands between vundle#begin/end.
+"******* GIT PLUGINS ********
 " plugin on GitHub repo
 Plugin 'tpope/vim-fugitive'
 " extend fugitive with better branch and commit views
 Plugin 'gregsexton/gitv'
 " git gutter
 Plugin 'airblade/vim-gitgutter'
-" Check code syntax
-Plugin 'scrooloose/syntastic'
+
 " comment stuff out
 Plugin 'tpope/vim-commentary'
 " misc functions for plugins
@@ -58,6 +59,9 @@ Plugin 'SirVer/ultisnips'
 
 " Easy movement along a line with f and t
 Plugin 'unblevable/quick-scope'
+
+" Check code syntax
+Plugin 'scrooloose/syntastic'
 
 " Program support
 Plugin 'dgryski/vim-godef'
@@ -120,6 +124,12 @@ let g:multi_cursor_prev_key='<C-p>'
 let g:multi_cursor_skip_key='<C-x>'
 let g:multi_cursor_quit_key='<C-c>'
 
+" Buffergator
+" https://github.com/jeetsukumaran/vim-buffergator
+" We want to be able to use <leader>t for tables. 
+" TODO rebind buffer keys
+let g:buffergator_suppress_keymaps = 1
+
 " QuickScope options
 " Trigger a highlight in the appropriate direction when pressing these keys:
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
@@ -160,8 +170,7 @@ let g:UltiSnipsExpandTrigger = "<tab>"
 let g:UltiSnipsJumpForwardTrigger = "<tab>"
 let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 
-set completeopt="menu"                          " remove preview from completeopt
-
+set completeopt="menu" " remove preview from completeopt
 
 "tmuxline
 let g:tmuxline_powerline_separators = 0
@@ -174,7 +183,7 @@ let g:gitgutter_sign_column_always = 1
 let ruby_no_expensive=1
 
 " set latex preview 
-" let g:livepreview_previewer = 'open -a Preview'
+let g:livepreview_previewer = 'open -a Preview'
 
 " vimtex
 let g:vimtex_latexmk_enabled = 0
