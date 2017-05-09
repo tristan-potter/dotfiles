@@ -14,6 +14,11 @@ independent from the big-web-corp, ideally creating an easy solution to privacy 
 safety on my computer. 
 
 TODO:
+- [ ] Install:
+  - vundle, brew, oh-my-zsh
+  - vundle plugin install
+  - iterm, tmux, solarized
+  - `git config --global core.excludesfile ~/.gitignore_global`
 
 - [ ] Install:
   - fzf, fzf-zsh, fzf-vim
