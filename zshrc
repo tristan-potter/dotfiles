@@ -8,6 +8,9 @@ export GOPATH=$HOME
 export GOBIN=$GOPATH/bin
 export PATH=$GOBIN:$PATH
 
+export RUSTBIN=~/.cargo/bin directory
+export PATH=$RUSTBIN:$PATH
+
 # zsh options
 setopt autocd histignoredups notify 
 unsetopt beep

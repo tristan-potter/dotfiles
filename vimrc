@@ -69,6 +69,16 @@ Plugin 'fatih/vim-go'
 Plugin 'vim-ruby/vim-ruby'
 Plugin 'xuhdev/vim-latex-live-preview'
 Plugin 'lervag/vimtex'
+Plugin 'pangloss/vim-javascript'
+Plugin 'thoughtbot/vim-rspec'
+Plugin 'tpope/vim-rails'
+Plugin 'rust-lang/rust.vim'
+Plugin 'davidbeckingsale/writegood.vim' " English y'all
+
+" Supercharged autocomplete for html
+Plugin 'mattn/emmet-vim'
+Plugin 'mattn/webapi-vim'
+
 
 " TMUX
 Plugin 'edkolev/tmuxline.vim'
@@ -251,11 +261,13 @@ set nolazyredraw            " don't redraw while executing macros
 
 " Set colours
 syntax on                   " switch syntax highlighting on
+syntax enable
 
 set t_Co=256                " Explicitly tell vim that the terminal supports 256 colors"
 set background=dark
 colorscheme solarized       " Set the colorscheme
 call togglebg#map("<F5>")
+let g:solarized_termcolors=256
 
 " set line the cursor is on to be highlighted
 set cursorline
