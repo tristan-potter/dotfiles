@@ -18,6 +18,7 @@ TODO:
   - vundle, brew, oh-my-zsh
   - vundle plugin install
   - iterm, tmux, solarized
+  - `git config --global core.excludesfile ~/.gitignore_global`
 
 - [ ] Install:
   - fzf, fzf-zsh, fzf-vim
