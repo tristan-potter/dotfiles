@@ -12,6 +12,17 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
+"******* LOOK AND FEEL
+" solarized
+Plugin 'altercation/vim-colors-solarized'
+" airline
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+" TODO In the future, may want to transition to 
+"   https://github.com/itchyny/lightline.vim
+" TMUX
+Plugin 'edkolev/tmuxline.vim'
+
 "******* GIT PLUGINS ********
 " plugin on GitHub repo
 Plugin 'tpope/vim-fugitive'
@@ -20,45 +31,46 @@ Plugin 'gregsexton/gitv'
 " git gutter
 Plugin 'airblade/vim-gitgutter'
 
-" comment stuff out
-Plugin 'tpope/vim-commentary'
-" misc functions for plugins
-Plugin 'xolox/vim-misc'
+" ***** CONVINIENCE *******
 " easy ctag management for 'go-to-definition' support
 "Plugin 'ludovicchabant/vim-gutentags'
 " browse tags in the current file
 Plugin 'majutsushi/tagbar'
+" comment stuff out
+Plugin 'tpope/vim-commentary'
+" misc functions for plugins
+Plugin 'xolox/vim-misc'
 " allow easy surrouding
 Plugin 'tpope/vim-surround'
 " all comma objects to be a real object
 Plugin 'austintaylor/vim-commaobject'
-" airline
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-" solarized
-Plugin 'altercation/vim-colors-solarized'
-" multiple cursors
-" Plugin 'terryma/vim-multiple-cursors'
-" nerdtree
-Plugin 'scrooloose/nerdtree'
-Plugin 'Xuyuanp/nerdtree-git-plugin'
-" Ctrl-p fuzzy finder
-Plugin 'ctrlpvim/ctrlp.vim'
-" Buffergator (leader-b to display a list of buffers)
-Plugin 'jeetsukumaran/vim-buffergator'
-"Tables
+"Table mode
 Plugin 'dhruvasagar/vim-table-mode'
-" Plugin 'Chiel92/vim-autoformat'
+" Easy movement along a line with f and t
+Plugin 'unblevable/quick-scope'
 
-" Code completion
+"****** CODE COMPLETION ********
 " On servers, probably want to just use ervandew/supertab since it's
 "   more lightweight and doesn't require compilations
 Plugin 'ervandew/supertab'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'SirVer/ultisnips'
+" Supercharged autocomplete for html
+Plugin 'mattn/emmet-vim'
+Plugin 'mattn/webapi-vim'
 
-" Easy movement along a line with f and t
-Plugin 'unblevable/quick-scope'
+"******* PROJECT CONTEXT *******
+" nerdtree
+Plugin 'scrooloose/nerdtree'
+Plugin 'Xuyuanp/nerdtree-git-plugin'
+" Ctrl-p fuzzy finder
+Plugin 'ctrlpvim/ctrlp.vim'
+" Use fzf for file completion, async!
+Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plugin 'junegunn/fzf.vim'
+" Buffergator (leader-b to display a list of buffers)
+Plugin 'jeetsukumaran/vim-buffergator'
+" Plugin 'Chiel92/vim-autoformat'
 
 " Check code syntax
 Plugin 'scrooloose/syntastic'
@@ -74,15 +86,6 @@ Plugin 'thoughtbot/vim-rspec'
 Plugin 'tpope/vim-rails'
 Plugin 'rust-lang/rust.vim'
 Plugin 'davidbeckingsale/writegood.vim' " English y'all
-
-" Supercharged autocomplete for html
-Plugin 'mattn/emmet-vim'
-Plugin 'mattn/webapi-vim'
-
-
-" TMUX
-Plugin 'edkolev/tmuxline.vim'
-
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -119,20 +122,12 @@ noremap <C-c> <Esc>
 
 " switch because 0 is easier to hit and ^ is more useful
 " commented out in favour of using _ for ^. same behaviour when no count
-" nnoremap ^ 0
-" nnoremap 0 ^
+nnoremap ^ 0
+nnoremap 0 ^
 
 " vim-autoformat
 " auto run formatting on save
 " au BufWrite * :Autoformat
-
-" TODO change vim-multiple-cursors bindings?
-" Change Ctrl-P to Ctrl-Space and use fzy or fzf for everythign
-let g:multi_cursor_use_default_mapping=0
-let g:multi_cursor_next_key='<C-n>'
-let g:multi_cursor_prev_key='<C-p>'
-let g:multi_cursor_skip_key='<C-x>'
-let g:multi_cursor_quit_key='<C-c>'
 
 " Buffergator
 " https://github.com/jeetsukumaran/vim-buffergator
@@ -151,6 +146,31 @@ let g:qs_second_occurrence_highlight_color = 81
 " Set Vundle to use ssh
 let g:vundle_default_git_proto = 'git'
 
+" fzf
+let g:fzf_buffers_jump = 1 " [Buffers] Jump to the existing window if possible
+let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr"'
+let g:fzf_tags_command = 'ctags -R'
+" Default fzf layout
+let g:fzf_layout = { 'down': '~25%' }
+nnoremap <NUL> :Files<CR>
+
+
+" Add Find command to use rg in fzf
+" --column: Show column number
+" --line-number: Show line number
+" --no-heading: Do not show file headings in results
+" --fixed-strings: Search term as a literal string
+" --ignore-case: Case insensitive search
+" --no-ignore: Do not respect .gitignore, etc...
+" --hidden: Search hidden files and folders
+" --follow: Follow symlinks
+" --glob: Additional conditions for search (in this case ignore everything
+"  in the .git/ folder)
+" --color: Search color options
+command! -bang -nargs=* Find 
+            \ call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
+
+
 " NerdTree
 " autocmd vimenter * NERDTree " sets nerdtree to open on start
 map <leader>n :NERDTreeToggle<CR>
@@ -162,6 +182,11 @@ set ttimeoutlen=50
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = ' '
+let g:airline#extensions#tmuxline#enabled = 0 " we use tmuxline plugin
+let g:airline_theme='solarized'
+
+" javascript
+let g:javascript_plugin_flow = 1
 
 " you complete me
 " compatability https://github.com/SirVer/ultisnips/issues/512
@@ -267,7 +292,8 @@ set t_Co=256                " Explicitly tell vim that the terminal supports 256
 set background=dark
 colorscheme solarized       " Set the colorscheme
 call togglebg#map("<F5>")
-let g:solarized_termcolors=256
+" let g:solarized_termcolors=256 " tells solarized to use 256 termcolours,
+" instead of the normal ones
 
 " set line the cursor is on to be highlighted
 set cursorline

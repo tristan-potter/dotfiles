@@ -11,6 +11,14 @@ export PATH=$GOBIN:$PATH
 export RUSTBIN=~/.cargo/bin directory
 export PATH=$RUSTBIN:$PATH
 
+# Default command to run when :Files is called in vim
+# --files: List files that would be searched but do not search
+# # --no-ignore: Do not respect .gitignore, etc...
+# # --hidden: Search hidden files and folders
+# # --follow: Follow symlinks
+# # --glob: Additional conditions for search (in this case ignore everything in the .git/ folder)
+export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
+
 # zsh options
 setopt autocd histignoredups notify 
 unsetopt beep
