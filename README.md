@@ -19,6 +19,8 @@ TODO:
   - vundle plugin install
   - iterm, tmux, solarized
   - `git config --global core.excludesfile ~/.gitignore_global`
+  - `brew install fzf`
+  - `brew install ripgrep`
 
 - [ ] Install:
   - fzf, fzf-zsh, fzf-vim
