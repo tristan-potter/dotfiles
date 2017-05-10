@@ -63,9 +63,7 @@ Plugin 'mattn/webapi-vim'
 " nerdtree
 Plugin 'scrooloose/nerdtree'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
-" Ctrl-p fuzzy finder
-Plugin 'ctrlpvim/ctrlp.vim'
-" Use fzf for file completion, async!
+" Use fzf for file search, async!
 Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plugin 'junegunn/fzf.vim'
 " Buffergator (leader-b to display a list of buffers)
@@ -152,9 +150,7 @@ let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %
 let g:fzf_tags_command = 'ctags -R'
 " Default fzf layout
 let g:fzf_layout = { 'down': '~25%' }
-nnoremap <NUL> :Files<CR>
-
-
+nnoremap <C-P> :Files<CR>
 " Add Find command to use rg in fzf
 " --column: Show column number
 " --line-number: Show line number
@@ -169,7 +165,11 @@ nnoremap <NUL> :Files<CR>
 " --color: Search color options
 command! -bang -nargs=* Find 
             \ call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
+nnoremap <NUL> :Find<CR>
+vnoremap <NUL> y:Find<SPACE><C-R>"<CR>
 
+" Search for selection
+vnoremap // y/<C-R>"<CR>
 
 " NerdTree
 " autocmd vimenter * NERDTree " sets nerdtree to open on start
