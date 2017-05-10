@@ -21,6 +21,9 @@ TODO:
   - `git config --global core.excludesfile ~/.gitignore_global`
   - `brew install fzf`
   - `brew install ripgrep`
+  - `brew install cmake` for YouCompleteMe
+  - Install https://golang.org/doc/install?download=go1.8.1.darwin-amd64.pkg
+  - `python ~/.vim/bundle/YouCompleteMe/install.py --clang-completer --tern-completer --racer-completer --gocode-completer`
 
 - [ ] Install:
   - fzf, fzf-zsh, fzf-vim
