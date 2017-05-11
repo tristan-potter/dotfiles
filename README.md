@@ -27,6 +27,8 @@ TODO:
   - `brew install ripgrep`
   - `brew install cmake` for YouCompleteMe
   - Install https://golang.org/doc/install?download=go1.8.1.darwin-amd64.pkg
+  - `git clone git://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions` for auto-suggestions
+  - `git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting` for syntax highlighting
   - `python ~/.vim/bundle/YouCompleteMe/install.py --clang-completer --tern-completer --racer-completer --gocode-completer`
 
 - [ ] Install:
