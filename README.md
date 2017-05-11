@@ -14,6 +14,10 @@ independent from the big-web-corp, ideally creating an easy solution to privacy 
 safety on my computer. 
 
 TODO:
+
+- Vim script:
+  - https://vi.stackexchange.com/questions/415/adding-80-column-wide-comment-header-block-with-centered-text
+  
 - [ ] Install:
   - vundle, brew, oh-my-zsh
   - vundle plugin install
