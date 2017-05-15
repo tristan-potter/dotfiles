@@ -31,6 +31,7 @@ TODO:
   - `git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting` for syntax highlighting
   - `python ~/.vim/bundle/YouCompleteMe/install.py --clang-completer --tern-completer --racer-completer --gocode-completer`
   - https://github.com/sindresorhus/caprine/blob/master/readme.md?ref=producthunt
+  - http://rvm.io/rvm/install `\curl -sSL https://get.rvm.io | bash -s stable` and install ruby (`ruby-install`? )
 
 - [ ] Install:
   - fzf, fzf-zsh, fzf-vim
