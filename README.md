@@ -30,6 +30,7 @@ TODO:
   - `git clone git://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions` for auto-suggestions
   - `git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting` for syntax highlighting
   - `python ~/.vim/bundle/YouCompleteMe/install.py --clang-completer --tern-completer --racer-completer --gocode-completer`
+  - https://github.com/sindresorhus/caprine/blob/master/readme.md?ref=producthunt
 
 - [ ] Install:
   - fzf, fzf-zsh, fzf-vim
