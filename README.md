@@ -32,6 +32,7 @@ TODO:
   - `python ~/.vim/bundle/YouCompleteMe/install.py --clang-completer --tern-completer --racer-completer --gocode-completer`
   - https://github.com/sindresorhus/caprine/blob/master/readme.md?ref=producthunt
   - http://rvm.io/rvm/install `\curl -sSL https://get.rvm.io | bash -s stable` and install ruby (`ruby-install`? )
+  - https://github.com/vimwiki/vimwiki
 
 - [ ] Install:
   - fzf, fzf-zsh, fzf-vim
