@@ -20,6 +20,7 @@ TODO:
   
 - [ ] Install:
   - vundle, brew, oh-my-zsh
+  - `brew install vim --with-override-system-vi`
   - vundle plugin install
   - iterm, tmux, solarized
   - `git config --global core.excludesfile ~/.gitignore_global`
