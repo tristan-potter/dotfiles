@@ -35,6 +35,8 @@ TODO:
   - http://rvm.io/rvm/install `\curl -sSL https://get.rvm.io | bash -s stable` and install ruby (`ruby-install`? )
   - https://github.com/vimwiki/vimwiki
   - https://valelint.github.io/docs/
+  - https://github.com/universal-ctags/ctags
+  - https://github.com/eapache/starscope
 
 - [ ] Install:
   - fzf, fzf-zsh, fzf-vim
