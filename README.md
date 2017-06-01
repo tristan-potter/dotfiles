@@ -34,6 +34,7 @@ TODO:
   - https://github.com/sindresorhus/caprine/blob/master/readme.md?ref=producthunt
   - http://rvm.io/rvm/install `\curl -sSL https://get.rvm.io | bash -s stable` and install ruby (`ruby-install`? )
   - https://github.com/vimwiki/vimwiki
+  - https://valelint.github.io/docs/
 
 - [ ] Install:
   - fzf, fzf-zsh, fzf-vim
