@@ -6,6 +6,12 @@
 .DS_Store
 Desktop.ini
 
+# Tags
+tags
+.tags
+tags.*
+.starscope.db
+
 # Thumbnail cache files
 ._*
 Thumbs.db

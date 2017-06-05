@@ -4,6 +4,7 @@ export PATH=/usr/local/go/bin:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
+export ZSH_CUSTOM=$ZSH/custom
 
 export GOPATH=$HOME
 export GOBIN=$GOPATH/bin
@@ -75,12 +76,13 @@ ZSH_THEME="intheloop"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git, vi-mode, colored-man-pages, history-substring-search)
+plugins=(git, vi-mode, colored-man-pages, history-substring-search, zsh-autosuggestions, zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 source $ZSH/plugins/git/git.plugin.zsh
 source $ZSH/plugins/vi-mode/vi-mode.plugin.zsh
 source $ZSH/plugins/colored-man-pages/colored-man-pages.plugin.zsh
+source $ZSH/custom/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
 
 
 # User configuration
@@ -111,6 +113,7 @@ export EDITOR='vim'
 #
 # Example aliases
 alias zshconfig="vim ~/.zshrc"
+alias viminstall="vim +PluginInstall +qall"
 alias mkdir="mkdir -p"
 alias gstat="git status"
 

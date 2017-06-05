@@ -33,9 +33,9 @@ Plugin 'airblade/vim-gitgutter'
 
 " ***** CONVINIENCE *******
 " easy ctag management for 'go-to-definition' support
-"Plugin 'ludovicchabant/vim-gutentags'
-" browse tags in the current file
-Plugin 'majutsushi/tagbar'
+Plugin 'ludovicchabant/vim-gutentags'
+" personal wiki
+Plugin 'vimwiki/vimwiki'
 " comment stuff out
 Plugin 'tpope/vim-commentary'
 " misc functions for plugins
@@ -48,6 +48,8 @@ Plugin 'austintaylor/vim-commaobject'
 Plugin 'dhruvasagar/vim-table-mode'
 " Easy movement along a line with f and t
 Plugin 'unblevable/quick-scope'
+" Use editorconfig files if found
+Plugin 'editorconfig/editorconfig-vim'
 
 "****** CODE COMPLETION ********
 " On servers, probably want to just use ervandew/supertab since it's
@@ -71,7 +73,7 @@ Plugin 'jeetsukumaran/vim-buffergator'
 " Plugin 'Chiel92/vim-autoformat'
 
 " Check code syntax
-Plugin 'scrooloose/syntastic'
+Plugin 'w0rp/ale'
 
 " Program support
 Plugin 'dgryski/vim-godef'
@@ -80,6 +82,7 @@ Plugin 'vim-ruby/vim-ruby'
 Plugin 'xuhdev/vim-latex-live-preview'
 Plugin 'lervag/vimtex'
 Plugin 'pangloss/vim-javascript'
+Plugin 'mxw/vim-jsx'
 Plugin 'thoughtbot/vim-rspec'
 Plugin 'tpope/vim-rails'
 Plugin 'rust-lang/rust.vim'
@@ -133,6 +136,11 @@ nnoremap 0 ^
 " TODO rebind buffer keys
 let g:buffergator_suppress_keymaps = 1
 
+" Gutentags
+let g:gutentags_ctags_executable_ruby = 'starscope && starscope -e cscope'
+let g:gutentags_ctags_executable_javascript = 'starscope && starscope -e cscope'
+let g:gutentags_ctags_executable_golang = 'starscope && starscope -e cscope'
+
 " QuickScope options
 " Trigger a highlight in the appropriate direction when pressing these keys:
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
@@ -170,6 +178,12 @@ vnoremap <NUL> y:Find<SPACE><C-R>"<CR>
 
 " Search for selection
 vnoremap // y/<C-R>"<CR>
+
+"editorconfig 
+let g:EditorConfig_exclude_patterns = ['fugitive://.*']
+
+" ALE 
+let g:ale_sign_column_always = 1
 
 " NerdTree
 " autocmd vimenter * NERDTree " sets nerdtree to open on start
