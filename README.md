@@ -14,8 +14,13 @@ independent from the big-web-corp, ideally creating an easy solution to privacy 
 safety on my computer. 
 
 TODO:
+
+- Vim script:
+  - https://vi.stackexchange.com/questions/415/adding-80-column-wide-comment-header-block-with-centered-text
+  
 - [ ] Install:
   - vundle, brew, oh-my-zsh
+  - `brew install vim --with-override-system-vi`
   - vundle plugin install
   - iterm, tmux, solarized
   - `git config --global core.excludesfile ~/.gitignore_global`
@@ -23,7 +28,15 @@ TODO:
   - `brew install ripgrep`
   - `brew install cmake` for YouCompleteMe
   - Install https://golang.org/doc/install?download=go1.8.1.darwin-amd64.pkg
+  - `git clone git://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions` for auto-suggestions
+  - `git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting` for syntax highlighting
   - `python ~/.vim/bundle/YouCompleteMe/install.py --clang-completer --tern-completer --racer-completer --gocode-completer`
+  - https://github.com/sindresorhus/caprine/blob/master/readme.md?ref=producthunt
+  - http://rvm.io/rvm/install `\curl -sSL https://get.rvm.io | bash -s stable` and install ruby (`ruby-install`? )
+  - https://github.com/vimwiki/vimwiki
+  - https://valelint.github.io/docs/
+  - https://github.com/universal-ctags/ctags
+  - https://github.com/eapache/starscope
 
 - [ ] Install:
   - fzf, fzf-zsh, fzf-vim
