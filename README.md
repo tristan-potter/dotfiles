@@ -37,6 +37,7 @@ TODO:
   - https://valelint.github.io/docs/
   - https://github.com/universal-ctags/ctags
   - https://github.com/eapache/starscope
+  - https://github.com/github/hub
 
 - [ ] Install:
   - fzf, fzf-zsh, fzf-vim
