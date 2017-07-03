@@ -20,6 +20,7 @@ TODO:
   
 - [ ] Install:
   - vundle, brew, oh-my-zsh
+  - https://github.com/zsh-users/antigen
   - `brew install vim --with-override-system-vi`
   - vundle plugin install
   - iterm, tmux, solarized
