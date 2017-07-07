@@ -10,3 +10,5 @@ export GOPATH=$HOME
 export PATH=$GOPATH:$PATH
 
 if [[ -f /opt/dev/dev.sh ]]; then source /opt/dev/dev.sh; fi
+
+export PATH="$HOME/.cargo/bin:$PATH"

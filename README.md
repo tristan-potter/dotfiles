@@ -13,6 +13,9 @@ This project is also going to be a listing for my TODO. I want to become a bit m
 independent from the big-web-corp, ideally creating an easy solution to privacy and 
 safety on my computer. 
 
+Useful for colourschemes: 
+https://github.com/jwilm/alacritty/wiki/Color-schemes
+
 TODO:
 
 - Vim script:

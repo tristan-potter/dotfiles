@@ -6,9 +6,6 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 " Keep Plugin commands between vundle#begin/end.
 
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
-
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
@@ -61,8 +58,7 @@ Plugin 'SirVer/ultisnips'
 Plugin 'mattn/emmet-vim'
 Plugin 'mattn/webapi-vim'
 
-"******* PROJECT CONTEXT *******
-" nerdtree
+" ****** PROJECT CONTEXT *******
 Plugin 'scrooloose/nerdtree'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 " Use fzf for file search, async!
@@ -118,7 +114,9 @@ let mapleader = '\'
 nmap <leader>\ :w<cr>
 
 " map ctrl-[ to exit with no checks, and ctrl-c to exit 
-noremap <C-[> <C-c>
+" terminal.app on macOS has a problem with the next line
+" also maybe alacritty with zsh???
+" noremap <C-[> <C-c>
 noremap <C-c> <Esc>
 
 " switch because 0 is easier to hit and ^ is more useful
@@ -255,7 +253,7 @@ let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
 let g:go_highlight_structs = 1
 
-nmap <F8> :TagbarToggle<CR>
+" nmap <F8> :TagbarToggle<Cr>
 
 "ruby indentation
 autocmd FileType ruby setlocal expandtab shiftwidth=2 tabstop=2
@@ -302,12 +300,11 @@ set nolazyredraw            " don't redraw while executing macros
 syntax on                   " switch syntax highlighting on
 syntax enable
 
+" let g:solarized_termcolors=256 " tells solarized to use 256 termcolours
 set t_Co=256                " Explicitly tell vim that the terminal supports 256 colors"
 set background=dark
 colorscheme solarized       " Set the colorscheme
-call togglebg#map("<F5>")
-" let g:solarized_termcolors=256 " tells solarized to use 256 termcolours,
-" instead of the normal ones
+" call togglebg#map("<F5>")
 
 " set line the cursor is on to be highlighted
 set cursorline
