@@ -13,6 +13,8 @@ export PATH=$GOBIN:$PATH
 export RUSTBIN=~/.cargo/bin directory
 export PATH=$RUSTBIN:$PATH
 
+export PKG_CONFIG_PATH=/usr/local/opt/imagemagick@6/lib/pkgconfig:$PKG_CONFIG_PATH
+
 # Default command to run when :Files is called in vim
 # --files: List files that would be searched but do not search
 # # --no-ignore: Do not respect .gitignore, etc...
@@ -115,7 +117,7 @@ export EDITOR='vim'
 alias zshconfig="vim ~/.zshrc"
 alias viminstall="vim +PluginInstall +qall"
 alias mkdir="mkdir -p"
-alias gstat="git status"
+alias gs="git status"
 
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 

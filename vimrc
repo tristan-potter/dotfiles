@@ -14,18 +14,22 @@ Plugin 'VundleVim/Vundle.vim'
 
 "******* LOOK AND FEEL
 " solarized
-Plugin 'altercation/vim-colors-solarized'
+" Plugin 'altercation/vim-colors-solarized'
+Plugin 'lifepillar/vim-solarized8' " true colour
 " airline
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 " TODO In the future, may want to transition to 
 "   https://github.com/itchyny/lightline.vim
+Plugin 'mhinz/vim-startify'
+
 " TMUX
 Plugin 'edkolev/tmuxline.vim'
 
 "******* GIT PLUGINS ********
 " plugin on GitHub repo
 Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-rhubarb.git'
 " extend fugitive with better branch and commit views
 Plugin 'gregsexton/gitv'
 " git gutter
@@ -182,6 +186,20 @@ vnoremap // y/<C-R>"<CR>
 "editorconfig 
 let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 
+" startify
+let g:startify_fortune_use_unicode = 1
+let g:startify_padding_left = 3
+let g:startify_bookmarks = [ {'a': '~/.vimrc'}, '~/.zshrc' ]
+let g:startify_change_to_vcs_root = 1
+function! s:filter_header(lines) abort
+    let longest_line   = max(map(copy(a:lines), 'strwidth(v:val)'))
+    let centered_lines = map(copy(a:lines),
+                \ 'repeat(" ", (&columns / 2) - (longest_line / 2)) . v:val')
+    return centered_lines
+endfunction
+let g:startify_custom_header = s:filter_header(startify#fortune#cowsay())
+let g:startify_list_order = ['bookmarks', 'dir', 'commands']
+
 " ALE 
 let g:ale_sign_column_always = 1
 
@@ -198,6 +216,7 @@ let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = ' '
 let g:airline#extensions#tmuxline#enabled = 0 " we use tmuxline plugin
 let g:airline_theme='solarized'
+let g:airline_solarized_bg='dark'
 
 " javascript
 let g:javascript_plugin_flow = 1
@@ -255,6 +274,7 @@ let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
 let g:go_highlight_structs = 1
 
+" TODO better mapping for this
 nmap <F8> :TagbarToggle<CR>
 
 "ruby indentation
@@ -297,21 +317,40 @@ set hlsearch                " highlight search results
 set incsearch               " set incremental search, like modern browsers
 set nolazyredraw            " don't redraw while executing macros
 
+set splitbelow              " New window goes below
+set splitright              " New windows goes right
+set termguicolors           " Enable true color support
+set undofile                " Persistent Undo
 
 " Set colours
-syntax on                   " switch syntax highlighting on
-syntax enable
-
-set t_Co=256                " Explicitly tell vim that the terminal supports 256 colors"
-set background=dark
-colorscheme solarized       " Set the colorscheme
-call togglebg#map("<F5>")
-" let g:solarized_termcolors=256 " tells solarized to use 256 termcolours,
-" instead of the normal ones
+if !exists("g:syntax_on")
+  syntax enable
+endif
 
 " set line the cursor is on to be highlighted
 set cursorline
 set colorcolumn=80 " line end guide
 
+" set Vim-specific sequences for RGB colors
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+
 " make comments and HTML attributes italic
 highlight htmlArg cterm=italic
+
+" set t_Co=256                " Explicitly tell vim that the terminal supports 256 colors"
+" let g:solarized_termcolors=256 " tells solarized to use 256 termcolours,
+" instead of the normal ones
+colorscheme solarized8_dark       " Set the colorscheme
+let g:solarized_term_italics = 1
+let g:solorized_old_cursor_style = 0
+let g:solarized_visibility = "normal"
+" let g:solarized_diffmode = "low"
+set background=dark
+
+" Toggle light and dark solarized
+nnoremap  <leader>B :<c-u>exe "colors" (g:colors_name =~# "dark"
+    \ ? substitute(g:colors_name, 'dark', 'light', '')
+    \ : substitute(g:colors_name, 'light', 'dark', '')
+    \ )<cr>
+
