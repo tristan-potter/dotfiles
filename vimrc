@@ -325,11 +325,6 @@ if !exists("g:syntax_on")
   syntax enable
 endif
 
-" let g:solarized_termcolors=256 " tells solarized to use 256 termcolours
-set t_Co=256                " Explicitly tell vim that the terminal supports 256 colors"
-set background=dark
-colorscheme solarized       " Set the colorscheme
-
 " set line the cursor is on to be highlighted
 set cursorline
 set colorcolumn=80 " line end guide
