@@ -21,7 +21,7 @@ Plugin 'vim-airline/vim-airline-themes'
 Plugin 'mhinz/vim-startify'
 
 " TMUX
-Plugin 'edkolev/tmuxline.vim'
+Plugin 'weihanglo/tmuxline.vim'
 
 "******* GIT PLUGINS ********
 " plugin on GitHub repo
