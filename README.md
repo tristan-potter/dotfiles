@@ -13,6 +13,9 @@ This project is also going to be a listing for my TODO. I want to become a bit m
 independent from the big-web-corp, ideally creating an easy solution to privacy and 
 safety on my computer. 
 
+Useful for colourschemes: 
+https://github.com/jwilm/alacritty/wiki/Color-schemes
+
 TODO:
 
 - Vim script:
@@ -20,6 +23,7 @@ TODO:
   
 - [ ] Install:
   - vundle, brew, oh-my-zsh
+  - https://github.com/zsh-users/antigen
   - `brew install vim --with-override-system-vi`
   - vundle plugin install
   - iterm, tmux, solarized
@@ -37,6 +41,7 @@ TODO:
   - https://valelint.github.io/docs/
   - https://github.com/universal-ctags/ctags
   - https://github.com/eapache/starscope
+  - https://github.com/github/hub
 
 - [ ] Install:
   - fzf, fzf-zsh, fzf-vim
