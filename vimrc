@@ -329,22 +329,20 @@ endif
 set cursorline
 set colorcolumn=80 " line end guide
 
+" make comments and HTML attributes italic
+" highlight htmlArg cterm=italic
+
+" TrueColor (24-bit) colorscheme
 " set Vim-specific sequences for RGB colors
 let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
 let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 
-" make comments and HTML attributes italic
-highlight htmlArg cterm=italic
-
-" set t_Co=256                " Explicitly tell vim that the terminal supports 256 colors"
-" let g:solarized_termcolors=256 " tells solarized to use 256 termcolours,
-" instead of the normal ones
-colorscheme solarized8_dark       " Set the colorscheme
-let g:solarized_term_italics = 1
-let g:solorized_old_cursor_style = 0
-let g:solarized_visibility = "normal"
-" let g:solarized_diffmode = "low"
-set background=dark
+" Set the colorscheme to solarized
+colorscheme solarized8_dark
+let g:solarized_term_italics = 0
+let g:solorized_old_cursor_style = 1
+let g:solarized_visibility = "high"
+let g:solarized_diffmode = "high"
 
 " Toggle light and dark solarized
 nnoremap  <leader>B :<c-u>exe "colors" (g:colors_name =~# "dark"
