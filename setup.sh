@@ -15,6 +15,7 @@ brew install npm
 brew install rustup
 brew install rg
 brew install fzf
+brew install exa
 
 # figure out how to install alacritty as a script
 
