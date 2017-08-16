@@ -200,6 +200,11 @@ let g:startify_list_order = ['bookmarks', 'dir', 'commands']
 
 " ALE 
 let g:ale_sign_column_always = 1
+let g:ale_fixers = {}
+let g:ale_fixers.javascript = [
+            \ 'eslint',
+            \ 'remove_trailing_lines'
+            \ ]
 
 " NerdTree
 " autocmd vimenter * NERDTree " sets nerdtree to open on start

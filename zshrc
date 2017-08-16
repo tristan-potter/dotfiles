@@ -74,6 +74,7 @@ alias zshconfig="vim ~/.zshrc"
 alias viminstall="vim +PluginInstall +qall"
 alias mkdir="mkdir -p"
 alias gs="git status"
+alias gglog="git log --pretty=format:\"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]\" --decorate"
 
 [ -f /opt/dev/dev.sh ] && source /opt/dev/dev.sh
 
