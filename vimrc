@@ -87,6 +87,8 @@ Plugin 'thoughtbot/vim-rspec'
 Plugin 'tpope/vim-rails'
 Plugin 'rust-lang/rust.vim'
 Plugin 'davidbeckingsale/writegood.vim' " English y'all
+Plugin 'leafgarland/typescript-vim'
+Plugin 'ianks/vim-tsx'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
