@@ -357,3 +357,8 @@ nnoremap  <leader>B :<c-u>exe "colors" (g:colors_name =~# "dark"
     \ : substitute(g:colors_name, 'light', 'dark', '')
     \ )<cr>
 
+" Break insert mode at punctuation
+inoremap . .<c-g>u
+inoremap ? ?<c-g>u
+inoremap ! !<c-g>u
+inoremap , ,<c-g>u
