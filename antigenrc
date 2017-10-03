@@ -1,0 +1,18 @@
+# load antigen
+source $(brew --prefix)/share/antigen/antigen.zsh
+
+# oh-my-zsh is useful
+antigen use oh-my-zsh
+
+antigen bundle git
+antigen bundle vi-mode
+antigen bundle colored-man-pages
+antigen bundle history-substring-search
+antigen bundle zsh-autosuggestions
+
+# independent plugins
+antigen bundle mafredri/zsh-async
+antigen bundle sindresorhus/pure
+antigen bundle zsh-users/zsh-syntax-highlighting
+
+antigen apply
