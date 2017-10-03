@@ -1,5 +1,3 @@
-[core]
-	excludesfile = /Users/tristanpotter/.gitignore
 [user]
 	email = tristan.potter@shopify.com
 	name = Tristan Potter
@@ -11,3 +9,6 @@
     s = status
     d = diff
     ds = diff --cached
+
+[core] 
+    excludesFile = ~/.gitignore
