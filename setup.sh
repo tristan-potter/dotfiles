@@ -16,6 +16,17 @@ brew install rustup
 brew install rg
 brew install fzf
 brew install exa
+brew install reattach-to-user-namespace
+
+# quicklook plugins
+brew cask install qlstephen
+brew cask install qlmarkdown
+brew cask install quicklook-json
+brew cask install qlprettypatch
+brew cask install quicklook-csv
+brew cask install betterzipql
+brew cask install webpquicklook
+brew cask install suspicious-package
 
 # figure out how to install alacritty as a script
 
