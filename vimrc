@@ -51,13 +51,15 @@ Plugin 'dhruvasagar/vim-table-mode'
 Plugin 'unblevable/quick-scope'
 " Use editorconfig files if found
 Plugin 'editorconfig/editorconfig-vim'
+" Show registers when pasting
+Plugin 'junegunn/vim-peekaboo'
 
 "****** CODE COMPLETION ********
 " On servers, probably want to just use ervandew/supertab since it's
 "   more lightweight and doesn't require compilations
-Plugin 'ervandew/supertab'
+" Plugin 'ervandew/supertab'
 Plugin 'Valloric/YouCompleteMe'
-Plugin 'SirVer/ultisnips'
+" Plugin 'SirVer/ultisnips'
 " Supercharged autocomplete for html
 Plugin 'mattn/emmet-vim'
 Plugin 'mattn/webapi-vim'
