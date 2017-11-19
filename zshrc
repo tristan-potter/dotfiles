@@ -46,6 +46,7 @@ alias viminstall="vim +PluginInstall +qall"
 alias mkdir="mkdir -p"
 alias gs="git status"
 alias gglog="git log --pretty=format:\"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]\" --decorate"
+alias today="date +'%Y-%m-%d'"
 
 [ -f /opt/dev/dev.sh ] && source /opt/dev/dev.sh
 
