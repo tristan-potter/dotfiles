@@ -345,19 +345,21 @@ set colorcolumn=80 " line end guide
 " set Vim-specific sequences for RGB colors
 let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
 let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+execute "set t_8f=\e[38;2;%lu;%lu;%lum"
+execute "set t_8b=\e[48;2;%lu;%lu;%lum"
 
 " Set the colorscheme to solarized
 colorscheme solarized8_dark
-let g:solarized_term_italics = 0
-let g:solorized_old_cursor_style = 1
-let g:solarized_visibility = "high"
-let g:solarized_diffmode = "high"
+" let g:solarized_term_italics = 0
+" let g:solorized_old_cursor_style = 1
+" let g:solarized_visibility = "high"
+" let g:solarized_diffmode = "high"
 
 " Toggle light and dark solarized
-nnoremap  <leader>B :<c-u>exe "colors" (g:colors_name =~# "dark"
-    \ ? substitute(g:colors_name, 'dark', 'light', '')
-    \ : substitute(g:colors_name, 'light', 'dark', '')
-    \ )<cr>
+" nnoremap  <leader>B :<c-u>exe "colors" (g:colors_name =~# "dark"
+"     \ ? substitute(g:colors_name, 'dark', 'light', '')
+"     \ : substitute(g:colors_name, 'light', 'dark', '')
+"     \ )<cr>
 
 " Break insert mode at punctuation
 inoremap . .<c-g>u
