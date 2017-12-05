@@ -54,6 +54,9 @@ Plugin 'editorconfig/editorconfig-vim'
 " Show registers when pasting
 Plugin 'junegunn/vim-peekaboo'
 
+" ****** INCONVINIENCE **********
+Plugin 'kbarrette/mediummode'
+
 "****** CODE COMPLETION ********
 " On servers, probably want to just use ervandew/supertab since it's
 "   more lightweight and doesn't require compilations
