@@ -338,6 +338,25 @@ endif
 set cursorline
 set colorcolumn=80 " line end guide
 
+" Ruby is an oddball in the family, use special spacing/rules
+if v:version >= 703
+  " Note: Relative number is quite slow with Ruby, so is cursorline
+  autocmd FileType ruby setlocal ts=2 sts=2 sw=2 norelativenumber nocursorline
+else
+  autocmd FileType ruby setlocal ts=2 sts=2 sw=2
+endif
+
+" While scrolling, VIM blanks the background sometimes.  This fixes that
+" behaviour.
+if &term =~ '256color'
+  " disable Background Color Erase (BCE) so that color schemes
+  " render properly when inside 256-color tmux and GNU screen.
+  set t_ut=
+endif
+
+" Split single line in multiple after comma ,
+command! NewLineAfterComma %s/,/,\r/g
+
 " make comments and HTML attributes italic
 " highlight htmlArg cterm=italic
 
