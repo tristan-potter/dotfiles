@@ -284,13 +284,6 @@ let g:go_highlight_structs = 1
 " TODO better mapping for this
 " nmap <F8> :TagbarToggle<Cr>
 
-"ruby indentation
-autocmd FileType ruby setlocal expandtab shiftwidth=2 tabstop=2
-
-" Auto line numbers
-set relativenumber
-set number
-
 " column length
 " this is for readability
 set colorcolumn=80
@@ -339,12 +332,16 @@ set cursorline
 set colorcolumn=80 " line end guide
 
 " Ruby is an oddball in the family, use special spacing/rules
-if v:version >= 703
-  " Note: Relative number is quite slow with Ruby, so is cursorline
-  autocmd FileType ruby setlocal ts=2 sts=2 sw=2 norelativenumber nocursorline
-else
-  autocmd FileType ruby setlocal ts=2 sts=2 sw=2
-endif
+autocmd FileType ruby setlocal ts=2 sts=2 sw=2 expandtab shiftwidth=2 tabstop=2 
+
+" relative line numbers only in active buffer
+set number
+set relativenumber
+augroup numbertoggle
+  autocmd!
+  autocmd BufEnter,FocusGained,InsertLeave,WinEnter * set relativenumber
+  autocmd BufLeave,FocusLost,InsertEnter,WinLeave   * set norelativenumber
+augroup END
 
 " While scrolling, VIM blanks the background sometimes.  This fixes that
 " behaviour.
