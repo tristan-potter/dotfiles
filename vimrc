@@ -19,6 +19,8 @@ Plugin 'vim-airline/vim-airline-themes'
 " TODO In the future, may want to transition to 
 "   https://github.com/itchyny/lightline.vim
 Plugin 'mhinz/vim-startify'
+" distraction free writing
+Plugin 'junegunn/goyo.vim'
 
 " TMUX
 Plugin 'weihanglo/tmuxline.vim'
