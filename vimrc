@@ -9,6 +9,9 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
+" Dash integration
+Plugin 'rizzatti/dash.vim'
+
 "******* LOOK AND FEEL
 " solarized
 " Plugin 'altercation/vim-colors-solarized'
@@ -83,8 +86,8 @@ Plugin 'w0rp/ale'
 Plugin 'dgryski/vim-godef'
 Plugin 'fatih/vim-go'
 Plugin 'vim-ruby/vim-ruby'
-Plugin 'xuhdev/vim-latex-live-preview'
-Plugin 'lervag/vimtex'
+" Plugin 'lervag/vimtex'
+Plugin 'LaTeX-Box-Team/LaTeX-Box'
 Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
 Plugin 'thoughtbot/vim-rspec'
@@ -259,11 +262,8 @@ let g:gitgutter_sign_column_always = 1
 " set ruby to not do expensive syntax highlighting
 let ruby_no_expensive=1
 
-" set latex preview 
-let g:livepreview_previewer = 'open -a Preview'
-
 " vimtex
-let g:vimtex_latexmk_enabled = 0
+" let g:vimtex_latexmk_enabled = 0
 
 " Set easytags to use project-dependent tags
 " set tags=./.tags;,~/.vimtags
