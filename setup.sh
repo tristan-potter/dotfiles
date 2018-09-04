@@ -30,6 +30,7 @@ brew cask install quicklook-csv
 brew cask install betterzipql
 brew cask install webpquicklook
 brew cask install suspicious-package
+brew cask install sequel-pro
 
 # figure out how to install alacritty as a script
 
