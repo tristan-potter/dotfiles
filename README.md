@@ -21,6 +21,8 @@ TODO:
 - Vim script:
   - https://vi.stackexchange.com/questions/415/adding-80-column-wide-comment-header-block-with-centered-text
   
+- Antigen: 
+  - Make antigen install using a clone from https://raw.githubusercontent.com/zsh-users/antigen/develop/bin/antigen.zsh 
 - [ ] Install:
   - vundle, brew, oh-my-zsh
   - https://github.com/zsh-users/antigen
