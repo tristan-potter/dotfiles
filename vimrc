@@ -9,24 +9,25 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
-" Dash integration
-Plugin 'rizzatti/dash.vim'
+"""""""""""""""""""""""""""""""""""""""
+"           LOOK AND FEEL             "
+"""""""""""""""""""""""""""""""""""""""
 
-"******* LOOK AND FEEL
-" solarized
-" Plugin 'altercation/vim-colors-solarized'
-Plugin 'lifepillar/vim-solarized8' " true colour
+" solarized using true colour
+Plugin 'lifepillar/vim-solarized8'
+
 " airline
+" TODO In the future, should transition to lightline or vim's built-in
+" statusline
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
-" TODO In the future, may want to transition to 
-"   https://github.com/itchyny/lightline.vim
+
+" Startup screen
 Plugin 'mhinz/vim-startify'
+
 " distraction free writing
 Plugin 'junegunn/goyo.vim'
 
-" TMUX
-Plugin 'weihanglo/tmuxline.vim'
 
 "******* GIT PLUGINS ********
 " plugin on GitHub repo
@@ -127,7 +128,7 @@ let mapleader = '\'
 " shortcut to save
 nmap <leader>\ :w<cr>
 
-" map ctrl-[ to exit with no checks, and ctrl-c to exit 
+" map ctrl-[ to exit with no checks, and ctrl-c to exit
 " terminal.app on macOS has a problem with the next line
 " also maybe alacritty with zsh???
 " noremap <C-[> <C-c>
@@ -144,7 +145,7 @@ nnoremap 0 ^
 
 " Buffergator
 " https://github.com/jeetsukumaran/vim-buffergator
-" We want to be able to use <leader>t for tables. 
+" We want to be able to use <leader>t for tables.
 " TODO rebind buffer keys
 let g:buffergator_suppress_keymaps = 1
 
@@ -183,7 +184,7 @@ nnoremap <C-P> :Files<CR>
 " --glob: Additional conditions for search (in this case ignore everything
 "  in the .git/ folder)
 " --color: Search color options
-command! -bang -nargs=* Find 
+command! -bang -nargs=* Find
             \ call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
 nnoremap <NUL> :Find<CR>
 vnoremap <NUL> y:Find<SPACE><C-R>"<CR>
@@ -191,7 +192,7 @@ vnoremap <NUL> y:Find<SPACE><C-R>"<CR>
 " Search for selection
 vnoremap // y/<C-R>"<CR>
 
-"editorconfig 
+"editorconfig
 let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 
 " startify
@@ -208,7 +209,7 @@ endfunction
 let g:startify_custom_header = s:filter_header(startify#fortune#cowsay())
 let g:startify_list_order = ['bookmarks', 'dir', 'commands']
 
-" ALE 
+" ALE
 let g:ale_fixers = {}
 let g:ale_fixers.javascript = [
             \ 'eslint',
@@ -237,7 +238,7 @@ let g:javascript_plugin_flow = 1
 " compatability https://github.com/SirVer/ultisnips/issues/512
 let g:ycm_allow_changing_updatetime = 1         " leave my updatetime alone
 let g:ycm_collect_identifiers_from_tags_files = 1
-let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']  
+let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 
 "supertab
@@ -257,7 +258,7 @@ let g:tmuxline_powerline_separators = 0
 
 " set git gutter to update faster
 set updatetime=100
-set signcolumn=yes 
+set signcolumn=yes
 
 " set ruby to not do expensive syntax highlighting
 let ruby_no_expensive=1
@@ -343,7 +344,7 @@ set cursorline
 set colorcolumn=80 " line end guide
 
 " Ruby is an oddball in the family, use special spacing/rules
-autocmd FileType ruby setlocal regexpengine=1 ts=2 sts=2 sw=2 expandtab shiftwidth=2 tabstop=2 
+autocmd FileType ruby setlocal regexpengine=1 ts=2 sts=2 sw=2 expandtab shiftwidth=2 tabstop=2
 
 " relative line numbers only in active buffer
 set number
