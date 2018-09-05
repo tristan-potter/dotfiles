@@ -9,81 +9,106 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
-" Dash integration
-Plugin 'rizzatti/dash.vim'
 
-"******* LOOK AND FEEL
-" solarized
-" Plugin 'altercation/vim-colors-solarized'
-Plugin 'lifepillar/vim-solarized8' " true colour
+"""""""""""""""""""""""""""""""""""""""
+"       LIBRARIES                     "
+"""""""""""""""""""""""""""""""""""""""
+
+" misc functions for plugins
+Plugin 'xolox/vim-misc'
+
+" Asynchronous build and test dispatcher
+Plugin 'tpope/vim-dispatch'
+
+"""""""""""""""""""""""""""""""""""""""
+"       LOOK AND FEEL                 "
+"""""""""""""""""""""""""""""""""""""""
+
+" solarized using true colour
+Plugin 'lifepillar/vim-solarized8'
+
 " airline
+" TODO In the future, should transition to lightline or vim's built-in
+" statusline
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
-" TODO In the future, may want to transition to 
-"   https://github.com/itchyny/lightline.vim
+
+" Startup screen
 Plugin 'mhinz/vim-startify'
+
 " distraction free writing
 Plugin 'junegunn/goyo.vim'
 
-" TMUX
-Plugin 'weihanglo/tmuxline.vim'
 
-"******* GIT PLUGINS ********
+"""""""""""""""""""""""""""""""""""""""
+"       GIT PLUGINS                   "
+"""""""""""""""""""""""""""""""""""""""
+
 " plugin on GitHub repo
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-rhubarb.git'
 " extend fugitive with better branch and commit views
 Plugin 'gregsexton/gitv'
+
 " git gutter
 Plugin 'airblade/vim-gitgutter'
 
-" ***** CONVINIENCE *******
+"""""""""""""""""""""""""""""""""""""""
+"       CONVENIENCE                   "
+"""""""""""""""""""""""""""""""""""""""
+
 " easy ctag management for 'go-to-definition' support
 Plugin 'ludovicchabant/vim-gutentags'
-" personal wiki
-Plugin 'vimwiki/vimwiki'
+
 " comment stuff out
 Plugin 'tpope/vim-commentary'
-" misc functions for plugins
-Plugin 'xolox/vim-misc'
+
 " allow easy surrouding
 Plugin 'tpope/vim-surround'
+
 " all comma objects to be a real object
 Plugin 'austintaylor/vim-commaobject'
-"Table mode
-Plugin 'dhruvasagar/vim-table-mode'
+
 " Easy movement along a line with f and t
 Plugin 'unblevable/quick-scope'
+
 " Use editorconfig files if found
 Plugin 'editorconfig/editorconfig-vim'
 
-"****** CODE COMPLETION ********
+" Autoformat
+Plugin 'Chiel92/vim-autoformat'
+
+" Check code syntax
+Plugin 'w0rp/ale'
+
+"""""""""""""""""""""""""""""""""""""""
+"       CODE COMPLETION               "
+"""""""""""""""""""""""""""""""""""""""
+
 " TODO remove YouCompleteMe, look into deocomplete
 " On servers, probably want to just use ervandew/supertab since it's
 "   more lightweight and doesn't require compilations
 " Plugin 'ervandew/supertab'
 Plugin 'Valloric/YouCompleteMe'
-" Plugin 'SirVer/ultisnips'
-" Supercharged autocomplete for html
-Plugin 'mattn/emmet-vim'
-Plugin 'mattn/webapi-vim'
 
-" ****** PROJECT CONTEXT *******
+"""""""""""""""""""""""""""""""""""""""
+"       PROJECT CONTEXT               "
+"""""""""""""""""""""""""""""""""""""""
+
 Plugin 'scrooloose/nerdtree'
+
 Plugin 'Xuyuanp/nerdtree-git-plugin'
-" Use fzf for file search, async!
+" Install FZF using vundle, TODO do this a different way
+"
 Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+
+" Use fzf for file search, async!
 Plugin 'junegunn/fzf.vim'
-" Buffergator (leader-b to display a list of buffers)
-Plugin 'jeetsukumaran/vim-buffergator'
 
-" Autoformat
-" Plugin 'Chiel92/vim-autoformat'
 
-" Check code syntax
-Plugin 'w0rp/ale'
-
-" Program support
+"""""""""""""""""""""""""""""""""""""""
+"       LANGUAGE SUPPORT              "
+"""""""""""""""""""""""""""""""""""""""
 Plugin 'dgryski/vim-godef'
 Plugin 'fatih/vim-go'
 Plugin 'vim-ruby/vim-ruby'
@@ -127,7 +152,7 @@ let mapleader = '\'
 " shortcut to save
 nmap <leader>\ :w<cr>
 
-" map ctrl-[ to exit with no checks, and ctrl-c to exit 
+" map ctrl-[ to exit with no checks, and ctrl-c to exit
 " terminal.app on macOS has a problem with the next line
 " also maybe alacritty with zsh???
 " noremap <C-[> <C-c>
@@ -140,13 +165,10 @@ nnoremap 0 ^
 
 " vim-autoformat
 " auto run formatting on save
-" au BufWrite * :Autoformat
-
-" Buffergator
-" https://github.com/jeetsukumaran/vim-buffergator
-" We want to be able to use <leader>t for tables. 
-" TODO rebind buffer keys
-let g:buffergator_suppress_keymaps = 1
+au BufWrite * :Autoformat
+let g:autoformat_autoindent = 1
+let g:autoformat_retab = 0
+let g:autoformat_remove_trailing_spaces = 1
 
 " Gutentags
 let g:gutentags_ctags_executable_ruby = 'starscope && starscope -e cscope'
@@ -158,8 +180,6 @@ let g:gutentags_ctags_executable_golang = 'starscope && starscope -e cscope'
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 " Trigger a highlight only when pressing f and F.
 let g:qs_highlight_on_keys = ['f', 'F']
-" let g:qs_first_occurrence_highlight_color = 155
-" let g:qs_second_occurrence_highlight_color = 81
 
 " Set Vundle to use ssh
 let g:vundle_default_git_proto = 'git'
@@ -183,7 +203,7 @@ nnoremap <C-P> :Files<CR>
 " --glob: Additional conditions for search (in this case ignore everything
 "  in the .git/ folder)
 " --color: Search color options
-command! -bang -nargs=* Find 
+command! -bang -nargs=* Find
             \ call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
 nnoremap <NUL> :Find<CR>
 vnoremap <NUL> y:Find<SPACE><C-R>"<CR>
@@ -191,7 +211,7 @@ vnoremap <NUL> y:Find<SPACE><C-R>"<CR>
 " Search for selection
 vnoremap // y/<C-R>"<CR>
 
-"editorconfig 
+"editorconfig
 let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 
 " startify
@@ -208,7 +228,7 @@ endfunction
 let g:startify_custom_header = s:filter_header(startify#fortune#cowsay())
 let g:startify_list_order = ['bookmarks', 'dir', 'commands']
 
-" ALE 
+" ALE
 let g:ale_fixers = {}
 let g:ale_fixers.javascript = [
             \ 'eslint',
@@ -237,7 +257,7 @@ let g:javascript_plugin_flow = 1
 " compatability https://github.com/SirVer/ultisnips/issues/512
 let g:ycm_allow_changing_updatetime = 1         " leave my updatetime alone
 let g:ycm_collect_identifiers_from_tags_files = 1
-let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']  
+let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 
 "supertab
@@ -257,7 +277,7 @@ let g:tmuxline_powerline_separators = 0
 
 " set git gutter to update faster
 set updatetime=100
-set signcolumn=yes 
+set signcolumn=yes
 
 " set ruby to not do expensive syntax highlighting
 let ruby_no_expensive=1
@@ -335,7 +355,7 @@ set undofile                " Persistent Undo
 
 " Set colours
 if !exists("g:syntax_on")
-  syntax enable
+    syntax enable
 endif
 
 " set line the cursor is on to be highlighted
@@ -343,23 +363,23 @@ set cursorline
 set colorcolumn=80 " line end guide
 
 " Ruby is an oddball in the family, use special spacing/rules
-autocmd FileType ruby setlocal regexpengine=1 ts=2 sts=2 sw=2 expandtab shiftwidth=2 tabstop=2 
+autocmd FileType ruby setlocal regexpengine=1 ts=2 sts=2 sw=2 expandtab shiftwidth=2 tabstop=2
 
 " relative line numbers only in active buffer
 set number
 set relativenumber
 augroup numbertoggle
-  autocmd!
-  autocmd BufEnter,FocusGained,InsertLeave,WinEnter * set relativenumber
-  autocmd BufLeave,FocusLost,InsertEnter,WinLeave   * set norelativenumber
+    autocmd!
+    autocmd BufEnter,FocusGained,InsertLeave,WinEnter * set relativenumber
+    autocmd BufLeave,FocusLost,InsertEnter,WinLeave   * set norelativenumber
 augroup END
 
 " While scrolling, VIM blanks the background sometimes.  This fixes that
 " behaviour.
 if &term =~ '256color'
-  " disable Background Color Erase (BCE) so that color schemes
-  " render properly when inside 256-color tmux and GNU screen.
-  set t_ut=
+    " disable Background Color Erase (BCE) so that color schemes
+    " render properly when inside 256-color tmux and GNU screen.
+    set t_ut=
 endif
 
 " Split single line in multiple after comma ,
