@@ -158,8 +158,8 @@ let g:gutentags_ctags_executable_golang = 'starscope && starscope -e cscope'
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 " Trigger a highlight only when pressing f and F.
 let g:qs_highlight_on_keys = ['f', 'F']
-let g:qs_first_occurrence_highlight_color = 155
-let g:qs_second_occurrence_highlight_color = 81
+" let g:qs_first_occurrence_highlight_color = 155
+" let g:qs_second_occurrence_highlight_color = 81
 
 " Set Vundle to use ssh
 let g:vundle_default_git_proto = 'git'
@@ -209,7 +209,6 @@ let g:startify_custom_header = s:filter_header(startify#fortune#cowsay())
 let g:startify_list_order = ['bookmarks', 'dir', 'commands']
 
 " ALE 
-let g:ale_sign_column_always = 1
 let g:ale_fixers = {}
 let g:ale_fixers.javascript = [
             \ 'eslint',
@@ -258,7 +257,7 @@ let g:tmuxline_powerline_separators = 0
 
 " set git gutter to update faster
 set updatetime=100
-let g:gitgutter_sign_column_always = 1
+set signcolumn=yes 
 
 " set ruby to not do expensive syntax highlighting
 let ruby_no_expensive=1
