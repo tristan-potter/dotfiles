@@ -9,6 +9,9 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
+" Dash integration
+Plugin 'rizzatti/dash.vim'
+
 "******* LOOK AND FEEL
 " solarized
 " Plugin 'altercation/vim-colors-solarized'
@@ -19,6 +22,8 @@ Plugin 'vim-airline/vim-airline-themes'
 " TODO In the future, may want to transition to 
 "   https://github.com/itchyny/lightline.vim
 Plugin 'mhinz/vim-startify'
+" distraction free writing
+Plugin 'junegunn/goyo.vim'
 
 " TMUX
 Plugin 'weihanglo/tmuxline.vim'
@@ -72,6 +77,8 @@ Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plugin 'junegunn/fzf.vim'
 " Buffergator (leader-b to display a list of buffers)
 Plugin 'jeetsukumaran/vim-buffergator'
+
+" Autoformat
 " Plugin 'Chiel92/vim-autoformat'
 
 " Check code syntax
@@ -81,8 +88,7 @@ Plugin 'w0rp/ale'
 Plugin 'dgryski/vim-godef'
 Plugin 'fatih/vim-go'
 Plugin 'vim-ruby/vim-ruby'
-Plugin 'xuhdev/vim-latex-live-preview'
-Plugin 'lervag/vimtex'
+Plugin 'LaTeX-Box-Team/LaTeX-Box'
 Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
 Plugin 'thoughtbot/vim-rspec'
@@ -91,6 +97,7 @@ Plugin 'rust-lang/rust.vim'
 Plugin 'davidbeckingsale/writegood.vim' " English y'all
 Plugin 'leafgarland/typescript-vim'
 Plugin 'ianks/vim-tsx'
+Plugin 'cespare/vim-toml' " Toml syntax highlighting
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -257,11 +264,8 @@ let g:gitgutter_sign_column_always = 1
 " set ruby to not do expensive syntax highlighting
 let ruby_no_expensive=1
 
-" set latex preview 
-let g:livepreview_previewer = 'open -a Preview'
-
 " vimtex
-let g:vimtex_latexmk_enabled = 0
+" let g:vimtex_latexmk_enabled = 0
 
 " Set easytags to use project-dependent tags
 " set tags=./.tags;,~/.vimtags
@@ -298,6 +302,15 @@ set colorcolumn=80
 " Improved indentation on newline
 set autoindent
 set smartindent
+
+" spell sugesstion window at 15 entries
+set spellsuggest=15
+
+" set wrap on word
+set linebreak
+
+" keep the cursor away from the bottom of the screen
+set scrolloff=3
 
 " Tab control
 set expandtab               " insert spaces for tabs
@@ -339,21 +352,21 @@ set cursorline
 set colorcolumn=80 " line end guide
 
 " make comments and HTML attributes italic
-" highlight htmlArg cterm=italic
+highlight htmlArg cterm=italic
 
 " TrueColor (24-bit) colorscheme
 " set Vim-specific sequences for RGB colors
 let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
 let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 execute "set t_8f=\e[38;2;%lu;%lu;%lum"
-execute "set t_8b=\e[48;2;%lu;%lu;%lum"
+" execute "set t_8b=\e[48;2;%lu;%lu;%lum"
 
 " Set the colorscheme to solarized
 colorscheme solarized8_dark
-" let g:solarized_term_italics = 0
-" let g:solorized_old_cursor_style = 1
-" let g:solarized_visibility = "high"
-" let g:solarized_diffmode = "high"
+let g:solarized_term_italics = 0
+let g:solorized_old_cursor_style = 1
+let g:solarized_visibility = "high"
+let g:solarized_diffmode = "high"
 
 " Toggle light and dark solarized
 " nnoremap  <leader>B :<c-u>exe "colors" (g:colors_name =~# "dark"
@@ -366,3 +379,10 @@ inoremap . .<c-g>u
 inoremap ? ?<c-g>u
 inoremap ! !<c-g>u
 inoremap , ,<c-g>u
+
+" up and down do expected things
+map j gj
+map k gk
+
+" Spellchecking
+map <leader>s :setlocal spell<cr>

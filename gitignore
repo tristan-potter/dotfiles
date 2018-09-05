@@ -44,3 +44,6 @@ Thumbs.db
 venv
 node_modules
 .sass-cache
+
+# Ulysses
+.Ulysses-Group.plist
