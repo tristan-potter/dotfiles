@@ -77,6 +77,8 @@ Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plugin 'junegunn/fzf.vim'
 " Buffergator (leader-b to display a list of buffers)
 Plugin 'jeetsukumaran/vim-buffergator'
+
+" Autoformat
 " Plugin 'Chiel92/vim-autoformat'
 
 " Check code syntax
@@ -86,7 +88,6 @@ Plugin 'w0rp/ale'
 Plugin 'dgryski/vim-godef'
 Plugin 'fatih/vim-go'
 Plugin 'vim-ruby/vim-ruby'
-" Plugin 'lervag/vimtex'
 Plugin 'LaTeX-Box-Team/LaTeX-Box'
 Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
@@ -96,6 +97,7 @@ Plugin 'rust-lang/rust.vim'
 Plugin 'davidbeckingsale/writegood.vim' " English y'all
 Plugin 'leafgarland/typescript-vim'
 Plugin 'ianks/vim-tsx'
+Plugin 'cespare/vim-toml' " Toml syntax highlighting
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -301,6 +303,15 @@ set colorcolumn=80
 set autoindent
 set smartindent
 
+" spell sugesstion window at 15 entries
+set spellsuggest=15
+
+" set wrap on word
+set linebreak
+
+" keep the cursor away from the bottom of the screen
+set scrolloff=3
+
 " Tab control
 set expandtab               " insert spaces for tabs
 set smarttab                " tab respects 'tabstop', 'shiftwidth', and 'softtabstop'
@@ -341,21 +352,21 @@ set cursorline
 set colorcolumn=80 " line end guide
 
 " make comments and HTML attributes italic
-" highlight htmlArg cterm=italic
+highlight htmlArg cterm=italic
 
 " TrueColor (24-bit) colorscheme
 " set Vim-specific sequences for RGB colors
 let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
 let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 execute "set t_8f=\e[38;2;%lu;%lu;%lum"
-execute "set t_8b=\e[48;2;%lu;%lu;%lum"
+" execute "set t_8b=\e[48;2;%lu;%lu;%lum"
 
 " Set the colorscheme to solarized
 colorscheme solarized8_dark
-" let g:solarized_term_italics = 0
-" let g:solorized_old_cursor_style = 1
-" let g:solarized_visibility = "high"
-" let g:solarized_diffmode = "high"
+let g:solarized_term_italics = 0
+let g:solorized_old_cursor_style = 1
+let g:solarized_visibility = "high"
+let g:solarized_diffmode = "high"
 
 " Toggle light and dark solarized
 " nnoremap  <leader>B :<c-u>exe "colors" (g:colors_name =~# "dark"
@@ -368,3 +379,10 @@ inoremap . .<c-g>u
 inoremap ? ?<c-g>u
 inoremap ! !<c-g>u
 inoremap , ,<c-g>u
+
+" up and down do expected things
+map j gj
+map k gk
+
+" Spellchecking
+map <leader>s :setlocal spell<cr>

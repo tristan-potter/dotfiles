@@ -21,4 +21,7 @@ export PATH=$GOBIN:$PATH
 export RUSTBIN=~/.cargo/bin directory
 export PATH=$RUSTBIN:$PATH
 
+export FLUTTERBIN=$HOME/src/flutter/bin
+export PATH=$FLUTTERBIN:$PATH
+
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
