@@ -9,8 +9,19 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
+
 """""""""""""""""""""""""""""""""""""""
-"           LOOK AND FEEL             "
+"       LIBRARIES                     "
+"""""""""""""""""""""""""""""""""""""""
+
+" misc functions for plugins
+Plugin 'xolox/vim-misc'
+
+" Asynchronous build and test dispatcher
+Plugin 'tpope/vim-dispatch'
+
+"""""""""""""""""""""""""""""""""""""""
+"       LOOK AND FEEL                 "
 """""""""""""""""""""""""""""""""""""""
 
 " solarized using true colour
@@ -29,62 +40,75 @@ Plugin 'mhinz/vim-startify'
 Plugin 'junegunn/goyo.vim'
 
 
-"******* GIT PLUGINS ********
+"""""""""""""""""""""""""""""""""""""""
+"       GIT PLUGINS                   "
+"""""""""""""""""""""""""""""""""""""""
+
 " plugin on GitHub repo
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-rhubarb.git'
 " extend fugitive with better branch and commit views
 Plugin 'gregsexton/gitv'
+
 " git gutter
 Plugin 'airblade/vim-gitgutter'
 
-" ***** CONVINIENCE *******
+"""""""""""""""""""""""""""""""""""""""
+"       CONVENIENCE                   "
+"""""""""""""""""""""""""""""""""""""""
+
 " easy ctag management for 'go-to-definition' support
 Plugin 'ludovicchabant/vim-gutentags'
-" personal wiki
-Plugin 'vimwiki/vimwiki'
+
 " comment stuff out
 Plugin 'tpope/vim-commentary'
-" misc functions for plugins
-Plugin 'xolox/vim-misc'
+
 " allow easy surrouding
 Plugin 'tpope/vim-surround'
+
 " all comma objects to be a real object
 Plugin 'austintaylor/vim-commaobject'
-"Table mode
-Plugin 'dhruvasagar/vim-table-mode'
+
 " Easy movement along a line with f and t
 Plugin 'unblevable/quick-scope'
+
 " Use editorconfig files if found
 Plugin 'editorconfig/editorconfig-vim'
 
-"****** CODE COMPLETION ********
+" Autoformat
+Plugin 'Chiel92/vim-autoformat'
+
+" Check code syntax
+Plugin 'w0rp/ale'
+
+"""""""""""""""""""""""""""""""""""""""
+"       CODE COMPLETION               "
+"""""""""""""""""""""""""""""""""""""""
+
 " TODO remove YouCompleteMe, look into deocomplete
 " On servers, probably want to just use ervandew/supertab since it's
 "   more lightweight and doesn't require compilations
 " Plugin 'ervandew/supertab'
 Plugin 'Valloric/YouCompleteMe'
-" Plugin 'SirVer/ultisnips'
-" Supercharged autocomplete for html
-Plugin 'mattn/emmet-vim'
-Plugin 'mattn/webapi-vim'
 
-" ****** PROJECT CONTEXT *******
+"""""""""""""""""""""""""""""""""""""""
+"       PROJECT CONTEXT               "
+"""""""""""""""""""""""""""""""""""""""
+
 Plugin 'scrooloose/nerdtree'
+
 Plugin 'Xuyuanp/nerdtree-git-plugin'
-" Use fzf for file search, async!
+" Install FZF using vundle, TODO do this a different way
+"
 Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+
+" Use fzf for file search, async!
 Plugin 'junegunn/fzf.vim'
-" Buffergator (leader-b to display a list of buffers)
-Plugin 'jeetsukumaran/vim-buffergator'
 
-" Autoformat
-" Plugin 'Chiel92/vim-autoformat'
 
-" Check code syntax
-Plugin 'w0rp/ale'
-
-" Program support
+"""""""""""""""""""""""""""""""""""""""
+"       LANGUAGE SUPPORT              "
+"""""""""""""""""""""""""""""""""""""""
 Plugin 'dgryski/vim-godef'
 Plugin 'fatih/vim-go'
 Plugin 'vim-ruby/vim-ruby'
@@ -141,13 +165,10 @@ nnoremap 0 ^
 
 " vim-autoformat
 " auto run formatting on save
-" au BufWrite * :Autoformat
-
-" Buffergator
-" https://github.com/jeetsukumaran/vim-buffergator
-" We want to be able to use <leader>t for tables.
-" TODO rebind buffer keys
-let g:buffergator_suppress_keymaps = 1
+au BufWrite * :Autoformat
+let g:autoformat_autoindent = 1
+let g:autoformat_retab = 0
+let g:autoformat_remove_trailing_spaces = 1
 
 " Gutentags
 let g:gutentags_ctags_executable_ruby = 'starscope && starscope -e cscope'
@@ -159,8 +180,6 @@ let g:gutentags_ctags_executable_golang = 'starscope && starscope -e cscope'
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 " Trigger a highlight only when pressing f and F.
 let g:qs_highlight_on_keys = ['f', 'F']
-" let g:qs_first_occurrence_highlight_color = 155
-" let g:qs_second_occurrence_highlight_color = 81
 
 " Set Vundle to use ssh
 let g:vundle_default_git_proto = 'git'
@@ -336,7 +355,7 @@ set undofile                " Persistent Undo
 
 " Set colours
 if !exists("g:syntax_on")
-  syntax enable
+    syntax enable
 endif
 
 " set line the cursor is on to be highlighted
@@ -350,17 +369,17 @@ autocmd FileType ruby setlocal regexpengine=1 ts=2 sts=2 sw=2 expandtab shiftwid
 set number
 set relativenumber
 augroup numbertoggle
-  autocmd!
-  autocmd BufEnter,FocusGained,InsertLeave,WinEnter * set relativenumber
-  autocmd BufLeave,FocusLost,InsertEnter,WinLeave   * set norelativenumber
+    autocmd!
+    autocmd BufEnter,FocusGained,InsertLeave,WinEnter * set relativenumber
+    autocmd BufLeave,FocusLost,InsertEnter,WinLeave   * set norelativenumber
 augroup END
 
 " While scrolling, VIM blanks the background sometimes.  This fixes that
 " behaviour.
 if &term =~ '256color'
-  " disable Background Color Erase (BCE) so that color schemes
-  " render properly when inside 256-color tmux and GNU screen.
-  set t_ut=
+    " disable Background Color Erase (BCE) so that color schemes
+    " render properly when inside 256-color tmux and GNU screen.
+    set t_ut=
 endif
 
 " Split single line in multiple after comma ,
