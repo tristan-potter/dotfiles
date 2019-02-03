@@ -75,9 +75,6 @@ Plugin 'unblevable/quick-scope'
 " Use editorconfig files if found
 Plugin 'editorconfig/editorconfig-vim'
 
-" Autoformat
-Plugin 'Chiel92/vim-autoformat'
-
 " Check code syntax
 Plugin 'w0rp/ale'
 
@@ -85,17 +82,17 @@ Plugin 'w0rp/ale'
 "       CODE COMPLETION               "
 """""""""""""""""""""""""""""""""""""""
 
-" TODO remove YouCompleteMe, look into deocomplete
-" On servers, probably want to just use ervandew/supertab since it's
-"   more lightweight and doesn't require compilations
-" Plugin 'ervandew/supertab'
-Plugin 'Valloric/YouCompleteMe'
+" " TODO remove YouCompleteMe, look into deocomplete
+" " On servers, probably want to just use ervandew/supertab since it's
+" "   more lightweight and doesn't require compilations
+" " Plugin 'ervandew/supertab'
+" Plugin 'Valloric/YouCompleteMe'
 
 """""""""""""""""""""""""""""""""""""""
 "       PROJECT CONTEXT               "
 """""""""""""""""""""""""""""""""""""""
 
-Plugin 'scrooloose/nerdtree'
+" Plugin 'scrooloose/nerdtree'
 
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 " Install FZF using vundle, TODO do this a different way
@@ -140,6 +137,11 @@ filetype plugin indent on    " required
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
 
+
+"""""""""""""""""""""""""""""""""""""""
+"       SETTINGS                      "
+"""""""""""""""""""""""""""""""""""""""
+
 " map capitals, cause my pinky is slow
 :command! WQ wq
 :command! Wq wq
@@ -148,32 +150,27 @@ filetype plugin indent on    " required
 
 " set a map leader for more key combos
 let mapleader = '\'
+" shortcut to sourcing (reloading) vimrc
+:nnoremap <leader>r :source $MYVIMRC<cr>
 
 " shortcut to save
-nmap <leader>\ :w<cr>
+nnoremap <leader>\ :w<cr>
 
 " map ctrl-[ to exit with no checks, and ctrl-c to exit
 " terminal.app on macOS has a problem with the next line
 " also maybe alacritty with zsh???
 " noremap <C-[> <C-c>
-noremap <C-c> <Esc>
+" noremap <C-c> <Esc>
 
 " switch because 0 is easier to hit and ^ is more useful
 " commented out in favour of using _ for ^. same behaviour when no count
 nnoremap ^ 0
 nnoremap 0 ^
 
-" vim-autoformat
-" auto run formatting on save
-" au BufWrite * :Autoformat
-let g:autoformat_autoindent = 1
-let g:autoformat_retab = 0
-let g:autoformat_remove_trailing_spaces = 1
-
 " Gutentags
-let g:gutentags_ctags_executable_ruby = 'starscope && starscope -e cscope'
-let g:gutentags_ctags_executable_javascript = 'starscope && starscope -e cscope'
-let g:gutentags_ctags_executable_golang = 'starscope && starscope -e cscope'
+" let g:gutentags_ctags_executable_ruby = 'starscope && starscope -e cscope'
+" let g:gutentags_ctags_executable_javascript = 'starscope && starscope -e cscope'
+" let g:gutentags_ctags_executable_golang = 'starscope && starscope -e cscope'
 
 " QuickScope options
 " Trigger a highlight in the appropriate direction when pressing these keys:
@@ -191,6 +188,7 @@ let g:fzf_tags_command = 'ctags -R'
 " Default fzf layout
 let g:fzf_layout = { 'down': '~25%' }
 nnoremap <C-P> :Files<CR>
+nnoremap <leader>b :Buffers<Cr>
 " Add Find command to use rg in fzf
 " --column: Show column number
 " --line-number: Show line number
@@ -205,40 +203,62 @@ nnoremap <C-P> :Files<CR>
 " --color: Search color options
 command! -bang -nargs=* Find
             \ call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
-nnoremap <NUL> :Find<CR>
-vnoremap <NUL> y:Find<SPACE><C-R>"<CR>
-
+" search directory for word under cursor
+nnoremap <Leader>sW :execute ":Find " . expand("<cWORD>")<CR>
+nnoremap <Leader>sw :execute ":Find " . expand("<cword>")<CR>
+vnoremap <leader>sw y:Find<SPACE><C-R>"<CR>
 " Search for selection
 vnoremap // y/<C-R>"<CR>
 
 "editorconfig
 let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 
+" " use fugitive to get a list of commits used in startify
+" function! s:list_commits()
+"     let git = 'git'
+"     let commits = systemlist(git .' log --oneline | head -n10')
+"     let git = 'G'. git[1:]
+"     return map(commits, '{"line": matchstr(v:val, "\\s\\zs.*"), "cmd": "'. git .' show ". matchstr(v:val, "^\\x\\+") }')
+" endfunction
+
 " startify
-let g:startify_fortune_use_unicode = 1
 let g:startify_padding_left = 3
-let g:startify_bookmarks = [ {'a': '~/.vimrc'}, '~/.zshrc' ]
+let g:startify_lists = [
+    \ { 'type': 'dir', 'header': ['MRU '.getcwd()] },
+    \ { 'type': 'sessions', 'header': ['Sessions'] },
+    \ { 'type': 'bookmarks', 'header': ['Bookmarks'] },
+    \ { 'type': 'commands', 'header': ['Commands'] },
+    \ ]
+    " \ { 'type': function('s:list_commits'), 'header': ['Commits'] },
+let g:startify_bookmarks = [ '~/.vimrc', '~/.zshrc' ]
 let g:startify_change_to_vcs_root = 1
-function! s:filter_header(lines) abort
-    let longest_line   = max(map(copy(a:lines), 'strwidth(v:val)'))
-    let centered_lines = map(copy(a:lines),
-                \ 'repeat(" ", (&columns / 2) - (longest_line / 2)) . v:val')
-    return centered_lines
-endfunction
-let g:startify_custom_header = s:filter_header(startify#fortune#cowsay())
-let g:startify_list_order = ['bookmarks', 'dir', 'commands']
+" Update old files on the fly
+let g:startify_update_oldfiles = 0
+let g:startify_custom_header = ['']
+" Set cursorline
+autocmd User Startified setlocal cursorline
 
 " ALE
+nnoremap <LEADER>af :ALEFix<CR>
 let g:ale_fixers = {}
 let g:ale_fixers.javascript = [
             \ 'eslint',
             \ 'remove_trailing_lines'
             \ ]
+let g:ale_fixers.ruby = [
+            \ 'remove_trailing_lines',
+            \ 'trim_whitespace',
+            \ 'rubocop'
+            \ ]
 
-" NerdTree
-" autocmd vimenter * NERDTree " sets nerdtree to open on start
-map <leader>n :NERDTreeToggle<CR>
-let NERDTreeQuitOnOpen=1
+let g:ale_lint_on_text_changed = 1
+let g:ale_lint_on_save = 1
+let g:ale_set_loclist = 1
+
+
+let g:ale_linters = {'ruby': ['rubocop', 'ruby']}
+let g:ale_ruby_rubocop_executable = 'bin/rubocop'
+let g:ruby_indent_assignment_style = 'variable'
 
 " airline
 set laststatus=2
@@ -253,22 +273,22 @@ let g:airline_solarized_bg='dark'
 " javascript
 let g:javascript_plugin_flow = 1
 
-" you complete me
-" compatability https://github.com/SirVer/ultisnips/issues/512
-let g:ycm_allow_changing_updatetime = 1         " leave my updatetime alone
-let g:ycm_collect_identifiers_from_tags_files = 1
-let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+" " you complete me
+" " compatability https://github.com/SirVer/ultisnips/issues/512
+" let g:ycm_allow_changing_updatetime = 1         " leave my updatetime alone
+" let g:ycm_collect_identifiers_from_tags_files = 1
+" let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+" let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 
 "supertab
-let g:SuperTabDefaultCompletionType = '<C-n>'
-let g:SuperTabNoCompleteAfter = ['^', ',', '\s']
+" let g:SuperTabDefaultCompletionType = '<C-n>'
+" let g:SuperTabNoCompleteAfter = ['^', ',', '\s']
 
 " UtilSnips
 " better key bindings for UltiSnipsExpandTrigger
-let g:UltiSnipsExpandTrigger = "<tab>"
-let g:UltiSnipsJumpForwardTrigger = "<tab>"
-let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+" let g:UltiSnipsExpandTrigger = "<tab>"
+" let g:UltiSnipsJumpForwardTrigger = "<tab>"
+" let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 
 set completeopt="menu" " remove preview from completeopt
 
@@ -279,36 +299,30 @@ let g:tmuxline_powerline_separators = 0
 set updatetime=100
 set signcolumn=yes
 
+" Open Netrw in a vsplit
+noremap <leader>n :Vexplore<CR>
+" Default netrw to tree view
+let g:netrw_liststyle = 3
+" Remove the banner
+let g:netrw_banner = 0
+let g:netrw_winsize = 30
+" Change how files are opened by default
+" 0 - current netrw window (default)
+" 1 - open files in a new horizontal split
+" 2 - open files in a new vertical split
+" 3 - open files in a new tab
+" 4 - open in previous window
+let g:netrw_browse_split = 4
+
 " set ruby to not do expensive syntax highlighting
 let ruby_no_expensive=1
-
-" vimtex
-" let g:vimtex_latexmk_enabled = 0
-
-" Set easytags to use project-dependent tags
-" set tags=./.tags;,~/.vimtags
-
-" "Set easytags to compile go-tags
-" let g:easytags_languages = {
-" 			\   'language': {
-" 			\     'go': 'gotags',
-" 			\       'fileoutput_opt': '-f',
-" 			\       'stdout_opt': '-f-',
-" 			\       'recurse_flag': '-R'
-" 			\   }
-" 			\}
-
-"Tagbar Options
-let g:go_highlight_functions = 1
-let g:go_highlight_methods = 1
-let g:go_highlight_structs = 1
-
-" TODO better mapping for this
-" nmap <F8> :TagbarToggle<Cr>
 
 " column length
 " this is for readability
 set colorcolumn=80
+
+" set line the cursor is on to be highlighted
+set cursorline
 
 " Improved indentation on newline
 set autoindent
@@ -358,9 +372,8 @@ if !exists("g:syntax_on")
     syntax enable
 endif
 
-" set line the cursor is on to be highlighted
-set cursorline
-set colorcolumn=80 " line end guide
+" Ctrl-l to remove clear search highlighting
+nnoremap <silent> <C-l> :<C-u>nohlsearch<CR><C-l>
 
 " Ruby is an oddball in the family, use special spacing/rules
 autocmd FileType ruby setlocal regexpengine=1 ts=2 sts=2 sw=2 expandtab shiftwidth=2 tabstop=2
@@ -368,6 +381,7 @@ autocmd FileType ruby setlocal regexpengine=1 ts=2 sts=2 sw=2 expandtab shiftwid
 " relative line numbers only in active buffer
 set number
 set relativenumber
+set numberwidth=4
 augroup numbertoggle
     autocmd!
     autocmd BufEnter,FocusGained,InsertLeave,WinEnter * set relativenumber
@@ -415,8 +429,8 @@ inoremap ! !<c-g>u
 inoremap , ,<c-g>u
 
 " up and down do expected things
-map j gj
-map k gk
+noremap j gj
+noremap k gk
 
 " Spellchecking
-map <leader>s :setlocal spell<cr>
+nnoremap <leader>s :setlocal spell<cr>

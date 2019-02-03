@@ -50,7 +50,7 @@ alias mkdir="mkdir -p"
 alias gs="git status"
 alias gglog="git log --pretty=format:\"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]\" --decorate"
 alias today="date +'%Y-%m-%d'"
-alias tnew="tmux new-session -s ${PWD##*/}"
+alias tnew="tmux new-session -s"
 
 [ -f /opt/dev/dev.sh ] && source /opt/dev/dev.sh
 

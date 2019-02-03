@@ -4,6 +4,7 @@
 
 [alias]
     ll = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ad) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative --branches --tags --remotes
+    lll = log --abbrev-commit --pretty=oneline --graph --decorate
     c = checkout
     cb = checkout -b
     s = status
@@ -12,3 +13,9 @@
 
 [core] 
     excludesFile = ~/.gitignore
+[diff]
+	algorithm = patience
+[protocol]
+	version = 2
+[credential]
+	helper = osxkeychain
