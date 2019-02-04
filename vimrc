@@ -119,6 +119,7 @@ Plugin 'davidbeckingsale/writegood.vim' " English y'all
 Plugin 'leafgarland/typescript-vim'
 Plugin 'ianks/vim-tsx'
 Plugin 'cespare/vim-toml' " Toml syntax highlighting
+Plugin 'jparise/vim-graphql' 
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -240,25 +241,28 @@ autocmd User Startified setlocal cursorline
 
 " ALE
 nnoremap <LEADER>af :ALEFix<CR>
-let g:ale_fixers = {}
-let g:ale_fixers.javascript = [
-            \ 'eslint',
-            \ 'remove_trailing_lines'
-            \ ]
-let g:ale_fixers.ruby = [
-            \ 'remove_trailing_lines',
-            \ 'trim_whitespace',
-            \ 'rubocop'
-            \ ]
+let g:ale_fixers = {
+            \ '*': ['remove_trailing_lines', 'trim_whitespace'],
+            \ 'javascript': ['eslint', 'remove_trailing_lines', 'prettier'],
+            \ 'ruby': ['trim_whitespace', 'rubocop'],
+            \ 'javascript.jsx': ['prettier', 'eslint'],
+            \ 'typescript': ['prettier', 'eslint', 'tslint --jsx'],
+            \ 'typescript.tsx': ['prettier', 'eslint', 'tslint --jsx'],
+            \ 'rust': ['rustfmt'],
+            \ }
+let g:ale_linters = {
+            \'ruby': ['rubocop', 'ruby']
+            \ }
 
 let g:ale_lint_on_text_changed = 1
 let g:ale_lint_on_save = 1
 let g:ale_set_loclist = 1
 
-
-let g:ale_linters = {'ruby': ['rubocop', 'ruby']}
-let g:ale_ruby_rubocop_executable = 'bin/rubocop'
+let g:ale_ruby_rubocop_executable = 'bundle'
+let g:ale_ruby_rubocop_options = '--display-cop-names --rails'
 let g:ruby_indent_assignment_style = 'variable'
+
+let g:ale_virtualenv_dir_names = []
 
 " airline
 set laststatus=2
