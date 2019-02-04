@@ -20,6 +20,7 @@ brew install rg
 brew install fzf
 brew install exa
 brew install reattach-to-user-namespace
+brew install fx
 
 # quicklook plugins
 brew cask install qlstephen
