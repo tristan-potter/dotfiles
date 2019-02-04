@@ -414,7 +414,8 @@ execute "set t_8f=\e[38;2;%lu;%lu;%lum"
 " execute "set t_8b=\e[48;2;%lu;%lu;%lum"
 
 " Set the colorscheme to solarized
-colorscheme solarized8_dark
+set background=dark
+colorscheme solarized8
 let g:solarized_term_italics = 0
 let g:solorized_old_cursor_style = 1
 let g:solarized_visibility = "high"
