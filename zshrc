@@ -34,7 +34,14 @@ unsetopt beep
 bindkey -v
 #export KEYTIMEOUT=1 #make escape delay 0.1s
 
-# User configuration
+autoload -Uz up-line-or-beginning-search
+autoload -Uz down-line-or-beginning-search
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
+bindkey '\eOA' up-line-or-beginning-search
+bindkey '\e[A' up-line-or-beginning-search
+bindkey '\eOB' down-line-or-beginning-search
+bindkey '\e[B' down-line-or-beginning-search
 
 # Preferred editor for local and remote sessions
 export EDITOR='vim'
