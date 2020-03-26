@@ -28,8 +28,7 @@ Plugin 'tpope/vim-dispatch'
 Plugin 'lifepillar/vim-solarized8'
 
 " airline
-" TODO In the future, should transition to lightline or vim's built-in
-" statusline
+" TODO In the future, should transition to lightline or vim's built-in statusline
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 
@@ -57,9 +56,6 @@ Plugin 'airblade/vim-gitgutter'
 "       CONVENIENCE                   "
 """""""""""""""""""""""""""""""""""""""
 
-" easy ctag management for 'go-to-definition' support
-Plugin 'ludovicchabant/vim-gutentags'
-
 " comment stuff out
 Plugin 'tpope/vim-commentary'
 
@@ -68,6 +64,9 @@ Plugin 'tpope/vim-surround'
 
 " all comma objects to be a real object
 Plugin 'austintaylor/vim-commaobject'
+
+" change between single line and multi line constructs
+Plugin 'AndrewRadev/splitjoin.vim'
 
 " Easy movement along a line with f and t
 Plugin 'unblevable/quick-scope'
@@ -92,15 +91,13 @@ Plugin 'w0rp/ale'
 "       PROJECT CONTEXT               "
 """""""""""""""""""""""""""""""""""""""
 
-" Plugin 'scrooloose/nerdtree'
-
-Plugin 'Xuyuanp/nerdtree-git-plugin'
-" Install FZF using vundle, TODO do this a different way
-"
 Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 
 " Use fzf for file search, async!
 Plugin 'junegunn/fzf.vim'
+
+" Nerdtree
+Plugin 'scrooloose/nerdtree.git'
 
 
 """""""""""""""""""""""""""""""""""""""
@@ -120,6 +117,10 @@ Plugin 'leafgarland/typescript-vim'
 Plugin 'ianks/vim-tsx'
 Plugin 'cespare/vim-toml' " Toml syntax highlighting
 Plugin 'jparise/vim-graphql' 
+Plugin 'derekwyatt/vim-scala'
+Plugin 'tikhomirov/vim-glsl'
+Plugin 'elmcast/elm-vim'
+Plugin 'LnL7/vim-nix'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -173,6 +174,17 @@ nnoremap 0 ^
 " let g:gutentags_ctags_executable_javascript = 'starscope && starscope -e cscope'
 " let g:gutentags_ctags_executable_golang = 'starscope && starscope -e cscope'
 
+" Dispatch
+autocmd FileType ruby let b:dispatch = 'rspec %'
+
+" splitjoin
+let g:splitjoin_ruby_curly_braces = 1
+let g:splitjoin_split_mapping = ''
+let g:splitjoin_join_mapping = ''
+
+nmap sj :SplitjoinJoin<cr>
+nmap sk :SplitjoinSplit<cr>
+
 " QuickScope options
 " Trigger a highlight in the appropriate direction when pressing these keys:
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
@@ -222,6 +234,30 @@ let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 "     return map(commits, '{"line": matchstr(v:val, "\\s\\zs.*"), "cmd": "'. git .' show ". matchstr(v:val, "^\\x\\+") }')
 " endfunction
 
+" fugitive
+function! GalaxyUrl(opts, ...) abort
+    if a:0 || type(a:opts) != type({})
+        return ''
+    endif
+
+    let remote = matchlist(a:opts.remote, '\v^galaxy::(.{-1,})(\.git)?$')
+    if empty(remote)
+        return ''
+    end
+
+    let opts = copy(a:opts)
+    let opts.remote = "https://github.com/" . remote[1] . ".git"
+    return call("rhubarb#FugitiveUrl", [opts])
+endfunction
+
+if !exists('g:fugitive_browse_handlers')
+    let g:fugitive_browse_handlers = []
+endif
+
+if index(g:fugitive_browse_handlers, function('GalaxyUrl')) < 0
+    call insert(g:fugitive_browse_handlers, function('GalaxyUrl'))
+endif
+
 " startify
 let g:startify_padding_left = 3
 let g:startify_lists = [
@@ -264,16 +300,32 @@ let g:ruby_indent_assignment_style = 'variable'
 
 let g:ale_virtualenv_dir_names = []
 
+" completion
+let g:ale_completion_enabled = 1
+let g:ale_ruby_solargraph_executable = 'solargraph'
+
+" nerdtree
+map <C-n> :NERDTreeToggle<CR>
+
 " airline
 set laststatus=2
 set ttimeoutlen=50
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = ' '
+let g:airline_detect_paste=0
+let g:airline_detect_modified=1
+let g:airline_detect_spell=0
+let g:airline_inactive_collapse=0
 let g:airline#extensions#tmuxline#enabled = 0 " we use tmuxline plugin
 let g:airline_theme='solarized'
 let g:airline_solarized_bg='dark'
+let g:airline_exclude_preview = 1
+let g:airline_focuslost_inactive = 1
 
+let g:airline_section_x = ''
+let g:airline_section_y = ''
+  
 " javascript
 let g:javascript_plugin_flow = 1
 
@@ -317,6 +369,9 @@ let g:netrw_winsize = 30
 " 3 - open files in a new tab
 " 4 - open in previous window
 let g:netrw_browse_split = 4
+let g:netrw_preview=1
+
+hi! vertsplit guifg=fg guibg=fg term=NONE
 
 " set ruby to not do expensive syntax highlighting
 let ruby_no_expensive=1
@@ -344,9 +399,9 @@ set scrolloff=3
 " Tab control
 set expandtab               " insert spaces for tabs
 set smarttab                " tab respects 'tabstop', 'shiftwidth', and 'softtabstop'
-set tabstop=4               " the visible width of tabs
-set softtabstop=4           " edit as if the tabs are 4 characters wide
-set shiftwidth=4            " number of spaces to use for indent and unindent
+set tabstop=2               " the visible width of tabs
+set softtabstop=2           " edit as if the tabs are 4 characters wide
+set shiftwidth=2            " number of spaces to use for indent and unindent
 set shiftround              " round indent to a multiple of 'shiftwidth'
 set completeopt+=longest
 
@@ -439,3 +494,22 @@ noremap k gk
 
 " Spellchecking
 nnoremap <leader>s :setlocal spell<cr>
+
+" Don't overrite the register when pasting
+vnoremap p "_dP
+
+" working on a plugin
+set runtimepath+=~/src/github.com/Shopify/vim-devilish/
+
+" maybe make an arglist fzf command
+" fun! something() abort
+"   " TODO add support for Denite and potentially other fuzzy finders
+"   if exists('*fzf#run')
+"     call fzf#run(fzf#wrap({
+"           \ 'source':  '/opt/dev/bin/dev cd --list',
+"           \ 'sink*': function('s:cd')
+"           \ }))
+"   else
+"     echohl Error | echom 'Try doing a `:Dev cd <repo>` with tab-completion. Interactive selection requires fzf.vim' | echohl None
+"   endif
+" endf

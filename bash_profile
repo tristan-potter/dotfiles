@@ -12,3 +12,5 @@ export PATH=$GOPATH:$PATH
 if [[ -f /opt/dev/dev.sh ]]; then source /opt/dev/dev.sh; fi
 
 export PATH="$HOME/.cargo/bin:$PATH"
+if [ -e /Users/tristanpotter/.nix-profile/etc/profile.d/nix.sh ]; then . /Users/tristanpotter/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
+export PATH="/usr/local/opt/imagemagick@6/bin:$PATH"

@@ -14,6 +14,8 @@ export PATH=$FLUTTERBIN:$PATH
 
 export PKG_CONFIG_PATH=/usr/local/opt/imagemagick@6/lib/pkgconfig:$PKG_CONFIG_PATH
 
+export PATH=/opt/dev/bin/user:$PATH
+
 source $HOME/.dotfiles/antigenrc
 
 # if I make a custom prompt, i will need this
