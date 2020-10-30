@@ -45,7 +45,8 @@ Plugin 'junegunn/goyo.vim'
 
 " plugin on GitHub repo
 Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-rhubarb.git'
+" Plugin 'tpope/vim-rhubarb.git'
+
 " extend fugitive with better branch and commit views
 Plugin 'gregsexton/gitv'
 
@@ -86,6 +87,8 @@ Plugin 'w0rp/ale'
 " "   more lightweight and doesn't require compilations
 " " Plugin 'ervandew/supertab'
 " Plugin 'Valloric/YouCompleteMe'
+"
+Plugin 'lifepillar/vim-mucomplete'
 
 """""""""""""""""""""""""""""""""""""""
 "       PROJECT CONTEXT               "
@@ -121,6 +124,8 @@ Plugin 'derekwyatt/vim-scala'
 Plugin 'tikhomirov/vim-glsl'
 Plugin 'elmcast/elm-vim'
 Plugin 'LnL7/vim-nix'
+Plugin 'elixir-editors/vim-elixir'
+Plugin 'udalov/kotlin-vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -184,6 +189,13 @@ let g:splitjoin_join_mapping = ''
 
 nmap sj :SplitjoinJoin<cr>
 nmap sk :SplitjoinSplit<cr>
+
+" mu autocomplete 
+set completeopt-=preview
+set completeopt+=menuone,noselect,noinsert,popup,menu
+let g:mucomplete#enable_auto_at_startup = 1
+set shortmess+=c   " Shut off completion messages
+set belloff+=ctrlg " If Vim beeps during completion
 
 " QuickScope options
 " Trigger a highlight in the appropriate direction when pressing these keys:
@@ -290,19 +302,24 @@ let g:ale_linters = {
             \'ruby': ['rubocop', 'ruby']
             \ }
 
-let g:ale_lint_on_text_changed = 1
+let g:ale_lint_on_text_changed = 0
 let g:ale_lint_on_save = 1
 let g:ale_set_loclist = 1
 
-let g:ale_ruby_rubocop_executable = 'bundle'
-let g:ale_ruby_rubocop_options = '--display-cop-names --rails'
-let g:ruby_indent_assignment_style = 'variable'
+" let g:ale_ruby_rubocop_executable = 'bundle'
+" let g:ale_ruby_rubocop_options = '--display-cop-names --rails'
+" let g:ruby_indent_assignment_style = 'variable'
 
 let g:ale_virtualenv_dir_names = []
 
 " completion
-let g:ale_completion_enabled = 1
-let g:ale_ruby_solargraph_executable = 'solargraph'
+let g:ale_completion_enabled = 0
+" let g:ale_ruby_solargraph_executable = 'solargraph'
+
+map <buffer> K <plug>(ale_hover)
+map <buffer> <c-]> <plug>(ale_go_to_definition)
+map <buffer> <c-}> <plug>(ale_go_to_definition_in_vsplit)
+map <buffer> <c-t> <plug>(ale_go_to_type_definition)
 
 " nerdtree
 map <C-n> :NERDTreeToggle<CR>
@@ -346,7 +363,7 @@ let g:javascript_plugin_flow = 1
 " let g:UltiSnipsJumpForwardTrigger = "<tab>"
 " let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 
-set completeopt="menu" " remove preview from completeopt
+" set completeopt="menu" " remove preview from completeopt
 
 "tmuxline
 let g:tmuxline_powerline_separators = 0
@@ -403,7 +420,7 @@ set tabstop=2               " the visible width of tabs
 set softtabstop=2           " edit as if the tabs are 4 characters wide
 set shiftwidth=2            " number of spaces to use for indent and unindent
 set shiftround              " round indent to a multiple of 'shiftwidth'
-set completeopt+=longest
+" set completeopt+=longest
 
 " code folding settings
 set foldmethod=indent       " fold based on indent

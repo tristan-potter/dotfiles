@@ -71,3 +71,4 @@ tm () {
     session=$(tmux list-sessions -F "#{session_name}" | \
     fzf --query="$1" --select-1 --exit-0)  && tmux attach-session -t "$session" || tmux new-session -s $newsession
 }
+if [ -e /Users/tristanpotter/.nix-profile/etc/profile.d/nix.sh ]; then . /Users/tristanpotter/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
