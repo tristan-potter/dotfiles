@@ -3,19 +3,19 @@
 	name = Tristan Potter
 
 [alias]
-    ll = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ad) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative --branches --tags --remotes
-    lll = log --abbrev-commit --pretty=oneline --graph --decorate
-    c = checkout
-    cb = checkout -b
-    s = status
-    d = diff
-    ds = diff --cached
-    com = commit -v
-    branchlog = log --pretty=format:'[%Cblue%an%Creset] %h %Cgreen%s%Creset' --numstat --reverse
-    recent-branches = for-each-ref --sort=-committerdate --count=10 --format='%(refname:short)' refs/heads/
-    branch-diff = !git diff $(git merge-base HEAD origin/master)
+  ll = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ad) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative --branches --tags --remotes
+  lll = log --abbrev-commit --pretty=oneline --graph --decorate
+  c = checkout
+  cb = checkout -b
+  s = status
+  d = diff
+  ds = diff --cached
+  com = commit -v
+  branchlog = log --pretty=format:'[%Cblue%an%Creset] %h %Cgreen%s%Creset' --numstat --reverse
+  recent-branches = for-each-ref --sort=-committerdate --count=10 --format='%(refname:short)' refs/heads/
+  branch-diff = !git diff $(git merge-base HEAD origin/master)
 [core] 
-    excludesFile = ~/.gitignore
+  excludesFile = ~/.gitignore
 	commitGraph = true
 [diff]
 	algorithm = patience

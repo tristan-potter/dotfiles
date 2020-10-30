@@ -1,5 +1,16 @@
 # .dotfiles
 
+Things I need:
+- Language specific things (syntax highlighting)
+- VSplit starts at 100 column instead of half
+- Fuzzy search
+- Fade when not focussed
+- Use nvim
+- Maybe use nix?
+
+
+## OLD
+
 My configurations!
 
 I'm starting from scratch. I want something I can `git clone` onto new computers and 
