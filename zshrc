@@ -15,6 +15,7 @@ export PATH=$FLUTTERBIN:$PATH
 export PKG_CONFIG_PATH=/usr/local/opt/imagemagick@6/lib/pkgconfig:$PKG_CONFIG_PATH
 
 export PATH=/opt/dev/bin/user:$PATH
+export PATH=$HOME/.dotfiles/util:$PATH
 
 source $HOME/.dotfiles/antigenrc
 
@@ -72,3 +73,8 @@ tm () {
     fzf --query="$1" --select-1 --exit-0)  && tmux attach-session -t "$session" || tmux new-session -s $newsession
 }
 if [ -e /Users/tristanpotter/.nix-profile/etc/profile.d/nix.sh ]; then . /Users/tristanpotter/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
+
+[[ -f /opt/dev/sh/chruby/chruby.sh ]] && type chruby >/dev/null 2>&1 || chruby () { source /opt/dev/sh/chruby/chruby.sh; chruby "$@"; }
+export PATH="/usr/local/sbin:$PATH"
+
+[[ -x /usr/local/bin/brew ]] && eval $(/usr/local/bin/brew shellenv)

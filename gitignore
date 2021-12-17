@@ -13,17 +13,13 @@ Session.vim
 # Temporary
 .netrwhist
 *~
-# Auto-generated tag files
-tags
 
 # Folder view configuration files
 .DS_Store
 Desktop.ini
 
 # Tags
-tags
 .tags
-tags.*
 .starscope.db
 
 # Thumbnail cache files
