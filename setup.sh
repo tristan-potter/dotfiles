@@ -1,43 +1,11 @@
 #!/bin/bash
 
-# Install homebrew if it's missing
-if ! command -v brew >/dev/null 2>&1; then
-  echo "Installing homebrew"
-  /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-fi
+# Install kitty
+# Install tmux
+# Install neovim
 
-# Install vim
-brew install vim --override-system-vi
+rm -rf $HOME/.config/kitty
+ln -s "$(pwd)/kitty" $HOME/.config/kitty
 
-# Install other things
-brew install antigen
-brew install cmake
-brew install go
-brew install node
-brew install npm
-brew install rustup
-brew install rg
-brew install fzf
-brew install exa
-brew install reattach-to-user-namespace
-brew install fx
-
-# quicklook plugins
-brew cask install qlstephen
-brew cask install qlmarkdown
-brew cask install quicklook-json
-brew cask install qlprettypatch
-brew cask install quicklook-csv
-brew cask install betterzipql
-brew cask install webpquicklook
-brew cask install suspicious-package
-brew cask install sequel-pro
-
-# figure out how to install alacritty as a script
-
-# After doing a vim plugin install, compile YCM
-cd ~/.vim/bundle/YouCompleteMe
-./install.py --gocode-completer --tern-completer --clang-completer
-
-# install rust
-rustup-init
+rm -f $HOME/.zshrc
+ln -s "$(pwd)/zshrc" $HOME/.zshrc
