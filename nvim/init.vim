@@ -1,6 +1,20 @@
-"--------------------------------
+"
+"                       _
+"                      | |
+"                      | |___      ___ __ ___  _ __
+"                      | __\ \ /\ / / '_ ` _ \| '_ \
+"                      | |_ \ V  V /| | | | | | |_) |
+"                       \__| \_/\_/ |_| |_| |_| .__/
+"                                             | |
+"                                             |_|
+"
+"     Personal vim configuration of Tristan Potter <hi@tristanpotter.dev>
+
+
+"------------------------------------------------------------------------------
 " General Settings
-"---------------------------------
+"------------------------------------------------------------------------------
+
 syntax on
 set nocompatible
 set hlsearch
@@ -48,9 +62,9 @@ filetype plugin indent on
 "--------------------------------
 " Key Mappings
 "---------------------------------
-let mapleader="/<Space>"
+let mapleader="\<Space>"
 
-:nnoremap <leader>r :source $MYVIMRC<cr>
+nnoremap <leader>r :source $MYVIMRC<cr>
 
 map <Leader>ve :edit ~/.config/nvim/init.vim<cr>
 nmap <Leader>vr :source ~/.config/nvim/init.vim<cr>
@@ -96,6 +110,11 @@ inoremap ? ?<c-g>u
 inoremap ! !<c-g>u
 inoremap , ,<c-g>u
 
+" switch because 0 is easier to hit and ^ is more useful
+" commented out in favour of using _ for ^. same behaviour when no count
+nnoremap ^ 0
+nnoremap 0 ^
+
 "--------------------------------
 " Plugins
 "---------------------------------
@@ -121,6 +140,9 @@ source ~/.config/nvim/plugins/solarized.vim
 source ~/.config/nvim/plugins/quick-scope.vim
 source ~/.config/nvim/plugins/heritage.vim
 source ~/.config/nvim/plugins/airline.vim
+source ~/.config/nvim/plugins/floaterm.vim
+source ~/.config/nvim/plugins/fzf.vim
+source ~/.config/nvim/plugins/startify.vim
 
 call plug#end()
 
