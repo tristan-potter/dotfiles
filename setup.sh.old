@@ -1,10 +1,14 @@
 #!/bin/bash
 
-# Install kitty
-# Install tmux
-# Install neovim
-# Install https://github.com/leits/MeetingBar
-# Install spotify
+# Install:
+# - kitty
+# - tmux
+# - fzf
+# - rg
+# - bat
+# - neovim
+# - https://github.com/leits/MeetingBar
+# - spotify
 
 rm -rf $HOME/.config/kitty
 ln -s "$(pwd)/kitty" $HOME/.config/kitty
