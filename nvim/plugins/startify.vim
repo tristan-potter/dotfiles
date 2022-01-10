@@ -36,19 +36,20 @@ let g:my_custom_header =<< END
                        | |
                        |_|
 END
-let g:startify_custom_header = startify#center(g:my_custom_header)
-
 let g:startify_padding_left = 3
-let g:startify_lists = [
-  \ { 'type': function('s:gitModified'),  'header': startify#pad(['Modified']) },
-  \ { 'type': function('s:gitUntracked'), 'header': startify#pad(['Untracked']) },
-  \ { 'type': 'dir', 'header': startify#pad(['Most Recent For: '.getcwd()]) },
-  \ { 'type': 'bookmarks', 'header': startify#pad(['Bookmarks']) },
-  \ ]
 let g:startify_bookmarks = ['~/.config/nvim/init.vim', '~/.tmux.conf', '~/.zshrc']
 let g:startify_change_to_vcs_root = 1
 
 augroup StartifyOverrides
   autocmd!
   autocmd User Startified setlocal cursorline
+
+  " These use Startify methods, so need to run after the plugin loads
+  autocmd User PlugLoaded let g:startify_custom_header = startify#center(g:my_custom_header)
+  autocmd User PlugLoaded let g:startify_lists = [
+  \ { 'type': function('s:gitModified'),  'header': startify#pad(['Modified']) },
+  \ { 'type': function('s:gitUntracked'), 'header': startify#pad(['Untracked']) },
+  \ { 'type': 'dir', 'header': startify#pad(['Most Recent For: '.getcwd()]) },
+  \ { 'type': 'bookmarks', 'header': startify#pad(['Bookmarks']) },
+  \ ]
 augroup end
