@@ -147,6 +147,7 @@ source ~/.config/nvim/plugins/git-gutter.vim
 source ~/.config/nvim/plugins/peekaboo.vim
 source ~/.config/nvim/plugins/splitjoin.vim
 source ~/.config/nvim/plugins/surround.vim
+source ~/.config/nvim/plugins/polyglot.vim
 source ~/.config/nvim/plugins/which-key.vim
 
 call plug#end()
