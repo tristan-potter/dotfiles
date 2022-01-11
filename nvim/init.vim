@@ -143,6 +143,11 @@ source ~/.config/nvim/plugins/airline.vim
 source ~/.config/nvim/plugins/floaterm.vim
 source ~/.config/nvim/plugins/fzf.vim
 source ~/.config/nvim/plugins/startify.vim
+source ~/.config/nvim/plugins/git-gutter.vim
+source ~/.config/nvim/plugins/peekaboo.vim
+source ~/.config/nvim/plugins/splitjoin.vim
+source ~/.config/nvim/plugins/surround.vim
+source ~/.config/nvim/plugins/which-key.vim
 
 call plug#end()
 
