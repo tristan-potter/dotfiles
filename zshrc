@@ -1,7 +1,70 @@
 
+# Use files for FZF
+export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
+export EDITOR='vim'
 
+# Plugins
+# TODO this doesn't seem to be working
+[ -f $HOME/.config/zsh/antigenrc ] && source $HOME/.config/zsh/antigenrc
+
+function set-prompt() {
+  local prompt_pwd='%B%F{blue}%1~%f%b'
+  local prompt_exit_status='%(?.%F{green}√.%F{red}?%?)%f'
+  local prompt_cursor=' %# '
+  PROMPT=$prompt_pwd""$'\n'$prompt_exit_status$prompt_cursor
+
+  # local top_left='%~'
+  # local top_right="$(git rev-parse --abbrev-ref HEAD 2>/dev/null)"
+  # local bottom_left='%# '
+  # local bottom_right='%T'
+
+  # PROMPT="$(fill-line "$top_left" "$top_right")"$'\n'$bottom_left
+  # RPROMPT=$bottom_right
+}
+autoload -Uz add-zsh-hook
+add-zsh-hook precmd set-prompt
+
+tm () {
+    local session
+    newsession=${1:-new}
+    session=$(tmux list-sessions -F "#{session_name}" | \
+    fzf --query="$1" --select-1 --exit-0)  && tmux attach-session -t "$session" || tmux new-session -s $newsession
+}
+# Pulled from https://github.com/ohmyzsh/ohmyzsh/blob/master/lib/git.zsh
+# Remove once I get antigen working
+function __git_prompt_git() {
+  GIT_OPTIONAL_LOCKS=0 command git "$@"
+}
+
+# Outputs the name of the current branch
+# Usage example: git pull origin $(git_current_branch)
+# Using '--quiet' with 'symbolic-ref' will not cause a fatal error (128) if
+# it's not a symbolic ref, but in a Git repo.
+function git_current_branch() {
+  local ref
+  ref=$(__git_prompt_git symbolic-ref --quiet HEAD 2> /dev/null)
+  local ret=$?
+  if [[ $ret != 0 ]]; then
+    [[ $ret == 128 ]] && return  # no git repo.
+    ref=$(__git_prompt_git rev-parse --short HEAD 2> /dev/null) || return
+  fi
+  echo ${ref#refs/heads/}
+}
+
+# Vim mode
+bindkey -v
 
 alias vim="nvim"
+alias zshconfig="vim ~/.zshrc"
+alias mkdir="mkdir -p"
+alias gs="git status"
+alias gglog="git log --pretty=format:\"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]\" --decorate"
+alias today="date +'%Y-%m-%d'"
+alias tnew="tmux new-session -s"
+alias ggpull="git pull origin $(git_current_branch)"
+alias ggpush="git push origin $(git_current_branch)"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # Auto-generated
 [[ -f /opt/dev/sh/chruby/chruby.sh ]] && type chruby >/dev/null 2>&1 || chruby () { source /opt/dev/sh/chruby/chruby.sh; chruby "$@"; }

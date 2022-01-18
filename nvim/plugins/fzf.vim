@@ -14,6 +14,14 @@ let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %
 
 let $FZF_DEFAULT_OPTS = '--layout=reverse --info=inline'
 
+" " Customise the Files command to use rg which respects .gitignore files
+" command! -bang -nargs=? -complete=dir Files
+"     \ call fzf#run(fzf#wrap('files', fzf#vim#with_preview({ 'dir': <q-args>, 'sink': 'e', 'source': 'rg --files --hidden --glob "!.git/*"' }), <bang>0))
+
+" " Add an AllFiles variation that ignores .gitignore files
+" command! -bang -nargs=? -complete=dir AllFiles
+"     \ call fzf#run(fzf#wrap('allfiles', fzf#vim#with_preview({ 'dir': <q-args>, 'sink': 'e', 'source': 'rg --files --hidden --no-ignore --glob "!.git/*"' }), <bang>0))
+
 nnoremap <C-P> :Files<CR>
 nmap <leader>f :Files<cr>
 nmap <leader>F :AllFiles<cr>
