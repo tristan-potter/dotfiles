@@ -148,12 +148,16 @@ source ~/.config/nvim/plugins/peekaboo.vim
 source ~/.config/nvim/plugins/splitjoin.vim
 source ~/.config/nvim/plugins/surround.vim
 source ~/.config/nvim/plugins/polyglot.vim
+source ~/.config/nvim/plugins/writegood.vim
+
+" TODO set up these two plugins
 source ~/.config/nvim/plugins/which-key.vim
+source ~/.config/nvim/plugins/coc.vim
 
 call plug#end()
 
 doautocmd User PlugLoaded
 
-"--------------------------------
+"---------------------------------
 " Miscellaneous
 "---------------------------------

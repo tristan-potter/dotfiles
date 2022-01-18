@@ -16,3 +16,5 @@
 "     autocmd!
 "     autocmd User PlugLoaded call WhichKeySetup()
 " augroup END
+"
+" Include the write good commands and spell check ones!
