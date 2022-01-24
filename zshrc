@@ -7,23 +7,6 @@ export EDITOR='vim'
 # TODO this doesn't seem to be working
 [ -f $HOME/.config/zsh/antigenrc ] && source $HOME/.config/zsh/antigenrc
 
-function set-prompt() {
-  local prompt_pwd='%B%F{blue}%1~%f%b'
-  local prompt_exit_status='%(?.%F{green}√.%F{red}?%?)%f'
-  local prompt_cursor=' %# '
-  PROMPT=$prompt_pwd""$'\n'$prompt_exit_status$prompt_cursor
-
-  # local top_left='%~'
-  # local top_right="$(git rev-parse --abbrev-ref HEAD 2>/dev/null)"
-  # local bottom_left='%# '
-  # local bottom_right='%T'
-
-  # PROMPT="$(fill-line "$top_left" "$top_right")"$'\n'$bottom_left
-  # RPROMPT=$bottom_right
-}
-autoload -Uz add-zsh-hook
-add-zsh-hook precmd set-prompt
-
 tm () {
     local session
     newsession=${1:-new}
@@ -50,6 +33,25 @@ function git_current_branch() {
   fi
   echo ${ref#refs/heads/}
 }
+
+function set-prompt() {
+  local prompt_pwd='%B%F{blue}%1~%f%b'
+  local current_branch="$(git_current_branch)"
+  local prompt_current_branch="%B%F{green}"$current_branch"%f%b"
+  local prompt_exit_status='%(?.%F{green}√.%F{red}?%?)%f'
+  local prompt_cursor=' %# '
+  PROMPT=$prompt_pwd' '$prompt_current_branch""$'\n'$prompt_exit_status$prompt_cursor
+
+  # local top_left='%~'
+  # local top_right="$(git rev-parse --abbrev-ref HEAD 2>/dev/null)"
+  # local bottom_left='%# '
+  # local bottom_right='%T'
+
+  # PROMPT="$(fill-line "$top_left" "$top_right")"$'\n'$bottom_left
+  # RPROMPT=$bottom_right
+}
+autoload -Uz add-zsh-hook
+add-zsh-hook precmd set-prompt
 
 # Vim mode
 bindkey -v
