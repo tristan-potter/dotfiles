@@ -39,8 +39,8 @@ function set-prompt() {
   local current_branch="$(git_current_branch)"
   local prompt_current_branch="%B%F{green}"$current_branch"%f%b"
   local prompt_exit_status='%(?.%F{green}√.%F{red}?%?)%f'
-  local prompt_cursor=' %# '
-  PROMPT=$prompt_pwd' '$prompt_current_branch""$'\n'$prompt_exit_status$prompt_cursor
+  local prompt_cursor='%B%F{blue}⮕ %f%b'
+  PROMPT=$prompt_pwd' '$prompt_current_branch""$'\n'$prompt_cursor
 
   # local top_left='%~'
   # local top_right="$(git rev-parse --abbrev-ref HEAD 2>/dev/null)"
@@ -48,7 +48,7 @@ function set-prompt() {
   # local bottom_right='%T'
 
   # PROMPT="$(fill-line "$top_left" "$top_right")"$'\n'$bottom_left
-  # RPROMPT=$bottom_right
+  RPROMPT=$prompt_exit_status
 }
 autoload -Uz add-zsh-hook
 add-zsh-hook precmd set-prompt
