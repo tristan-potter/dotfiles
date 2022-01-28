@@ -39,8 +39,8 @@ function set-prompt() {
   local current_branch="$(git_current_branch)"
   local prompt_current_branch="%B%F{green}"$current_branch"%f%b"
   local prompt_exit_status='%(?.%F{green}√.%F{red}?%?)%f'
-  local prompt_cursor='%B%F{blue}⮕ %f%b'
-  PROMPT=$prompt_pwd' '$prompt_current_branch""$'\n'$prompt_cursor
+  local prompt_cursor='%B%F{blue}⮕  %f%b'
+  PROMPT=$'\n'$prompt_pwd' '$prompt_current_branch$'\n'$prompt_cursor
 
   # local top_left='%~'
   # local top_right="$(git rev-parse --abbrev-ref HEAD 2>/dev/null)"
