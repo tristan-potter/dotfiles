@@ -10,6 +10,8 @@
 # - https://github.com/leits/MeetingBar
 # - spotify
 
+# Checkout raycast alfred replacement
+
 rm -rf $HOME/.config/kitty
 ln -s "$(pwd)/kitty" $HOME/.config/kitty
 
