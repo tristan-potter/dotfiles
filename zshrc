@@ -34,13 +34,25 @@ function git_current_branch() {
   echo ${ref#refs/heads/}
 }
 
+function prompt_host() {
+  local local_id=".local"
+  local spin_id="spin"
+  if [[ $HOST =~ $local_id ]]; then
+    echo ''
+  elif [[ $HOST =~ $spin ]]; then
+    echo "%F{blue}꩜ | %f"
+  else
+    echo '%F{blue}${HOST%%.*} | %f'
+  fi
+}
+
 function set-prompt() {
   local prompt_pwd='%B%F{blue}%1~%f%b'
   local current_branch="$(git_current_branch)"
   local prompt_current_branch="%B%F{green}"$current_branch"%f%b"
   local prompt_exit_status='%(?.%F{green}√.%F{red}?%?)%f'
   local prompt_cursor='%B%F{blue}⮕  %f%b'
-  PROMPT=$'\n'$prompt_pwd' '$prompt_current_branch$'\n'$prompt_cursor
+  PROMPT=$'\n'"$(prompt_host)"$prompt_pwd' '$prompt_current_branch$'\n'$prompt_cursor
 
   # local top_left='%~'
   # local top_right="$(git rev-parse --abbrev-ref HEAD 2>/dev/null)"
