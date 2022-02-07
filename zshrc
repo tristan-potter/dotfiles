@@ -86,3 +86,5 @@ alias ggpush="git push origin $(git_current_branch)"
 [[ -x /opt/homebrew/bin/brew ]] && eval $(/opt/homebrew/bin/brew shellenv)
 
 [ -f /opt/dev/dev.sh ] && source /opt/dev/dev.sh
+
+if [ "$TMUX" = "" ]; then tmux new -As0; fi
