@@ -118,6 +118,4 @@ typeset -U path cdpath fpath manpath
 if [ "$TMUX" = "" ]; then tmux new -As0; fi
 
 . $(brew --prefix)/opt/asdf/libexec/asdf.sh
-echo 'legacy_version_file = yes' >> ~/.asdfrc
-
 

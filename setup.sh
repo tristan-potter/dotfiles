@@ -36,3 +36,5 @@ ln -s "$(pwd)/wtf" $HOME/.config/wtf
 rm -rf $HOME/.gitconfig
 ln -s "$(pwd)/gitconfig" $HOME/.gitconfig
 
+rm -rf $HOME/.asdfrc
+ln -s "$(pwd)/asdfrc" $HOME/.asdfrc
