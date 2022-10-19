@@ -1,7 +1,12 @@
 
-# Use files for FZF
+# Use rg files for FZF by default
 export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
+export FZF_DEFAULT_OPTS='--height ~20% --layout=reverse --border'
 export EDITOR='vim'
+# Set bat as the default for man
+if [[ -x $(command -v 'bat') ]]; then
+  export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+fi
 
 # Plugins
 # TODO this doesn't seem to be working
@@ -46,7 +51,7 @@ function prompt_host() {
   fi
 }
 
-function set-prompt() {
+function set_prompt() {
   local prompt_pwd='%B%F{blue}%1~%f%b'
   local current_branch="$(git_current_branch)"
   local prompt_current_branch="%B%F{green}"$current_branch"%f%b"
@@ -63,7 +68,16 @@ function set-prompt() {
   RPROMPT=$prompt_exit_status
 }
 autoload -Uz add-zsh-hook
-add-zsh-hook precmd set-prompt
+add-zsh-hook precmd set_prompt
+
+# reloads a script or function that was previously defined
+function freload() {
+  while (( $# )); do
+    unfunction $1;
+    autoload -U $1;
+    shift;
+  done
+}
 
 # Vim mode
 bindkey -v
@@ -77,14 +91,33 @@ alias today="date +'%Y-%m-%d'"
 alias tnew="tmux new-session -s"
 alias ggpull="git pull origin $(git_current_branch)"
 alias ggpush="git push origin $(git_current_branch)"
+alias test_gglog="git log \
+  --max-count=20 --abbrev-commit --decorate --color=always\
+  --format=format:'%C(bold green)(%ar)%C(reset) - [%C(dim white)%an%C(reset)] %C(white)%s%C(reset)'"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-# Auto-generated
-[[ -f /opt/dev/sh/chruby/chruby.sh ]] && type chruby >/dev/null 2>&1 || chruby () { source /opt/dev/sh/chruby/chruby.sh; chruby "$@"; }
+# Use completions installed through brew
+if type brew &>/dev/null
+then
+  FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+fi
+autoload -Uz compinit
+compinit
 
+# Scripts in zfunc
+fpath=( ~/.config/zsh/zfunc "${fpath[@]}" )
+# Autoload everything in zfunc with executable bit
+for func in ~/.config/zsh/zfunc/*(N-.x:t); autoload -Uz $func
+# Remove any duplicates from the path arrays so they aren't super long
+typeset -U path cdpath fpath manpath
+
+# Auto-generated
 [[ -x /opt/homebrew/bin/brew ]] && eval $(/opt/homebrew/bin/brew shellenv)
 
-[ -f /opt/dev/dev.sh ] && source /opt/dev/dev.sh
-
 if [ "$TMUX" = "" ]; then tmux new -As0; fi
+
+. $(brew --prefix)/opt/asdf/libexec/asdf.sh
+echo 'legacy_version_file = yes' >> ~/.asdfrc
+
+

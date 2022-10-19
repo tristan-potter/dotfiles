@@ -8,7 +8,7 @@
 "                                             | |
 "                                             |_|
 "
-"     Personal vim configuration of Tristan Potter <hi@tristanpotter.dev>
+"     Personal vim configuration of Tristan Potter <hello@tristanpotter.dev>
 
 
 "------------------------------------------------------------------------------
@@ -149,6 +149,8 @@ source ~/.config/nvim/plugins/splitjoin.vim
 source ~/.config/nvim/plugins/surround.vim
 source ~/.config/nvim/plugins/polyglot.vim
 source ~/.config/nvim/plugins/writegood.vim
+
+source ~/.config/nvim/plugins/languages.vim
 
 " TODO set up these two plugins
 source ~/.config/nvim/plugins/which-key.vim

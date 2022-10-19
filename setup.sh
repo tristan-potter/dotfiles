@@ -1,12 +1,13 @@
 #!/bin/bash
 
 # Install:
-# - kitty
-# - tmux
-# - fzf
-# - rg
-# - bat
-# - neovim
+# - brew: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+# - kitty: https://github.com/kovidgoyal/kitty/releases
+# - tmux: brew install tmux
+# - fzf: brew install fzf && $(brew --prefix)/opt/fzf/install
+# - rg: brew install ripgrep
+# - bat: brew install bat
+# - neovim: brew install nvim
 # - https://github.com/leits/MeetingBar
 # - spotify
 
@@ -19,6 +20,7 @@ rm -f $HOME/.zshrc
 ln -s "$(pwd)/zshrc" $HOME/.zshrc
 rm -rf $HOME/.config/zsh
 ln -s "$(pwd)/zsh" $HOME/.config/zsh
+# Add something about zprofile
 
 rm -rf $HOME/.config/nvim
 ln -s "$(pwd)/nvim" $HOME/.config/nvim
@@ -30,3 +32,4 @@ ln -s "$(pwd)/tmux" $HOME/.config/tmux
 
 rm -rf $HOME/.config/wtf
 ln -s "$(pwd)/wtf" $HOME/.config/wtf
+
