@@ -33,3 +33,6 @@ ln -s "$(pwd)/tmux" $HOME/.config/tmux
 rm -rf $HOME/.config/wtf
 ln -s "$(pwd)/wtf" $HOME/.config/wtf
 
+rm -rf $HOME/.gitconfig
+ln -s "$(pwd)/gitconfig" $HOME/.gitconfig
+
