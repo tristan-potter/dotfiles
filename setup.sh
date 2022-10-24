@@ -1,14 +1,16 @@
 #!/bin/bash
 
 # Install:
-# - brew: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+# - brew (https://brew.sh): /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 # - kitty: https://github.com/kovidgoyal/kitty/releases
 # - tmux: brew install tmux
 # - fzf: brew install fzf && $(brew --prefix)/opt/fzf/install
 # - rg: brew install ripgrep
 # - bat: brew install bat
 # - neovim: brew install nvim
-# - https://github.com/leits/MeetingBar
+# - heads up for meetings in menu bar: https://github.com/leits/MeetingBar
+# - preview (quick look) for code and other text: https://github.com/sbarex/SourceCodeSyntaxHighlight
+# - preview (quick look) for markdown (rendered): https://github.com/sbarex/QLMarkdown
 # - spotify
 
 # Checkout raycast alfred replacement
