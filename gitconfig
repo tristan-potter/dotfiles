@@ -3,3 +3,8 @@
 # Please adapt and uncomment the following lines:
 	name = Tristan Potter
 	email = 4521510+DrTeePot@users.noreply.github.com
+
+[push]
+	# When doing `git push` and remote doesn't exist, create it.
+	# equivalent to `git push --set-upstream origin <LOCAL BRANCH>`
+	autoSetupRemote = true
