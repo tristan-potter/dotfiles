@@ -52,7 +52,7 @@ function prompt_host() {
 }
 
 function set_prompt() {
-  local prompt_pwd='%B%F{blue}%1~%f%b'
+  local prompt_pwd='%B%F{blue}%3~%f%b'
   local current_branch="$(git_current_branch)"
   local prompt_current_branch="%B%F{green}"$current_branch"%f%b"
   local prompt_exit_status='%(?.%F{green}√.%F{red}?%?)%f'
