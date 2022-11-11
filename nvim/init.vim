@@ -136,6 +136,7 @@ call plug#begin()
 source ~/.config/nvim/plugins/commentary.vim
 source ~/.config/nvim/plugins/editorconfig.vim
 source ~/.config/nvim/plugins/fugitive.vim
+source ~/.config/nvim/plugins/eunuch.vim
 source ~/.config/nvim/plugins/solarized.vim
 source ~/.config/nvim/plugins/quick-scope.vim
 source ~/.config/nvim/plugins/heritage.vim
@@ -143,18 +144,18 @@ source ~/.config/nvim/plugins/airline.vim
 source ~/.config/nvim/plugins/floaterm.vim
 source ~/.config/nvim/plugins/fzf.vim
 source ~/.config/nvim/plugins/startify.vim
-source ~/.config/nvim/plugins/git-gutter.vim
-source ~/.config/nvim/plugins/peekaboo.vim
 source ~/.config/nvim/plugins/splitjoin.vim
 source ~/.config/nvim/plugins/surround.vim
-source ~/.config/nvim/plugins/polyglot.vim
 source ~/.config/nvim/plugins/writegood.vim
-
+source ~/.config/nvim/plugins/coc.vim
 source ~/.config/nvim/plugins/languages.vim
 
-" TODO set up these two plugins
-source ~/.config/nvim/plugins/which-key.vim
-source ~/.config/nvim/plugins/coc.vim
+" Potentially deprecated if which-key will work
+source ~/.config/nvim/plugins/peekaboo.vim
+" source ~/.config/nvim/plugins/which-key.vim
+
+" Deprecated
+source ~/.config/nvim/plugins/git-gutter.vim
 
 call plug#end()
 

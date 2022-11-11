@@ -3,3 +3,4 @@
 " why it's called Fugitive.
 
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-rhubarb' " GitHub support for things like GBrowse

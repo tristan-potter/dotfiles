@@ -43,3 +43,6 @@ ln -s "$(pwd)/gitignore" $HOME/.gitignore
 
 rm -rf $HOME/.asdfrc
 ln -s "$(pwd)/asdfrc" $HOME/.asdfrc
+
+rm -rf $HOME/.tool-versions
+ln -s "$(pwd)/tool-versions" $HOME/.tool-versions

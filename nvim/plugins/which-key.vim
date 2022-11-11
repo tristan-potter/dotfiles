@@ -9,12 +9,11 @@
 "
 " https://github.com/folke/which-key.nvim
 
+Plug 'folke/whick-key.nvim'
 
-" Will need this to make work with the way I load plugins
-"
-" augroup WhichKeySetup
-"     autocmd!
-"     autocmd User PlugLoaded call WhichKeySetup()
-" augroup END
-"
+augroup which_key_setup
+  autocmd!
+  autocmd User PlugLoaded call WhichKeySetup()
+augroup END
+
 " Include the write good commands and spell check ones!
