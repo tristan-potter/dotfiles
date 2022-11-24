@@ -4,7 +4,38 @@
 	name = Tristan Potter
 	email = 4521510+DrTeePot@users.noreply.github.com
 
+[alias]
+	ll = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ad) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative --branches --tags --remotes
+	lll = log --abbrev-commit --pretty=oneline --graph --decorate
+	c = checkout
+	cb = checkout -b
+	s = status
+	d = diff
+	ds = diff --cached
+	com = commit -v
+	branchlog = log --pretty=format:'[%Cblue%an%Creset] %h %Cgreen%s%Creset' --numstat --reverse
+	recent-branches = for-each-ref --sort=-committerdate --count=10 --format='%(refname:short)' refs/heads/
+	branch-diff = !git diff $(git merge-base HEAD origin/master)
+
+[core]
+	excludesFile = ~/.gitignore
+	commitGraph = true
+
+[diff]
+	algorithm = patience
+	noprefix = true
+
+[rebase]
+	autosquash = true
+
+[gc]
+	writeCommitGraph = true
+
 [push]
 	# When doing `git push` and remote doesn't exist, create it.
 	# equivalent to `git push --set-upstream origin <LOCAL BRANCH>`
 	autoSetupRemote = true
+
+[pull]
+	ff = only
+
