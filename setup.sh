@@ -12,6 +12,7 @@
 # - preview (quick look) for code and other text: https://github.com/sbarex/SourceCodeSyntaxHighlight
 # - preview (quick look) for markdown (rendered): https://github.com/sbarex/QLMarkdown
 # - spotify
+# - solargraph for ruby language server: gem install solargraph
 
 # Checkout raycast alfred replacement
 
@@ -42,7 +43,10 @@ rm -rf $HOME/.gitignore
 ln -s "$(pwd)/gitignore" $HOME/.gitignore
 
 rm -rf $HOME/.asdfrc
-ln -s "$(pwd)/asdfrc" $HOME/.asdfrc
+ln -s "$(pwd)/asdf/asdfrc" $HOME/.asdfrc
 
 rm -rf $HOME/.tool-versions
-ln -s "$(pwd)/tool-versions" $HOME/.tool-versions
+ln -s "$(pwd)/asdf/tool-versions" $HOME/.tool-versions
+
+rm -rf $HOME/.default-gems
+ln -s "$(pwd)/asdf/default-gems" $HOME/.default-gems
