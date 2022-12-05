@@ -67,6 +67,7 @@ function _dev_help() {
   _dev_puts ""
   _dev_puts "Commands:"
   _dev_puts "  cd: change to a project directory in $workspace"
+  _dev_puts "  test: run changed and new specs, currently requires you to be in a project with rspec"
 }
 
 function dev() {
@@ -78,8 +79,8 @@ function dev() {
       # TODO Maybe I need a generic error
       _dev_puts "" >&2
     fi
-  elif [[ $@ = "" ]]; then
-    _dev_help
+  elif [[ $sub_command = "test" ]]; then
+    rspec $(git ls-files --modified --exclude-standard --others spec)
   elif [[ $@ = "" ]]; then
     _dev_help
   fi
