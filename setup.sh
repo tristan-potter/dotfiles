@@ -7,6 +7,7 @@
 # - fzf: brew install fzf && $(brew --prefix)/opt/fzf/install
 # - rg: brew install ripgrep
 # - bat: brew install bat
+# - go: https://go.dev/doc/install
 # - neovim: brew install nvim
 # - heads up for meetings in menu bar: https://github.com/leits/MeetingBar
 # - preview (quick look) for code and other text: https://github.com/sbarex/SourceCodeSyntaxHighlight

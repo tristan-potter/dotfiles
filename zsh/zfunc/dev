@@ -80,7 +80,7 @@ function dev() {
       _dev_puts "" >&2
     fi
   elif [[ $sub_command = "test" ]]; then
-    rspec $(git ls-files --modified --exclude-standard --others spec)
+    COVERAGE=false rspec $(git ls-files --modified --exclude-standard --others spec)
   elif [[ $@ = "" ]]; then
     _dev_help
   fi

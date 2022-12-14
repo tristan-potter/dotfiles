@@ -119,3 +119,4 @@ if [ "$TMUX" = "" ]; then tmux new -As0; fi
 
 . $(brew --prefix)/opt/asdf/libexec/asdf.sh
 
+if [[ -x /usr/local/go ]]; then path+=('/usr/local/go/bin'); fi

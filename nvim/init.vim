@@ -137,7 +137,6 @@ source ~/.config/nvim/plugins/commentary.vim
 source ~/.config/nvim/plugins/editorconfig.vim
 source ~/.config/nvim/plugins/fugitive.vim
 source ~/.config/nvim/plugins/eunuch.vim
-source ~/.config/nvim/plugins/solarized.vim
 source ~/.config/nvim/plugins/quick-scope.vim
 source ~/.config/nvim/plugins/heritage.vim
 source ~/.config/nvim/plugins/airline.vim
@@ -150,12 +149,18 @@ source ~/.config/nvim/plugins/writegood.vim
 source ~/.config/nvim/plugins/coc.vim
 source ~/.config/nvim/plugins/languages.vim
 
+" Colors, combine this into one
+source ~/.config/nvim/plugins/solarized.vim
+source ~/.config/nvim/plugins/hexokinase.vim
+source ~/.config/nvim/plugins/colors.vim
+
 " Potentially deprecated if which-key will work
 source ~/.config/nvim/plugins/peekaboo.vim
 " source ~/.config/nvim/plugins/which-key.vim
 
 " Deprecated
 source ~/.config/nvim/plugins/git-gutter.vim
+
 
 call plug#end()
 
