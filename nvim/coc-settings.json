@@ -1,0 +1,33 @@
+{
+  "coc.preferences.extensionUpdateCheck": "daily",
+  "[css][markdown][ruby]": {
+    "coc.preferences.formatOnSave": true
+  },
+
+  "solargraph.diagnostics": true,
+  "solargraph.autoformat": true,
+  "solargraph.formatting": true,
+  "solargraph.hover": true,
+
+  // coc-json - allows json language schemas
+  "json.enable": true,
+  "json.enableDefaultSchemas": true,
+  "json.format.enable": true,
+  "json.validate.enable": true,
+  "json.format.keepLines": false,
+  "json.schemaDownload.enable": true,
+  "json.schemas": [ ],
+
+  // coc-marketplace
+  "marketplace.npmsio": false,
+
+  // coc-git
+
+  // coc-tsserver
+  "tsserver.enable": true,
+  "tsserver.useSyntaxServer": "auto",
+
+  "prettier.enable": true,
+
+  "eslint.autoFixOnSave": true,
+}

@@ -6,6 +6,8 @@
 " https://github.com/junegunn/fzf
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+
+" See git status in vim FZF using GBranches or GTags
 Plug 'stsewd/fzf-checkout.vim'
 
 let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.3, 'yoffset':0.9, 'xoffset': 0.5 } }

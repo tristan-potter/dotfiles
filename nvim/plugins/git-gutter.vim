@@ -7,4 +7,6 @@
 "
 " https://github.com/airblade/vim-gitgutter
 
-Plug 'airblade/vim-gitgutter'
+" Plug 'airblade/vim-gitgutter'
+
+" No longer need this, provided by coc-git

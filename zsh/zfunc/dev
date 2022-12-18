@@ -1,0 +1,90 @@
+#! /bin/zsh
+
+function _dev_puts() {
+  # better than echo
+  printf '%s\n' "$1"
+}
+
+function _dev_workspace() {
+  _dev_puts "$HOME/src"
+}
+
+function _dev_get_repo_options() {
+  local git_relative_date_format='%C(bold green)(%ar)%C(reset)'
+  local git_author_format='%C(dim white)%an%C(reset)'
+  local git_commit_format='%C(white)%s%C(reset)'
+
+  local git_format_string="format:'$git_relative_date_format - [$git_author_format] $git_commit_format'"
+  local git_log_cmd="git -C {} log --max-count=20 --abbrev-commit --decorate --color=always --format=$git_format_string"
+
+  # TODO do I need the preview? Also what's the best height?
+  _dev_puts "$(_dev_puts "$1" | fzf --height 40% --reverse --ansi --preview=$git_log_cmd)"
+}
+
+# Takes one argument, the folder to find in $workspace/*/*/
+function _dev_get_matches() {
+  local workspace=$(_dev_workspace)
+  local matches="$(find $workspace -type d -depth 3 -name \*$1\*)"
+  if [[ $? -ne 0 ]]; then
+    _dev_puts ""
+    return 1
+  fi
+
+  _dev_puts $matches
+  return 0
+}
+
+# repository: string => void
+# Attempts to change directories to the given folder in `$workspace/*/*/`.
+# If there is more than one match for $respository -> ask user to pick from the
+#   list of options.
+# If there are no matches -> suggest git clone.
+function _dev_cd(){
+  local repository=$1
+  local workspace="$(_dev_workspace)"
+  local matches="$(_dev_get_matches $repository)"
+  local number_of_matches="$(_dev_puts "$matches" | wc -l | xargs)"
+
+  if [[ $matches = "" ]]; then
+    local git_repo="git@github.com:purposemed/$repository.git"
+    _dev_puts "Repository $2 does not exist. If this is a git repo:"
+    _dev_puts ""
+    _dev_puts "  git clone $git_repo $workspace/github.com/purposemed/$repository"
+    return 1
+  elif [[ $number_of_matches = '1' ]]; then
+    cd $matches
+    return 0
+  else
+    cd $(_dev_get_repo_options $matches)
+    return 0
+  fi
+
+}
+
+function _dev_help() {
+  local workspace="$(_dev_workspace)"
+  _dev_puts "Usage: dev [command] [arguments]"
+  _dev_puts ""
+  _dev_puts "Commands:"
+  _dev_puts "  cd: change to a project directory in $workspace"
+  _dev_puts "  test: run changed and new specs, currently requires you to be in a project with rspec"
+}
+
+function dev() {
+  local sub_command=$1
+
+  if [[ $sub_command = "cd" ]]; then
+    _dev_cd "$2"
+    if [[ $? -ne 0 ]]; then
+      # TODO Maybe I need a generic error
+      _dev_puts "" >&2
+    fi
+  elif [[ $sub_command = "test" ]]; then
+    COVERAGE=false rspec $(git ls-files --modified --exclude-standard --others spec)
+  elif [[ $@ = "" ]]; then
+    _dev_help
+  fi
+
+}
+
+dev "$@"
