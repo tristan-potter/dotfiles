@@ -1,2 +1,4 @@
 nodejs 19.0.1
 ruby 3.1.2
+rust 1.66.0
+golang 1.19.4
