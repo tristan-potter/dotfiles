@@ -1,0 +1,1 @@
+/Users/tristanpotter/.dotfiles/themer/out/macos-solarized/vim/ThemerVim.vim

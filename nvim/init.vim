@@ -139,28 +139,24 @@ source ~/.config/nvim/plugins/fugitive.vim
 source ~/.config/nvim/plugins/eunuch.vim
 source ~/.config/nvim/plugins/quick-scope.vim
 source ~/.config/nvim/plugins/heritage.vim
-source ~/.config/nvim/plugins/airline.vim
 source ~/.config/nvim/plugins/floaterm.vim
 source ~/.config/nvim/plugins/fzf.vim
 source ~/.config/nvim/plugins/startify.vim
 source ~/.config/nvim/plugins/splitjoin.vim
 source ~/.config/nvim/plugins/surround.vim
 source ~/.config/nvim/plugins/writegood.vim
+
+" ***** Display Plugins *****
+source ~/.config/nvim/plugins/theme.vim
+source ~/.config/nvim/plugins/airline.vim
 source ~/.config/nvim/plugins/coc.vim
 source ~/.config/nvim/plugins/languages.vim
+source ~/.config/nvim/plugins/git-gutter.vim " Deprecated
 
-" Colors, combine this into one
-source ~/.config/nvim/plugins/solarized.vim
-source ~/.config/nvim/plugins/hexokinase.vim
-source ~/.config/nvim/plugins/colors.vim
 
 " Potentially deprecated if which-key will work
 source ~/.config/nvim/plugins/peekaboo.vim
 " source ~/.config/nvim/plugins/which-key.vim
-
-" Deprecated
-source ~/.config/nvim/plugins/git-gutter.vim
-
 
 call plug#end()
 
@@ -169,3 +165,19 @@ doautocmd User PlugLoaded
 "---------------------------------
 " Miscellaneous
 "---------------------------------
+
+function! GenerateHeader(width, word, symbol)
+  let l:inserted_word = ' ' . a:word . ' '
+  let l:word_width = strlen(l:inserted_word)
+  let l:length_before = (a:width - l:word_width) / 2
+  let l:hashes_before = repeat(a:symbol, l:length_before)
+  let l:hashes_after = repeat(a:symbol, a:width - (l:word_width + l:length_before))
+  let l:hash_line = repeat(a:symbol, a:width)
+  let l:word_line = l:hashes_before . l:inserted_word . l:hashes_after
+
+  :put =l:hash_line
+  :put =l:word_line
+  :put =l:hash_line
+endfunction
+
+command! -nargs=0 CreateHeader :call GenerateHeader(80, getline("."), split(&commentstring, '%s')[0])

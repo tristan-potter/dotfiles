@@ -47,6 +47,7 @@ setup_nvim(){
   echo "Setting up Neovim"
   rm -rf $HOME/.config/nvim
   ln -s "$(pwd)/nvim" $HOME/.config/nvim
+  ln -s "$(pwd)/themer/out/macos/vim/ThemerVim.vim" $HOME/.config/nvim/colors/themer.vim
 }
 
 setup_tmux() {
@@ -94,6 +95,7 @@ setup_asdf() {
 }
 
 setup_tools() {
+  brew_install "git"
   brew_install "bat"
   brew_install "ripgrep"
   brew_install "fzf" && $(brew --prefix)/opt/fzf/install

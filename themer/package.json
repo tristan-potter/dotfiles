@@ -1,0 +1,24 @@
+{
+  "dependencies": {
+    "@themerdev/chrome": "^1.2.2",
+    "@themerdev/colors-default": "^1.0.11",
+    "@themerdev/colors-solarized": "^1.0.4",
+    "@themerdev/kitty": "^1.0.1",
+    "@themerdev/slack": "^2.1.1",
+    "@themerdev/vim": "^3.3.1",
+    "@themerdev/vim-lightline": "^3.2.0",
+    "@themerdev/vscode": "^2.4.0",
+    "@themerdev/wallpaper-block-wave": "^4.0.3",
+    "@themerdev/xcode": "^2.1.1",
+    "themer": "^4.0.0",
+    "themer-tmux": "^1.0.4"
+  },
+  "scripts": {
+    "themer": "themer",
+    "default-colors": "themer -c @themerdev/colors-default -t @themerdev/vim -t @themerdev/wallpaper-block-wave -o out/default",
+    "macos": "themer -c macos-theme.js -t @themerdev/vim-lightline -t @themerdev/vim -t @themerdev/vscode -t @themerdev/xcode -t @themerdev/kitty -t @themerdev/wallpaper-block-wave -t @themerdev/chrome -t @themerdev/slack -t themer-tmux -o out/macos",
+    "macos-atom-one": "themer -c macos-atom-one.js -t @themerdev/vim-lightline -t @themerdev/vim -t @themerdev/vscode -t @themerdev/xcode -t @themerdev/kitty -t @themerdev/wallpaper-block-wave -t @themerdev/chrome -t @themerdev/slack -t themer-tmux -o out/macos-atom-one",
+    "mac-solarized": "themer -c macos-solarized.js -t @themerdev/vim-lightline -t @themerdev/vim -t @themerdev/vscode -t @themerdev/xcode -t @themerdev/kitty -t @themerdev/wallpaper-block-wave -t @themerdev/chrome -t @themerdev/slack -t themer-tmux -o out/macos-solarized",
+    "solarized": "themer -c @themerdev/colors-solarized -t @themerdev/vim -t @themerdev/wallpaper-block-wave -o out/solarized"
+  }
+}
