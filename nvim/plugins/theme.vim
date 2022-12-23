@@ -1,5 +1,10 @@
 " Theme: {{{
 " Plugins and configuration related
+" -- Some useful links for making your own colorscheme:
+" -- https://github.com/chriskempson/base16
+" -- https://colourco.de/
+" -- https://color.adobe.com/create/color-wheel
+" -- http://vrl.cs.brown.edu/color
 
 " https://github.com/amadeus/vim-convert-color-to
 " A simple and easy to use plugin to convert color strings to different
