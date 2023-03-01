@@ -134,7 +134,6 @@ autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
 call plug#begin()
 
 source ~/.config/nvim/plugins/commentary.vim
-source ~/.config/nvim/plugins/editorconfig.vim
 source ~/.config/nvim/plugins/fugitive.vim
 source ~/.config/nvim/plugins/eunuch.vim
 source ~/.config/nvim/plugins/quick-scope.vim
@@ -181,3 +180,5 @@ function! GenerateHeader(width, word, symbol)
 endfunction
 
 command! -nargs=0 CreateHeader :call GenerateHeader(80, getline("."), split(&commentstring, '%s')[0])
+
+hi IndentBlanklineContextStart gui=underline guisp=Red

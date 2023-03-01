@@ -97,6 +97,7 @@ setup_asdf() {
 setup_tools() {
   brew_install "git"
   brew_install "bat"
+  brew_install "jq"
   brew_install "ripgrep"
   brew_install "fzf" && $(brew --prefix)/opt/fzf/install
 }

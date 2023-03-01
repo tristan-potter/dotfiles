@@ -28,6 +28,29 @@ endfunction
 " vim plugin to display the indention levels with thin vertical lines
 Plug 'Yggdroot/indentLine'
 function! s:ConfigIndentLine()
+  " Change indentline color to be same as highlight group. SpecialKey is the
+  " highlight group used by Tab characters.
+  let g:indentLine_defaultGroup = 'SpecialKey'
+
+  " Use the far-left pipe character to connect with underline on context
+  let g:indentLine_char = '▏'
+endfunction
+
+" https://github.com/lukas-reineke/indent-blankline.nvim
+" This plugin adds indentation guides to all lines (including empty lines).
+" It uses Neovims virtual text feature and no conceal.
+Plug 'lukas-reineke/indent-blankline.nvim'
+function! s:ConfigIndentBlankline()
+  lua require("indent_blankline").setup {
+        \  show_warning_message = true,
+        \  show_current_context = true,
+        \  show_current_context_start = true,
+        \ }
+
+  " highlight IndentBlanklineContextStart ctermul=4
+
+  " hi IndentBlanklineContextStart gui=nocombine guifg=Black guisp=Red
+  hi IndentBlanklineContextStart gui=underline guisp=Red
 endfunction
 
 " https://github.com/RRethy/vim-hexokinase
@@ -39,17 +62,23 @@ function! s:ConfigHexokinase()
   let g:Hexokinase_highlighters = ['virtual']
 endfunction
 
+Plug 'RRethy/vim-illuminate'
+function! s:ConfigIlluminate()
+endfunction
 
 function! s:ConfigPlugins()
   call s:ConfigConvertColorTo()
   call s:ConfigBase16()
   call s:ConfigHexokinase()
   call s:ConfigIndentLine()
+  call s:ConfigIlluminate()
 
   set background=dark
   " colorscheme themer
   " colorscheme solarized8_high
   colorscheme base16-onedark
+  " hi Normal guibg=NONE ctermbg=NONE
+  call s:ConfigIndentBlankline()
 endfunction
 
 function! SyntaxGroup()
