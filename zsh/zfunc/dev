@@ -34,6 +34,10 @@ function _dev_get_matches() {
   return 0
 }
 
+function _dev_repo_uri() {
+  _dev_puts "git@github.com:drteepot/$1.git"
+}
+
 # repository: string => void
 # Attempts to change directories to the given folder in `$workspace/*/*/`.
 # If there is more than one match for $respository -> ask user to pick from the
@@ -46,10 +50,10 @@ function _dev_cd(){
   local number_of_matches="$(_dev_puts "$matches" | wc -l | xargs)"
 
   if [[ $matches = "" ]]; then
-    local git_repo="git@github.com:purposemed/$repository.git"
+    local git_repo="$(_dev_repo_uri $repository)"
     _dev_puts "Repository $2 does not exist. If this is a git repo:"
     _dev_puts ""
-    _dev_puts "  git clone $git_repo $workspace/github.com/purposemed/$repository"
+    _dev_puts "  git clone $git_repo $workspace/github.com/drteepot/$repository"
     return 1
   elif [[ $number_of_matches = '1' ]]; then
     cd $matches
@@ -58,7 +62,19 @@ function _dev_cd(){
     cd $(_dev_get_repo_options $matches)
     return 0
   fi
+}
 
+# name: string => void
+# Attempts to create a new project in the main workspace.
+function _dev_new(){
+  local name=$1
+  local workspace="$(_dev_workspace)"
+
+  mkdir $workspace/github.com/drteepot/$name
+  cd $workspace/github.com/drteepot/$name
+  git init
+  # TODO Should do setup for Rails or Typescript
+  return 0
 }
 
 function _dev_help() {
@@ -68,6 +84,7 @@ function _dev_help() {
   _dev_puts "Commands:"
   _dev_puts "  cd: change to a project directory in $workspace"
   _dev_puts "  test: run changed and new specs, currently requires you to be in a project with rspec"
+  _dev_puts "  new: WIP creates a new folder in the project workspace and initializes git"
 }
 
 function dev() {
@@ -76,8 +93,12 @@ function dev() {
   if [[ $sub_command = "cd" ]]; then
     _dev_cd "$2"
     if [[ $? -ne 0 ]]; then
-      # TODO Maybe I need a generic error
-      _dev_puts "" >&2
+      _dev_puts "An error occured" >&2
+    fi
+  elif [[ $sub_command = "new" ]]; then
+    _dev_new "$2"
+    if [[ $? -ne 0 ]]; then
+      _dev_puts "An error occured" >&2
     fi
   elif [[ $sub_command = "test" ]]; then
     COVERAGE=false rspec $(git ls-files --modified --exclude-standard --others spec)
