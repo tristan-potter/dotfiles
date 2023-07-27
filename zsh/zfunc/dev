@@ -73,7 +73,7 @@ function _dev_new(){
   mkdir $workspace/github.com/drteepot/$name
   cd $workspace/github.com/drteepot/$name
   git init
-  # TODO Should do setup for Rails or Typescript
+  # TODO Should do setup for asdf and then Rails or Typescript
   return 0
 }
 
