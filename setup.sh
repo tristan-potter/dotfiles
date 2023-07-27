@@ -82,6 +82,8 @@ setup_asdf() {
   # Can provide global golang packages with $HOME/.default-golang-pkgs
   asdf plugin-add golang https://github.com/kennyp/asdf-golang.git
   asdf plugin-add rust https://github.com/code-lever/asdf-rust.git
+  # Requires additional setup
+  asdf plugin-add postgres https://github.com/smashedtoatoms/asdf-postgres.git
 
   echo "Setting up ASDF"
   rm -rf $HOME/.asdfrc
@@ -92,6 +94,15 @@ setup_asdf() {
   ln -s "$(pwd)/asdf/default-gems" $HOME/.default-gems
   echo "Installing ASDF plugins"
   asdf install
+}
+
+setup_postgres_deps() {
+  # see https://github.com/smashedtoatoms/asdf-postgres#mac
+  brew_install "gcc"
+  brew_install "readline"
+  brew_install "zlib"
+  brew_install "curl"
+  brew_install "ossp-uuid"
 }
 
 setup_tools() {
@@ -121,5 +132,6 @@ setup_tmux
 setup_wtf
 setup_git
 setup_asdf
+setup_postgres_deps
 setup_tools
 
