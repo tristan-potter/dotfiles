@@ -2,7 +2,7 @@
 
 function _dev_puts() {
   # better than echo
-  printf '%s\n' "$1"
+  printf "%s\\n" "$1"
 }
 
 function _dev_workspace() {
