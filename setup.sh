@@ -43,6 +43,14 @@ error() {
   printf "$(f error)" "${step_name}" "${@:2}" 1>&2
 }
 
+add_step_to_output() {
+  local step_name=$1
+
+  while IFS= read -r line; do
+    log "${step_name}" "${line}"
+  done
+}
+
 log_step() {
   log "$1" "Initializing step"
 }
@@ -58,7 +66,7 @@ brew_install() {
     log "${step}" "${name} is already installed"
   else
     log "${step}" "${name} is not installed. Installing..."
-    brew install ${name}
+    brew install "${name}" | add_step_to_output "${step_name}"
     if (( $? != 0 )); then
       error "${step}" "Installing ${name} failed."
       return 1;
@@ -89,7 +97,7 @@ setup_brew() {
     log "$step_name" "Already installed."
   else
     log "$step_name" "Not found. Installing..."
-    bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" | add_step_to_output "${step_name}"
   fi
   log "$step_name" "Finished."
 }
@@ -255,7 +263,7 @@ setup_asdf() {
   fi
 
   log "${step_name}" "Installing plugins..."
-  asdf install
+  asdf install | add_step_to_output "${step_name}"
 
   log "${step_name}" "Finished."
 }
@@ -274,13 +282,16 @@ add_asdf_plugin() {
   local plugin_name=$2
   local plugin_url=$3
 
+  log "${step_name}" "Adding asdf plugin ${plugin_name} from ${plugin_url}."
+
   check_asdf_dependency "${step_name}"
 
-  if asdf current ${plugin_name} &>/dev/null; then
+  if ! asdf list ${plugin_name} &>/dev/null; then
+    asdf plugin add "${plugin_name}" "${plugin_url}" | add_step_to_output "${step_name}"
+  else
     log "${step_name}" "Plugin ${plugin_name} already installed."
   fi
 
-  asdf plugin add "${plugin_name}" "${plugin_url}"
   if (( $? != 0 )); then
     error "${step_name}" "Failed to add asdf plugin ${plugin_name} from ${plugin_url}"
   fi
@@ -291,15 +302,15 @@ asdf_add_global() {
   local plugin=$2
   check_asdf_dependency "${step_name}"
 
-  if ! [[ -f "~/.tool-versions" ]]; then
-    echo "Dependency ~/.tool-versions not found."
+  if ! [[ -f "${HOME}/.tool-versions" ]]; then
+    error "${step_name}" "Dependency ${HOME}/.tool-versions not found."
     return 1
   fi
 
-  if ! grep -Fq "$plugin" "~/.tool-versions"; then
-    asdf global "$plugin" "latest"
+  if ! grep -Fq "${plugin}" "${HOME}/.tool-versions"; then
+    asdf global "${plugin}" "latest" | add_step_to_output "${step_name}"
   else
-    echo "Plugin $plugin already added to global tool-versions"
+    log "${step_name}" "Plugin ${plugin_name} already added to global tool-versions."
   fi
 }
 
@@ -360,13 +371,13 @@ setup_postgres() {
 }
 
 setup_xcode_command_line_tools() {
-  local step_name="XCode Command Line Tools"
+  local step_name="XCode Tools"
   log_step "${step_name}"
 
   log "${step_name}" "Verifying presence...."
   if ! xcode-select -p &>/dev/null; then
     log "${step_name}" "Not found, installing..."
-    xcode-select --install
+    xcode-select --install | add_step_to_output "${step_name}"
   else
     log "${step_name}" "Already installed."
   fi
