@@ -196,9 +196,15 @@ setup_wtf() {
   local step_name="wtf"
   log_step "${step_name}"
 
-  echo "Setting up WTF"
+  log "${step_name}" "Removing existing configurations"
   rm -rf $HOME/.config/wtf
+
+  log "${step_name}" "Linking configuration files..."
   ln -s "$(pwd)/wtf" $HOME/.config/wtf
+  if (( $? != 0 )); then
+    error "${step}" "Linking configuration file failed with ${?}."
+    return 1;
+  fi
 }
 
 setup_git() {
@@ -207,49 +213,83 @@ setup_git() {
 
   brew_install "${step_name}" "git"
 
-  echo "Setting up git"
+  log "${step_name}" "Removing existing configurations"
   rm -rf $HOME/.gitconfig
-  ln -s "$(pwd)/gitconfig" $HOME/.gitconfig
-
   rm -rf $HOME/.gitignore
+
+  log "${step_name}" "Linking configuration files..."
+  ln -s "$(pwd)/gitconfig" $HOME/.gitconfig
+  if (( $? != 0 )); then
+    error "${step}" "Linking configuration file failed with ${?}."
+    return 1;
+  fi
   ln -s "$(pwd)/gitignore" $HOME/.gitignore
+  if (( $? != 0 )); then
+    error "${step}" "Linking configuration file failed with ${?}."
+    return 1;
+  fi
+
+  log "${step_name}" "Finished."
 }
 
 setup_asdf() {
   local step_name="asdf"
   log_step "${step_name}"
 
-  echo "Setting up ASDF"
   brew_install "${step_name}" "asdf"
 
+  log "${step_name}" "Removing existing configurations"
   rm -rf $HOME/.asdfrc
-  ln -s "$(pwd)/asdf/asdfrc" $HOME/.asdfrc
   rm -rf $HOME/.tool-versions
+
+  log "${step_name}" "Linking configuration files..."
+  ln -s "$(pwd)/asdf/asdfrc" $HOME/.asdfrc
+  if (( $? != 0 )); then
+    error "${step}" "Linking configuration file failed with ${?}."
+    return 1;
+  fi
   ln -s "$(pwd)/asdf/tool-versions" $HOME/.tool-versions
-  echo "Installing ASDF plugins"
+  if (( $? != 0 )); then
+    error "${step}" "Linking configuration file failed with ${?}."
+    return 1;
+  fi
+
+  log "${step_name}" "Installing plugins..."
   asdf install
+
+  log "${step_name}" "Finished."
 }
 
 check_asdf_dependency() {
+  local step_name=$1
+
   if ! asdf &>/dev/null; then
-    echo "Required dependency `asdf` is missing"
+    error "${step_name}" "Required dependency `asdf` is missing"
     return 1;
   fi
 }
 
 add_asdf_plugin() {
-  local plugin_name=$1
-  local plugin_url=$2
-  check_asdf_dependency
-  asdf plugin add "$plugin_name" "$plugin_url"
+  local step_name=$1
+  local plugin_name=$2
+  local plugin_url=$3
+
+  check_asdf_dependency "${step_name}"
+
+  if asdf current ${plugin_name} &>/dev/null; then
+    log "${step_name}" "Plugin ${plugin_name} already installed."
+  fi
+
+  asdf plugin add "${plugin_name}" "${plugin_url}"
   if (( $? != 0 )); then
-    echo "Failed to add asdf plugin $plugin_name"
+    error "${step_name}" "Failed to add asdf plugin ${plugin_name} from ${plugin_url}"
   fi
 }
 
 asdf_add_global() {
-  local plugin=$1
-  check_asdf_dependency
+  local step_name=$1
+  local plugin=$2
+  check_asdf_dependency "${step_name}"
 
   if ! [[ -f "~/.tool-versions" ]]; then
     echo "Dependency ~/.tool-versions not found."
@@ -266,40 +306,48 @@ asdf_add_global() {
 setup_global_nodejs() {
   local step_name="NodeJS"
   log_step "${step_name}"
-  add_asdf_plugin "nodejs" "https://github.com/asdf-vm/asdf-nodejs.git"
-  asdf_add_global "nodejs"
+  add_asdf_plugin ${step_name} "nodejs" "https://github.com/asdf-vm/asdf-nodejs.git"
+  asdf_add_global "${step_name}" "nodejs"
+
+  log "${step_name}" "Finished."
 }
 
 setup_global_ruby() {
   local step_name="Ruby"
   log_step "${step_name}"
-  add_asdf_plugin "ruby" "https://github.com/asdf-vm/asdf-ruby.git"
+  add_asdf_plugin ${step_name} "ruby" "https://github.com/asdf-vm/asdf-ruby.git"
 
-  asdf_add_global "ruby"
+  asdf_add_global "${step_name}" "ruby"
 
   rm -rf $HOME/.default-gems
   ln -s "$(pwd)/asdf/default-gems" $HOME/.default-gems
+
+  log "${step_name}" "Finished."
 }
 
 setup_global_golang() {
   local step_name="Golang"
   log_step "${step_name}"
   # Can provide global golang packages with $HOME/.default-golang-pkgs
-  add_asdf_plugin "golang" "https://github.com/kennyp/asdf-golang.git"
-  asdf_add_global "golang"
+  add_asdf_plugin ${step_name} "golang" "https://github.com/kennyp/asdf-golang.git"
+  asdf_add_global "${step_name}" "golang"
+
+  log "${step_name}" "Finished."
 }
 
 setup_global_rust() {
   local step_name="Rust"
   log_step "${step_name}"
-  add_asdf_plugin "rust" "https://github.com/code-lever/asdf-rust.git"
-  asdf_add_global "rust"
+  add_asdf_plugin ${step_name} "rust" "https://github.com/code-lever/asdf-rust.git"
+  asdf_add_global "${step_name}" "rust"
+
+  log "${step_name}" "Finished."
 }
 
 setup_postgres() {
   local step_name="PostgreSQL"
   log_step "${step_name}"
-  add_asdf_plugin "postgres" "https://github.com/smashedtoatoms/asdf-postgres.git"
+  add_asdf_plugin ${step_name} "postgres" "https://github.com/smashedtoatoms/asdf-postgres.git"
 
   # see https://github.com/smashedtoatoms/asdf-postgres#mac
   brew_install "${step_name}" "gcc"
@@ -307,24 +355,27 @@ setup_postgres() {
   brew_install "${step_name}" "zlib"
   brew_install "${step_name}" "curl"
   brew_install "${step_name}" "ossp-uuid"
+
+  log "${step_name}" "Finished."
 }
 
 setup_xcode_command_line_tools() {
   local step_name="XCode Command Line Tools"
   log_step "${step_name}"
 
-  echo "[XCode Command Line Tools] Verifying presence..."
+  log "${step_name}" "Verifying presence...."
   if ! xcode-select -p &>/dev/null; then
-    echo "[XCode Command Line Tools] Not found, installing..."
+    log "${step_name}" "Not found, installing..."
     xcode-select --install
-    echo "[XCode Command Line Tools] Done."
   else
-    echo "[XCode Command Line Tools] Installed."
+    log "${step_name}" "Already installed."
   fi
+
+  log "${step_name}" "Finished."
 }
 
 setup_tools() {
-  local step_name="Miscellaneous Developer Tools"
+  local step_name="Misc Tools"
   log_step "${step_name}"
 
   brew_install "${step_name}" "bat"
@@ -332,6 +383,8 @@ setup_tools() {
   brew_install "${step_name}" "ripgrep"
 
   brew_install "${step_name}" "fzf" "$(brew --prefix)/opt/fzf/install"
+
+  log "${step_name}" "Finished."
 }
 
 # Install:
