@@ -272,7 +272,7 @@ check_asdf_dependency() {
   local step_name=$1
 
   if ! asdf &>/dev/null; then
-    error "${step_name}" "Required dependency `asdf` is missing"
+    error "${step_name}" "Required dependency asdf is missing"
     return 1;
   fi
 }
