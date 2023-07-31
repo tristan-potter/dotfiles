@@ -398,6 +398,16 @@ setup_tools() {
   log "${step_name}" "Finished."
 }
 
+setup_heroku() {
+  local step_name="Heroku"
+  log_step "${step_name}"
+
+  brew tap heroku/brew | add_step_to_output
+  brew_install "${step_name}" "heroku"
+
+  log "${step_name}" "Finished."
+}
+
 # Install:
 # - go: https://go.dev/doc/install
 # - rust: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
@@ -423,6 +433,7 @@ main() {
   setup_postgres
   setup_xcode_command_line_tools
   setup_tools
+  setup_heroku
 }
 
 main

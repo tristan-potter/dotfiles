@@ -98,8 +98,7 @@ alias test_gglog="git log \
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # Use completions installed through brew
-if type brew &>/dev/null
-then
+if type brew &>/dev/null; then
   FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
 fi
 autoload -Uz compinit
