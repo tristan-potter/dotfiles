@@ -200,9 +200,12 @@ setup_tmux() {
   log "$step_name" "Finished."
 }
 
+# WTF is a personal information dashboard for your terminal
 setup_wtf() {
   local step_name="wtf"
   log_step "${step_name}"
+
+  brew_install "${step_name}" "wtfutil"
 
   log "${step_name}" "Removing existing configurations"
   rm -rf $HOME/.config/wtf
@@ -402,8 +405,9 @@ setup_heroku() {
   local step_name="Heroku"
   log_step "${step_name}"
 
-  brew tap heroku/brew | add_step_to_output
+  brew tap heroku/brew | add_step_to_output "${step_name}"
   brew_install "${step_name}" "heroku"
+  heroku autocomplete --refresh-cache | add_step_to_output "${step_name}"
 
   log "${step_name}" "Finished."
 }

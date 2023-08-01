@@ -38,8 +38,6 @@ atom_one_theme:
 custom_solarized_theme:
 custom_atom_one_theme:
 
-\\
-
 active:
 
 clean:

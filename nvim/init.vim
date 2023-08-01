@@ -147,7 +147,8 @@ source ~/.config/nvim/plugins/writegood.vim
 
 " ***** Display Plugins *****
 source ~/.config/nvim/plugins/theme.vim
-source ~/.config/nvim/plugins/airline.vim
+" source ~/.config/nvim/plugins/airline.vim
+source ~/.config/nvim/plugins/lualine.lua
 source ~/.config/nvim/plugins/coc.vim
 source ~/.config/nvim/plugins/languages.vim
 source ~/.config/nvim/plugins/git-gutter.vim " Deprecated
@@ -180,5 +181,3 @@ function! GenerateHeader(width, word, symbol)
 endfunction
 
 command! -nargs=0 CreateHeader :call GenerateHeader(80, getline("."), split(&commentstring, '%s')[0])
-
-hi IndentBlanklineContextStart gui=underline guisp=Red

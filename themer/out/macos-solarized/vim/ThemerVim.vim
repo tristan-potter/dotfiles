@@ -5,7 +5,7 @@
     
   let s:guishade0 = "#222222"
   let s:guishade1 = "#2A2A2A"
-  let s:guishade2 = "#818181"
+  let s:guishade2 = "#E0DCE0"
   let s:guishade3 = "#657B83"
   let s:guishade4 = "#A29DA3"
   let s:guishade5 = "#C1BCC2"
@@ -21,7 +21,7 @@
   let s:guiaccent7 = "#D33682"
   let s:ctermshade0 = 235
   let s:ctermshade1 = 235
-  let s:ctermshade2 = 244
+  let s:ctermshade2 = 253
   let s:ctermshade3 = 243
   let s:ctermshade4 = 247
   let s:ctermshade5 = 250
