@@ -118,6 +118,16 @@ function _dev_server(){
   return 0
 }
 
+function _dev_rails_generate(){
+  local sub_command=$1
+  local name=$2
+  if [[ -x ./bin/rails ]]; then
+    ./bin/rails generate "${sub_command}" "${name}"
+  else
+    _dev_puts "Rails not found in this directory."
+  fi
+}
+
 function _dev_help() {
   local workspace="$(_dev_workspace)"
   _dev_puts "Usage: dev [command] [arguments]"
@@ -153,6 +163,10 @@ function dev() {
     fi
   elif [[ $sub_command = "test" ]]; then
     COVERAGE=false rspec $(git ls-files --modified --exclude-standard --others spec)
+
+  # Rails specific shortcuts
+  elif [[ $sub_command = "gen" ]]; then
+    _dev_rails_generate "${2}" "${3}"
 
   # Aliases at the end
   elif [[ $sub_command = "s" ]]; then
