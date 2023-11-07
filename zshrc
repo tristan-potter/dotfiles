@@ -2,6 +2,7 @@
 # Use files for FZF
 export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
 export EDITOR='vim'
+export GOPATH="$GOPATH:$HOME/src"
 
 # Plugins
 # TODO this doesn't seem to be working

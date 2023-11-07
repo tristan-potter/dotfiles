@@ -25,3 +25,9 @@ rm -f $HOME/.tmux.conf
 ln -s "$(pwd)/tmux.conf" $HOME/.tmux.conf
 rm -rf $HOME/.config/tmux
 ln -s "$(pwd)/tmux" $HOME/.config/tmux
+
+rm -f $HOME/.gitignore
+ln -s "$(pwd)/gitignore" $HOME/.gitignore
+
+rm -f $HOME/.gitconfig
+ln -s "$(pwd)/gitconfig" $HOME/.gitconfig
