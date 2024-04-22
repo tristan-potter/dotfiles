@@ -1,7 +1,14 @@
 {
   "coc.preferences.extensionUpdateCheck": "daily",
+  "semanticTokens.filetypes": ["*"],
+
   "[css][markdown][ruby]": {
     "coc.preferences.formatOnSave": true
+  },
+
+  "[handlebars][hbs][html]": {
+    "coc.preferences.semanticTokensHighlights": true
+    "coc.preferences.colorSupport": true,
   },
 
   "solargraph.diagnostics": true,
@@ -20,8 +27,6 @@
 
   // coc-marketplace
   "marketplace.npmsio": false,
-
-  // coc-git
 
   // coc-tsserver
   "tsserver.enable": true,

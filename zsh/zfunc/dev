@@ -44,7 +44,7 @@ function _dev_get_repo_options() {
 # Takes one argument, the folder to find in $workspace/*/*/
 function _dev_get_matches() {
   local workspace=$(_dev_workspace)
-  local matches="$(find $workspace -type d -depth 3 -name \*$1\*)"
+  local matches="$(find $workspace -type dl -depth 3 -name \*$1\*)"
   if [[ $? -ne 0 ]]; then
     _dev_puts ""
     return 1

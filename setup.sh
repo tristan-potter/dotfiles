@@ -395,6 +395,14 @@ setup_tools() {
   brew_install "${step_name}" "bat"
   brew_install "${step_name}" "jq"
   brew_install "${step_name}" "ripgrep"
+  brew_install "${step_name}" "qlcolorcode"
+  brew_install "${step_name}" "qlstephen"
+  brew_install "${step_name}" "qlmarkdown" 
+  brew_install "${step_name}" "quicklook-json"
+  brew_install "${step_name}" "qlimagesize"
+  brew_install "${step_name}" "apparency" 
+  brew_install "${step_name}" "quicklookase"
+  brew_install "${step_name}" "qlvideo"
 
   brew_install "${step_name}" "fzf" "$(brew --prefix)/opt/fzf/install"
 
@@ -412,6 +420,37 @@ setup_heroku() {
   log "${step_name}" "Finished."
 }
 
+link_config() {
+  local $source_name=$1
+  local $dest=$2
+
+  log "${step_name}" "Removing existing configurations"
+  rm -rf $HOME/.config/bin
+
+  log "${step_name}" "Linking configuration files..."
+  ln -s "$(pwd)/bin" $HOME/.config/bin
+  if (( $? != 0 )); then
+    error "${step}" "Linking configuration file failed with ${?}."
+    return 1;
+  fi
+}
+
+# Custom bash scripts
+setup_bin() {
+  local step_name="User-defined binaries"
+  log_step "${step_name}"
+
+  log "${step_name}" "Removing existing configurations"
+  rm -rf $HOME/.config/bin
+
+  log "${step_name}" "Linking configuration files..."
+  ln -s "$(pwd)/bin" $HOME/.config/bin
+  if (( $? != 0 )); then
+    error "${step}" "Linking configuration file failed with ${?}."
+    return 1;
+  fi
+}
+
 # Install:
 # - go: https://go.dev/doc/install
 # - rust: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
@@ -426,6 +465,7 @@ main() {
   setup_brew
   setup_kitty
   setup_zsh
+  setup_bin
   setup_nvim
   setup_tmux
   setup_wtf

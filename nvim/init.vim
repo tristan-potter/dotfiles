@@ -144,6 +144,8 @@ source ~/.config/nvim/plugins/startify.vim
 source ~/.config/nvim/plugins/splitjoin.vim
 source ~/.config/nvim/plugins/surround.vim
 source ~/.config/nvim/plugins/writegood.vim
+source ~/.config/nvim/plugins/tabular.vim
+source ~/.config/nvim/plugins/copilot.vim
 
 " ***** Display Plugins *****
 source ~/.config/nvim/plugins/theme.vim
@@ -161,6 +163,27 @@ source ~/.config/nvim/plugins/peekaboo.vim
 call plug#end()
 
 doautocmd User PlugLoaded
+
+
+"---------------------------------
+" Filetype Settings
+"---------------------------------
+
+augroup filetype_markdown
+  " https://codeinthehole.com/tips/writing-markdown-in-vim/
+  autocmd!
+
+  " Use Vim's spell checker
+  autocmd Filetype markdown setlocal spell
+
+  " Use custom wrapper around MacOS dictionary as keyword look-up
+  autocmd Filetype markdown setlocal keywordprg=open-dict
+
+  " Hugo Markdown files can have 'Vim: ' in their file metadata, which Vim
+  " treats as a modeline and spits out an error. Hence, we disable
+  " `modelines` for Markdown files.
+  setlocal nomodeline
+augroup end
 
 "---------------------------------
 " Miscellaneous

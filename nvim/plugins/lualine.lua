@@ -9,7 +9,7 @@ local Plug = vim.fn['plug#']
 Plug 'nvim-lualine/lualine.nvim'
 
 -- Providers pretty icons and colours
--- Plug 'nvim-tree/nvim-web-devicons'
+Plug 'nvim-tree/nvim-web-devicons'
 
 local group = vim.api.nvim_create_augroup('LualineConfigs', {clear = true})
 

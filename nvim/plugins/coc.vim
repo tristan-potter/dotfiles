@@ -17,6 +17,7 @@ let g:coc_global_extensions = [
       \'coc-html',
       \'coc-vimlsp',
       \]
+let g:coc_default_semantic_highlight_groups = 1
 
 augroup coc_config_ft
   au!

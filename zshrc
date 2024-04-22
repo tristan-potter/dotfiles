@@ -88,7 +88,7 @@ alias mkdir="mkdir -p"
 alias gs="git status"
 alias gglog="git log --pretty=format:\"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]\" --decorate"
 alias today="date +'%Y-%m-%d'"
-alias tnew="tmux new-session -s"
+alias tnew="tmux new-session -s $(printf '%s\n' \"${PWD##*/}\") -c ${PWD}"
 alias ggpull="git pull origin $(git_current_branch)"
 alias ggpush="git push origin $(git_current_branch)"
 alias test_gglog="git log \
@@ -114,7 +114,7 @@ typeset -U path cdpath fpath manpath
 # Auto-generated
 [[ -x /opt/homebrew/bin/brew ]] && eval $(/opt/homebrew/bin/brew shellenv)
 
-if [ "$TMUX" = "" ]; then tmux new -As0; fi
+# if [ "$TMUX" = "" ]; then tmux new -As0; fi
 
 . $(brew --prefix)/opt/asdf/libexec/asdf.sh
 
