@@ -395,8 +395,6 @@ setup_tools() {
   brew_install "${step_name}" "bat"
   brew_install "${step_name}" "jq"
   brew_install "${step_name}" "ripgrep"
-  brew_install "${step_name}" "qlcolorcode"
-  brew_install "${step_name}" "qlstephen"
   brew_install "${step_name}" "qlmarkdown" 
   brew_install "${step_name}" "quicklook-json"
   brew_install "${step_name}" "qlimagesize"

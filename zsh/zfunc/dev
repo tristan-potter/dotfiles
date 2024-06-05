@@ -128,6 +128,21 @@ function _dev_rails_generate(){
   fi
 }
 
+function _dev_repo() {
+  local remote=$(git remote -v | grep fetch | awk '{print $2}')
+  _dev_puts $remote
+  local git_regex="^git\@(.*):(.*)\/(.*)\.git$"
+  if [[ $remote =~ $git_regex ]]; then
+    _dev_puts "Domain: ${match[1]}"
+    _dev_puts "Account: ${match[2]}"
+    _dev_puts "Repo: ${match[3]}"
+    open "https://${match[1]}/${match[2]}/${match[3]}"
+  else
+    _dev_puts "Can't find repo - if HTTPS then a regex for HTTPS repo's needs
+    to be added to dev."
+  fi
+}
+
 function _dev_help() {
   local workspace="$(_dev_workspace)"
   _dev_puts "Usage: dev [command] [arguments]"
@@ -148,6 +163,11 @@ function dev() {
     fi
   elif [[ $sub_command = "new" ]]; then
     _dev_new "$2"
+    if [[ $? -ne 0 ]]; then
+      _dev_puts "An error occured" >&2
+    fi
+  elif [[ $sub_command = "repo" ]]; then
+    _dev_repo "$2"
     if [[ $? -ne 0 ]]; then
       _dev_puts "An error occured" >&2
     fi

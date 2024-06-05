@@ -9,7 +9,7 @@
 Plug 'davidbeckingsale/writegood.vim'
 
 function! s:ConfigWritegood()
-  autocmd Filetype markdown setlocal :WritegoodEnable
+  autocmd Filetype markdown setlocal call :WritegoodEnable
 endfunction
 
 augroup WritegoodConfiguration

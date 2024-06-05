@@ -88,7 +88,7 @@ alias mkdir="mkdir -p"
 alias gs="git status"
 alias gglog="git log --pretty=format:\"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]\" --decorate"
 alias today="date +'%Y-%m-%d'"
-alias tnew="tmux new-session -s $(printf '%s\n' \"${PWD##*/}\") -c ${PWD}"
+alias tnew="tmux new-session -s \"${PWD##*/}\""
 alias ggpull="git pull origin $(git_current_branch)"
 alias ggpush="git push origin $(git_current_branch)"
 alias test_gglog="git log \
@@ -106,6 +106,8 @@ compinit
 
 # Scripts in zfunc
 fpath=( ~/.config/zsh/zfunc "${fpath[@]}" )
+fpath=( ~/.config/zsh/zfunc "${fpath[@]}" )
+
 # Autoload everything in zfunc with executable bit
 for func in ~/.config/zsh/zfunc/*(N-.x:t); autoload -Uz $func
 # Remove any duplicates from the path arrays so they aren't super long

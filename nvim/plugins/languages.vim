@@ -54,17 +54,17 @@ Plug 'neoclide/jsonc.vim'
 "
 " Note that treesitter is not a fully-stable feature, so these may not work
 " 100% correctly.
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+" Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 " Treesitter Context: Lightweight alternative to context.vim implemented with
 "   nvim-treesitter.
 " https://github.com/nvim-treesitter/nvim-treesitter-context
-Plug 'nvim-treesitter/nvim-treesitter-context'
-function! s:ConfigTreesitterContext()
-  " TODO: look into whether the vim named color Grey is modified by Base16
-  " colorscheme
-  hi TreesitterContextBottom gui=underline guisp=Grey
-endfunction
+" Plug 'nvim-treesitter/nvim-treesitter-context'
+" function! s:ConfigTreesitterContext()
+"   " TODO: look into whether the vim named color Grey is modified by Base16
+"   " colorscheme
+"   hi TreesitterContextBottom gui=underline guisp=Grey
+" endfunction
 
 " Sleuth: Heuristically set buffer options
 " https://github.com/tpope/vim-sleuth
@@ -91,7 +91,7 @@ endfunction
 
 " Finalize: Call all the plugin configurations after plugins are loaded.
 function! s:ConfigPlugins()
-  call s:ConfigTreesitterContext()
+  " call s:ConfigTreesitterContext()
   call s:ConfigSleuth()
   call s:ConfigEditorconfig()
   call s:ConfigMarkdown()
