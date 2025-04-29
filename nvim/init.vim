@@ -64,6 +64,7 @@ filetype plugin indent on
 "---------------------------------
 let mapleader="\<Space>"
 
+" Reload Vim configurations
 nnoremap <leader>r :source $MYVIMRC<cr>
 
 map <Leader>ve :edit ~/.config/nvim/init.vim<cr>
@@ -143,18 +144,18 @@ source ~/.config/nvim/plugins/fzf.vim
 source ~/.config/nvim/plugins/startify.vim
 source ~/.config/nvim/plugins/splitjoin.vim
 source ~/.config/nvim/plugins/surround.vim
-source ~/.config/nvim/plugins/writegood.vim
+" TODO This is causing some problems
+" source ~/.config/nvim/plugins/writegood.vim
 source ~/.config/nvim/plugins/tabular.vim
 source ~/.config/nvim/plugins/copilot.vim
 
 " ***** Display Plugins *****
 source ~/.config/nvim/plugins/theme.vim
 source ~/.config/nvim/plugins/theme.lua
-" source ~/.config/nvim/plugins/airline.vim
+source ~/.config/nvim/plugins/airline.vim
 source ~/.config/nvim/plugins/lualine.lua
 source ~/.config/nvim/plugins/coc.vim
 source ~/.config/nvim/plugins/languages.vim
-source ~/.config/nvim/plugins/git-gutter.vim " Deprecated
 
 
 " Potentially deprecated if which-key will work

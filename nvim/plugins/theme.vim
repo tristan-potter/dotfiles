@@ -27,7 +27,8 @@ endfunction
 " https://github.com/lukas-reineke/indent-blankline.nvim
 " This plugin adds indentation guides to all lines (including empty lines).
 " It uses Neovims virtual text feature and no conceal.
-Plug 'lukas-reineke/indent-blankline.nvim'
+" TODO This is not working properly, errors on start
+" Plug 'lukas-reineke/indent-blankline.nvim'
 function! s:ConfigIndentBlankline()
 
 
@@ -60,8 +61,6 @@ function! s:ConfigPlugins()
   " colorscheme themer
   " colorscheme solarized8_high
   colorscheme base16-onedark
-
-  call s:ConfigIndentBlankline()
 endfunction
 
 function! SyntaxGroup()

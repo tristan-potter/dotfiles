@@ -2,13 +2,13 @@
   "coc.preferences.extensionUpdateCheck": "daily",
   "semanticTokens.filetypes": ["*"],
 
-  "[css][markdown][ruby]": {
+  "[css][ruby]": {
     "coc.preferences.formatOnSave": true
   },
 
   "[handlebars][hbs][html]": {
-    "coc.preferences.semanticTokensHighlights": true
-    "coc.preferences.colorSupport": true,
+    "coc.preferences.semanticTokensHighlights": true,
+    "coc.preferences.colorSupport": true
   },
 
   "solargraph.diagnostics": true,
@@ -35,4 +35,7 @@
   "prettier.enable": true,
 
   "eslint.autoFixOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
 }
