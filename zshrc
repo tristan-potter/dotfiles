@@ -9,7 +9,6 @@ if [[ -x $(command -v 'bat') ]]; then
 fi
 
 # Plugins
-# TODO this doesn't seem to be working
 [ -f $HOME/.config/zsh/antigenrc ] && source $HOME/.config/zsh/antigenrc
 
 tm () {

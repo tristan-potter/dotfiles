@@ -410,13 +410,16 @@ setup_bin() {
 }
 
 # Install:
-# - go: https://go.dev/doc/install
-# - rust: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 # - heads up for meetings in menu bar: https://github.com/leits/MeetingBar
 # - preview (quick look) for code and other text: https://github.com/sbarex/SourceCodeSyntaxHighlight
 # - preview (quick look) for markdown (rendered): https://github.com/sbarex/QLMarkdown
 # - spotify
 # - solargraph for ruby language server: gem install solargraph
+#
+# Also install 
+# - asdf plugin add golang https://github.com/asdf-community/asdf-golang.git
+# - asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
+# - asdf plugin add ruby https://github.com/asdf-vm/asdf-ruby.git
 
 # Checkout raycast alfred replacement
 main() {
