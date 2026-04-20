@@ -48,3 +48,6 @@ tags
 
 # Persistent undo
 [._]*.un~
+
+personal/
+gitconfig.local

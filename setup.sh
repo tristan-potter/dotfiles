@@ -410,6 +410,7 @@ setup_bin() {
 }
 
 # Install:
+# - zoxide: brew install zoxide
 # - heads up for meetings in menu bar: https://github.com/leits/MeetingBar
 # - preview (quick look) for code and other text: https://github.com/sbarex/SourceCodeSyntaxHighlight
 # - preview (quick look) for markdown (rendered): https://github.com/sbarex/QLMarkdown
