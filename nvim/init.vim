@@ -155,6 +155,11 @@ source ~/.config/nvim/plugins/lualine.lua
 source ~/.config/nvim/plugins/coc.vim
 source ~/.config/nvim/plugins/languages.vim
 
+" Colors, combine this into one
+source ~/.config/nvim/plugins/solarized.vim
+source ~/.config/nvim/plugins/hexokinase.vim
+source ~/.config/nvim/plugins/colors.vim
+source ~/.config/nvim/plugins/tint.vim
 
 " Potentially deprecated if which-key will work
 source ~/.config/nvim/plugins/peekaboo.vim
@@ -204,3 +209,13 @@ function! GenerateHeader(width, word, symbol)
 endfunction
 
 command! -nargs=0 CreateHeader :call GenerateHeader(80, getline("."), split(&commentstring, '%s')[0])
+
+" When the tmux pane loses focus, dim the active split to match inactive
+" appearance. tint.nvim handles active vs inactive splits within vim
+" automatically via WinEnter/WinLeave. Requires focus-events on in tmux.conf.
+" _G._tint_focus_lost is defined in tint.vim where lua<<EOF is reliable.
+augroup FocusDim
+  autocmd!
+  autocmd FocusLost   * lua _G._tint_focus_lost()
+  autocmd FocusGained * lua require("tint").untint(vim.api.nvim_get_current_win())
+augroup end
