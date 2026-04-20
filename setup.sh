@@ -428,7 +428,6 @@ setup_bin() {
 # - heads up for meetings in menu bar: https://github.com/leits/MeetingBar
 # - preview (quick look) for code and other text: https://github.com/sbarex/SourceCodeSyntaxHighlight
 # - spotify
-# - solargraph for ruby language server: gem install solargraph
 
 # Checkout raycast alfred replacement
 main() {
