@@ -21,12 +21,12 @@ let $FZF_DEFAULT_OPTS = '--layout=reverse --info=inline'
 "     \ call fzf#run(fzf#wrap('files', fzf#vim#with_preview({ 'dir': <q-args>, 'sink': 'e', 'source': 'rg --files --hidden --glob "!.git/*"' }), <bang>0))
 
 " " Add an AllFiles variation that ignores .gitignore files
-" command! -bang -nargs=? -complete=dir AllFiles
-"     \ call fzf#run(fzf#wrap('allfiles', fzf#vim#with_preview({ 'dir': <q-args>, 'sink': 'e', 'source': 'rg --files --hidden --no-ignore --glob "!.git/*"' }), <bang>0))
+command! -bang -nargs=? -complete=dir AllFiles
+    \ call fzf#run(fzf#wrap('allfiles', fzf#vim#with_preview({ 'dir': <q-args>, 'sink': 'e', 'source': 'rg --files --hidden --no-ignore --glob "!.git/*"' }), <bang>0))
 
 nnoremap <C-P> :Files<CR>
-nmap <leader>f :Files<cr>
-nmap <leader>F :AllFiles<cr>
+nmap \f :Files<cr>
+nmap <leader>f :AllFiles<cr>
 nmap <leader>b :Buffers<cr>
 nmap \b :Buffers<cr>
 nmap <leader>h :History<cr>
