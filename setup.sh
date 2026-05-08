@@ -390,6 +390,8 @@ setup_tools() {
 
   brew_install "${step_name}" "fzf" "$(brew --prefix)/opt/fzf/install"
   brew_install "${step_name}" "zoxide"
+  brew_install "${step_name}" "vhs"
+  brew_install "${step_name}" "gifsicle"
 
   log "${step_name}" "Finished."
 }
