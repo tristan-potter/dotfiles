@@ -239,6 +239,14 @@ setup_git() {
     return 1;
   fi
 
+  if ! [[ -f "$HOME/.gitconfig.local" ]]; then
+    log "${step_name}" "No ~/.gitconfig.local found. Creating one..."
+    touch "$HOME/.gitconfig.local"
+    read -r -p "Enter your git email address: " git_email
+    printf "[user]\n\temail = %s\n" "${git_email}" >> "$HOME/.gitconfig.local"
+    log "${step_name}" "Wrote email to ~/.gitconfig.local"
+  fi
+
   log "${step_name}" "Finished."
 }
 
