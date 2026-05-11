@@ -92,7 +92,7 @@ setup_brew() {
   log_step "$step_name"
 
   log "$step_name" "Verifying presence..."
-  if [[ -x /usr/local/bin/brew ]]; then
+  if [[ -x /opt/homebrew/bin/brew ]] || [[ -x /usr/local/bin/brew ]]; then
     log "$step_name" "Already installed."
   else
     log "$step_name" "Not found. Installing..."
