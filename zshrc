@@ -44,10 +44,10 @@ function prompt_host() {
   local spin_id="spin"
   if [[ $HOST =~ $local_id ]]; then
     echo ''
-  elif [[ $HOST =~ $spin ]]; then
+  elif [[ $HOST =~ $spin_id ]]; then
     echo "%F{blue}꩜ | %f"
   else
-    echo '%F{blue}${HOST%%.*} | %f'
+    echo "%F{blue}${HOST%%.*} | %f"
   fi
 }
 
