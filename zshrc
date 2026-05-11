@@ -43,11 +43,13 @@ function prompt_host() {
   local local_id=".local"
   local spin_id="spin"
   if [[ $HOST =~ $local_id ]]; then
-    echo ''
-  elif [[ $HOST =~ $spin ]]; then
+    echo "%F{blue}󰍛 | %f"
+  elif [[ $HOST =~ $spin_id ]]; then
     echo "%F{blue}꩜ | %f"
+  elif [[ $HOST != *.* ]]; then
+    echo "%F{blue}󰍛 | %f"
   else
-    echo '%F{blue}${HOST%%.*} | %f'
+    echo "%F{blue}${HOST%%.*} | %f"
   fi
 }
 
@@ -88,7 +90,7 @@ alias mkdir="mkdir -p"
 alias gs="git status"
 alias gglog="git log --pretty=format:\"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]\" --decorate"
 alias today="date +'%Y-%m-%d'"
-alias tnew="tmux new-session -s"
+alias tnew="tmux new-session -s \"${PWD##*/}\""
 alias ggpull="git pull origin $(git_current_branch)"
 alias ggpush="git push origin $(git_current_branch)"
 alias test_gglog="git log \
@@ -98,8 +100,7 @@ alias test_gglog="git log \
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # Use completions installed through brew
-if type brew &>/dev/null
-then
+if type brew &>/dev/null; then
   FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
 fi
 autoload -Uz compinit
@@ -107,6 +108,8 @@ compinit
 
 # Scripts in zfunc
 fpath=( ~/.config/zsh/zfunc "${fpath[@]}" )
+fpath=( ~/.config/zsh/zfunc "${fpath[@]}" )
+
 # Autoload everything in zfunc with executable bit
 for func in ~/.config/zsh/zfunc/*(N-.x:t); autoload -Uz $func
 # Remove any duplicates from the path arrays so they aren't super long
@@ -115,8 +118,9 @@ typeset -U path cdpath fpath manpath
 # Auto-generated
 [[ -x /opt/homebrew/bin/brew ]] && eval $(/opt/homebrew/bin/brew shellenv)
 
-if [ "$TMUX" = "" ]; then tmux new -As0; fi
+# if [ "$TMUX" = "" ]; then tmux new -As0; fi
 
 . $(brew --prefix)/opt/asdf/libexec/asdf.sh
 
 if [[ -x /usr/local/go ]]; then path+=('/usr/local/go/bin'); fi
+path+=("$HOME/.config/bin")

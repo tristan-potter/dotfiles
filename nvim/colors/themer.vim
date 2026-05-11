@@ -1,0 +1,1 @@
+../../themer/out/macos-solarized/vim/ThemerVim.vim

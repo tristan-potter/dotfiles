@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+# Used by NVIM for Markdown to open the system dictionary for spell
+# checking
+set -e
+
+function main() {
+    open "dict://$1"
+}
+
+main "$1"

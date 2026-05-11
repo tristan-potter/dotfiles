@@ -17,12 +17,15 @@ let g:coc_global_extensions = [
       \'coc-html',
       \'coc-vimlsp',
       \]
+let g:coc_default_semantic_highlight_groups = 1
 
-" Set coc_setting.json as jsonc so comments work
 augroup coc_config_ft
   au!
+  " Set coc_setting.json as jsonc so comments work
   autocmd BufNewFile,BufRead coc_settings.json set syntax=jsonc
   autocmd BufNewFile,BufRead coc_settings.json set filetype=jsonc
+  " Set tailwind.css as scss so it's correctly highlighted
+  autocmd BufNewFile,BufRead application.tailwind.css set filetype=scss 
 augroup END
 
 " Prettier

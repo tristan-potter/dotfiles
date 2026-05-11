@@ -1,7 +1,14 @@
 {
   "coc.preferences.extensionUpdateCheck": "daily",
-  "[css][markdown][ruby]": {
+  "semanticTokens.filetypes": ["*"],
+
+  "[css][ruby]": {
     "coc.preferences.formatOnSave": true
+  },
+
+  "[handlebars][hbs][html]": {
+    "coc.preferences.semanticTokensHighlights": true,
+    "coc.preferences.colorSupport": true
   },
 
   "solargraph.diagnostics": true,
@@ -21,8 +28,6 @@
   // coc-marketplace
   "marketplace.npmsio": false,
 
-  // coc-git
-
   // coc-tsserver
   "tsserver.enable": true,
   "tsserver.useSyntaxServer": "auto",
@@ -30,4 +35,7 @@
   "prettier.enable": true,
 
   "eslint.autoFixOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
 }

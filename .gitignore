@@ -2,3 +2,5 @@
 .DS_Store
 *.log
 .*~$
+
+themer/node_modules/

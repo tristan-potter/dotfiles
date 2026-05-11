@@ -2,11 +2,31 @@
 
 function _dev_puts() {
   # better than echo
-  printf '%s\n' "$1"
+  printf "%s\\n" "$1"
 }
 
 function _dev_workspace() {
   _dev_puts "$HOME/src"
+}
+
+function _dev_git_account() {
+  _dev_puts "tristan-potter"
+}
+
+function _dev_git_repo_uri() {
+  local account=$(_dev_git_account)
+  local repo="${1}"
+
+  _dev_puts "git@github.com:${account}/${repo}.git"
+}
+
+function _dev_personal_workspace() {
+  _dev_puts "$(_dev_workspace)/github.com/$(_dev_git_account)"
+}
+
+function _dev_personal_repo_dir() {
+  local repo=$1
+  _dev_puts "$(_dev_personal_workspace)/${repo}"
 }
 
 function _dev_get_repo_options() {
@@ -24,7 +44,7 @@ function _dev_get_repo_options() {
 # Takes one argument, the folder to find in $workspace/*/*/
 function _dev_get_matches() {
   local workspace=$(_dev_workspace)
-  local matches="$(find $workspace -type d -depth 3 -name \*$1\*)"
+  local matches="$(find $workspace -type dl -depth 3 -name \*$1\*)"
   if [[ $? -ne 0 ]]; then
     _dev_puts ""
     return 1
@@ -42,23 +62,85 @@ function _dev_get_matches() {
 function _dev_cd(){
   local repository=$1
   local workspace="$(_dev_workspace)"
-  local matches="$(_dev_get_matches $repository)"
+  local matches="$(_dev_get_matches ${repository})"
   local number_of_matches="$(_dev_puts "$matches" | wc -l | xargs)"
 
-  if [[ $matches = "" ]]; then
-    local git_repo="git@github.com:purposemed/$repository.git"
+  if [[ ${matches} = "" ]]; then
+    local git_repo="$(_dev_git_repo_uri ${repository})"
     _dev_puts "Repository $2 does not exist. If this is a git repo:"
     _dev_puts ""
-    _dev_puts "  git clone $git_repo $workspace/github.com/purposemed/$repository"
+    _dev_puts "  dev clone ${repository}"
     return 1
-  elif [[ $number_of_matches = '1' ]]; then
-    cd $matches
+  elif [[ ${number_of_matches} = '1' ]]; then
+    cd ${matches}
     return 0
   else
-    cd $(_dev_get_repo_options $matches)
+    cd $(_dev_get_repo_options ${matches})
     return 0
   fi
+}
 
+# name: string => void
+# Attempts to create a new project in the main workspace.
+function _dev_new(){
+  local name=$1
+  local workspace="$(_dev_workspace)"
+  local repo_dir="$(_dev_personal_repo_dir ${name})"
+
+  mkdir "${repo_dir}"
+  cd "${repo_dir}"
+  git init
+  # TODO Should do setup for asdf and then Rails or Typescript
+  return 0
+}
+
+# name: string => void
+# Attempts to clone a git repository of the same name
+function _dev_clone(){
+  local name=$1
+  local workspace="$(_dev_workspace)"
+
+  cd "$(_dev_personal_workspace)"
+  git clone "$(_dev_git_repo_uri ${name})"
+  cd "${name}"
+  return 0
+}
+
+# ?: string => void
+# Start the default server setup for the repo.
+function _dev_server(){
+  # TODO later make this work in any sub-directory within a given project
+  _dev_puts "This is under construction"
+  if [[ -f "./Procfile" ]]; then
+    # Run profile?
+
+  fi
+  return 0
+}
+
+function _dev_rails_generate(){
+  local sub_command=$1
+  local name=$2
+  if [[ -x ./bin/rails ]]; then
+    ./bin/rails generate "${sub_command}" "${name}"
+  else
+    _dev_puts "Rails not found in this directory."
+  fi
+}
+
+function _dev_repo() {
+  local remote=$(git remote -v | grep fetch | awk '{print $2}')
+  _dev_puts $remote
+  local git_regex="^git\@(.*):(.*)\/(.*)\.git$"
+  if [[ $remote =~ $git_regex ]]; then
+    _dev_puts "Domain: ${match[1]}"
+    _dev_puts "Account: ${match[2]}"
+    _dev_puts "Repo: ${match[3]}"
+    open "https://${match[1]}/${match[2]}/${match[3]}"
+  else
+    _dev_puts "Can't find repo - if HTTPS then a regex for HTTPS repo's needs
+    to be added to dev."
+  fi
 }
 
 function _dev_help() {
@@ -68,6 +150,7 @@ function _dev_help() {
   _dev_puts "Commands:"
   _dev_puts "  cd: change to a project directory in $workspace"
   _dev_puts "  test: run changed and new specs, currently requires you to be in a project with rspec"
+  _dev_puts "  new: WIP creates a new folder in the project workspace and initializes git"
 }
 
 function dev() {
@@ -76,11 +159,41 @@ function dev() {
   if [[ $sub_command = "cd" ]]; then
     _dev_cd "$2"
     if [[ $? -ne 0 ]]; then
-      # TODO Maybe I need a generic error
-      _dev_puts "" >&2
+      _dev_puts "An error occured" >&2
+    fi
+  elif [[ $sub_command = "new" ]]; then
+    _dev_new "$2"
+    if [[ $? -ne 0 ]]; then
+      _dev_puts "An error occured" >&2
+    fi
+  elif [[ $sub_command = "repo" ]]; then
+    _dev_repo "$2"
+    if [[ $? -ne 0 ]]; then
+      _dev_puts "An error occured" >&2
+    fi
+  elif [[ $sub_command = "server" ]]; then
+    _dev_server "$2"
+    if [[ $? -ne 0 ]]; then
+      _dev_puts "An error occured" >&2
+    fi
+  elif [[ $sub_command = "clone" ]]; then
+    _dev_clone "$2"
+    if [[ $? -ne 0 ]]; then
+      _dev_puts "An error occured" >&2
     fi
   elif [[ $sub_command = "test" ]]; then
     COVERAGE=false rspec $(git ls-files --modified --exclude-standard --others spec)
+
+  # Rails specific shortcuts
+  elif [[ $sub_command = "gen" ]]; then
+    _dev_rails_generate "${2}" "${3}"
+
+  # Aliases at the end
+  elif [[ $sub_command = "s" ]]; then
+    _dev_server "$2"
+    if [[ $? -ne 0 ]]; then
+      _dev_puts "An error occured" >&2
+    fi
   elif [[ $@ = "" ]]; then
     _dev_help
   fi

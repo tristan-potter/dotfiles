@@ -7,3 +7,12 @@
 " https://github.com/davidbeckingsale/writegood.vim
 
 Plug 'davidbeckingsale/writegood.vim'
+
+function! s:ConfigWritegood()
+  autocmd Filetype markdown call WritegoodEnable()
+endfunction
+
+augroup WritegoodConfiguration
+  autocmd!
+  autocmd User PlugLoaded ++nested call s:ConfigWritegood()
+augroup end
