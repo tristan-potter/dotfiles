@@ -121,3 +121,4 @@ typeset -U path cdpath fpath manpath
 . $(brew --prefix)/opt/asdf/libexec/asdf.sh
 
 if [[ -x /usr/local/go ]]; then path+=('/usr/local/go/bin'); fi
+path+=("$HOME/.config/bin")
