@@ -362,21 +362,6 @@ setup_global_rust() {
   log "${step_name}" "Finished."
 }
 
-setup_postgres() {
-  local step_name="PostgreSQL"
-  log_step "${step_name}"
-  add_asdf_plugin ${step_name} "postgres" "https://github.com/smashedtoatoms/asdf-postgres.git"
-
-  # see https://github.com/smashedtoatoms/asdf-postgres#mac
-  brew_install "${step_name}" "gcc"
-  brew_install "${step_name}" "readline"
-  brew_install "${step_name}" "zlib"
-  brew_install "${step_name}" "curl"
-  brew_install "${step_name}" "ossp-uuid"
-
-  log "${step_name}" "Finished."
-}
-
 setup_xcode_command_line_tools() {
   local step_name="XCode Tools"
   log_step "${step_name}"
@@ -399,25 +384,11 @@ setup_tools() {
   brew_install "${step_name}" "bat"
   brew_install "${step_name}" "jq"
   brew_install "${step_name}" "ripgrep"
-  brew_install "${step_name}" "qlmarkdown" 
-  brew_install "${step_name}" "quicklook-json"
-  brew_install "${step_name}" "qlimagesize"
-  brew_install "${step_name}" "apparency" 
-  brew_install "${step_name}" "quicklookase"
+  brew_install "${step_name}" "qlmarkdown"
+  brew_install "${step_name}" "apparency"
   brew_install "${step_name}" "qlvideo"
 
   brew_install "${step_name}" "fzf" "$(brew --prefix)/opt/fzf/install"
-
-  log "${step_name}" "Finished."
-}
-
-setup_heroku() {
-  local step_name="Heroku"
-  log_step "${step_name}"
-
-  brew tap heroku/brew | add_step_to_output "${step_name}"
-  brew_install "${step_name}" "heroku"
-  heroku autocomplete --refresh-cache | add_step_to_output "${step_name}"
 
   log "${step_name}" "Finished."
 }
@@ -463,10 +434,8 @@ main() {
   setup_global_golang
   setup_global_rust
   asdf install
-  setup_postgres
   setup_xcode_command_line_tools
   setup_tools
-  setup_heroku
 }
 
 main
