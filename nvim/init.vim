@@ -151,8 +151,6 @@ source ~/.config/nvim/plugins/copilot.vim
 
 " ***** Display Plugins *****
 source ~/.config/nvim/plugins/theme.vim
-source ~/.config/nvim/plugins/theme.lua
-source ~/.config/nvim/plugins/airline.vim
 source ~/.config/nvim/plugins/lualine.lua
 source ~/.config/nvim/plugins/coc.vim
 source ~/.config/nvim/plugins/languages.vim
