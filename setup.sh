@@ -72,11 +72,10 @@ brew_install() {
       return 1;
     fi
 
-    if ! [[ "${post_install}" -eq 0 ]]; then
+    if [[ -n "${post_install}" ]]; then
       log "${step}" "Running post-install script for ${name}:"
       log "${step}" "\t ${post_install}"
-      # TODO this feels wrong
-      $(post_install)
+      ${post_install}
       if (( $? != 0 )); then
         error "${step}" "Post-install script for ${name} failed."
         return 1;
@@ -113,12 +112,12 @@ setup_kitty() {
     rm -rf $HOME/.config/kitty
     ln -s "$(pwd)/kitty" $HOME/.config/kitty
     if (( $? != 0 )); then
-      error "${step}" "Linking configuration file failed with ${?}."
+      error "${step_name}" "Linking configuration file failed with ${?}."
       return 1;
     fi
     log "$step_name" "Finished."
   else
-    error "${step}" "Not found. Please download the DMG for Kitty from\n\t https://github.com/kovidgoyal/kitty/releases"
+    error "${step_name}" "Not found. Please download the DMG for Kitty from\n\t https://github.com/kovidgoyal/kitty/releases"
   fi
 }
 
@@ -137,12 +136,12 @@ setup_zsh(){
   ln -s "$(pwd)/zshrc" $HOME/.zshrc
   # TODO extract linking logic into a helper
   if (( $? != 0 )); then
-    error "${step}" "Linking configuration file failed with ${?}."
+    error "${step_name}" "Linking configuration file failed with ${?}."
     return 1;
   fi
   ln -s "$(pwd)/zsh" $HOME/.config/zsh
   if (( $? != 0 )); then
-    error "${step}" "Linking configuration file failed with ${?}."
+    error "${step_name}" "Linking configuration file failed with ${?}."
     return 1;
   fi
   # TODO: Add something about zprofile
@@ -155,7 +154,7 @@ setup_nvim(){
 
   brew_install "${step_name}" "neovim"
   if (( $? != 0 )); then
-    error "${step}" "Installation failed."
+    error "${step_name}" "Installation failed."
     return 1;
   fi
 
@@ -165,12 +164,12 @@ setup_nvim(){
   log "$step_name" "Linking configuration files..."
   ln -s "$(pwd)/nvim" $HOME/.config/nvim
   if (( $? != 0 )); then
-    error "${step}" "Linking configuration file failed with ${?}."
+    error "${step_name}" "Linking configuration file failed with ${?}."
     return 1;
   fi
 
   if ! [[ -f $HOME/.config/nvim/colors/themer.vim ]]; then
-    ln -s "$(pwd)/themer/out/macos/vim/ThemerVim.vim" $HOME/.config/nvim/colors/themer.vim
+    ln -s "$(pwd)/themer/out/macos-solarized/vim/ThemerVim.vim" $HOME/.config/nvim/colors/themer.vim
   fi
 
   log "$step_name" "Finished."
@@ -189,12 +188,12 @@ setup_tmux() {
   log "$step_name" "Linking configuration files..."
   ln -s "$(pwd)/tmux.conf" $HOME/.tmux.conf
   if (( $? != 0 )); then
-    error "${step}" "Linking configuration file failed with ${?}."
+    error "${step_name}" "Linking configuration file failed with ${?}."
     return 1;
   fi
   ln -s "$(pwd)/tmux" $HOME/.config/tmux
   if (( $? != 0 )); then
-    error "${step}" "Linking configuration file failed with ${?}."
+    error "${step_name}" "Linking configuration file failed with ${?}."
     return 1;
   fi
   log "$step_name" "Finished."
@@ -213,7 +212,7 @@ setup_wtf() {
   log "${step_name}" "Linking configuration files..."
   ln -s "$(pwd)/wtf" $HOME/.config/wtf
   if (( $? != 0 )); then
-    error "${step}" "Linking configuration file failed with ${?}."
+    error "${step_name}" "Linking configuration file failed with ${?}."
     return 1;
   fi
 }
@@ -231,12 +230,12 @@ setup_git() {
   log "${step_name}" "Linking configuration files..."
   ln -s "$(pwd)/gitconfig" $HOME/.gitconfig
   if (( $? != 0 )); then
-    error "${step}" "Linking configuration file failed with ${?}."
+    error "${step_name}" "Linking configuration file failed with ${?}."
     return 1;
   fi
   ln -s "$(pwd)/gitignore" $HOME/.gitignore
   if (( $? != 0 )); then
-    error "${step}" "Linking configuration file failed with ${?}."
+    error "${step_name}" "Linking configuration file failed with ${?}."
     return 1;
   fi
 
@@ -256,12 +255,12 @@ setup_asdf() {
   log "${step_name}" "Linking configuration files..."
   ln -s "$(pwd)/asdf/asdfrc" $HOME/.asdfrc
   if (( $? != 0 )); then
-    error "${step}" "Linking configuration file failed with ${?}."
+    error "${step_name}" "Linking configuration file failed with ${?}."
     return 1;
   fi
   ln -s "$(pwd)/asdf/tool-versions" $HOME/.tool-versions
   if (( $? != 0 )); then
-    error "${step}" "Linking configuration file failed with ${?}."
+    error "${step_name}" "Linking configuration file failed with ${?}."
     return 1;
   fi
 
@@ -313,7 +312,7 @@ asdf_add_global() {
   if ! grep -Fq "${plugin}" "${HOME}/.tool-versions"; then
     asdf global "${plugin}" "latest" | add_step_to_output "${step_name}"
   else
-    log "${step_name}" "Plugin ${plugin_name} already added to global tool-versions."
+    log "${step_name}" "Plugin ${plugin} already added to global tool-versions."
   fi
 }
 
@@ -418,21 +417,6 @@ setup_heroku() {
   log "${step_name}" "Finished."
 }
 
-link_config() {
-  local $source_name=$1
-  local $dest=$2
-
-  log "${step_name}" "Removing existing configurations"
-  rm -rf $HOME/.config/bin
-
-  log "${step_name}" "Linking configuration files..."
-  ln -s "$(pwd)/bin" $HOME/.config/bin
-  if (( $? != 0 )); then
-    error "${step}" "Linking configuration file failed with ${?}."
-    return 1;
-  fi
-}
-
 # Custom bash scripts
 setup_bin() {
   local step_name="User-defined binaries"
@@ -444,7 +428,7 @@ setup_bin() {
   log "${step_name}" "Linking configuration files..."
   ln -s "$(pwd)/bin" $HOME/.config/bin
   if (( $? != 0 )); then
-    error "${step}" "Linking configuration file failed with ${?}."
+    error "${step_name}" "Linking configuration file failed with ${?}."
     return 1;
   fi
 }
@@ -471,6 +455,7 @@ main() {
   setup_asdf
   setup_global_nodejs
   setup_global_ruby
+  setup_global_golang
   setup_global_rust
   setup_postgres
   setup_xcode_command_line_tools
