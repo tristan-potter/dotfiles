@@ -264,9 +264,6 @@ setup_asdf() {
     return 1;
   fi
 
-  log "${step_name}" "Installing plugins..."
-  asdf install | add_step_to_output "${step_name}"
-
   log "${step_name}" "Finished."
 }
 
@@ -457,6 +454,7 @@ main() {
   setup_global_ruby
   setup_global_golang
   setup_global_rust
+  asdf install
   setup_postgres
   setup_xcode_command_line_tools
   setup_tools
