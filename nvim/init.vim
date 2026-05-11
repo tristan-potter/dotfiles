@@ -154,6 +154,7 @@ source ~/.config/nvim/plugins/theme.vim
 source ~/.config/nvim/plugins/lualine.lua
 source ~/.config/nvim/plugins/coc.vim
 source ~/.config/nvim/plugins/languages.vim
+source ~/.config/nvim/plugins/treesitter.vim
 
 " Colors, combine this into one
 source ~/.config/nvim/plugins/solarized.vim

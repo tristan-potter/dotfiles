@@ -327,6 +327,9 @@ setup_global_nodejs() {
   add_asdf_plugin ${step_name} "nodejs" "https://github.com/asdf-vm/asdf-nodejs.git"
   asdf_add_global "${step_name}" "nodejs"
 
+  rm -f "$HOME/.default-npm-packages"
+  ln -s "$(pwd)/asdf/default-npm-packages" "$HOME/.default-npm-packages"
+
   log "${step_name}" "Finished."
 }
 
@@ -392,6 +395,7 @@ setup_tools() {
   brew_install "${step_name}" "zoxide"
   brew_install "${step_name}" "vhs"
   brew_install "${step_name}" "gifsicle"
+  brew_install "${step_name}" "tree-sitter"
 
   log "${step_name}" "Finished."
 }
