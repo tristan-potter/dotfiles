@@ -46,6 +46,8 @@ function prompt_host() {
     echo "%F{blue}󰍛 | %f"
   elif [[ $HOST =~ $spin_id ]]; then
     echo "%F{blue}꩜ | %f"
+  elif [[ $HOST != *.* ]]; then
+    echo "%F{blue}󰍛 | %f"
   else
     echo "%F{blue}${HOST%%.*} | %f"
   fi
