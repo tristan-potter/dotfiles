@@ -144,6 +144,12 @@ setup_zsh(){
     error "${step_name}" "Linking configuration file failed with ${?}."
     return 1;
   fi
+  if ! [[ -f "$HOME/.zshrc.local" ]]; then
+    log "${step_name}" "No ~/.zshrc.local found. Copying template..."
+    cp "$(pwd)/zshrc.local" "$HOME/.zshrc.local"
+    log "${step_name}" "Copied zshrc.local to ~/.zshrc.local — edit it to fill in your values."
+  fi
+
   # TODO: Add something about zprofile
   log "$step_name" "Finished."
 }

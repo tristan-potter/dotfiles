@@ -136,9 +136,6 @@ if [ "$TMUX" = "" ]; then tmux new-session -As "$(basename "$PWD")" -c "$PWD"; f
 if [[ -x /usr/local/go ]]; then path+=('/usr/local/go/bin'); fi
 path+=("$HOME/.config/bin")
 
-source /Users/tristanpotter/.config/op/plugins.sh
-
-# AWS config for DealMaker
-export AWS_PROFILE=dealmaker_dev
-export SSH_AUTH_SOCK="/Users/tristanpotter/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
 export PATH="$HOME/.local/bin:$PATH"
+
+[[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
