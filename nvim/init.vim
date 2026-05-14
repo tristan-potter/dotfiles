@@ -156,10 +156,7 @@ source ~/.config/nvim/plugins/coc.vim
 source ~/.config/nvim/plugins/languages.vim
 source ~/.config/nvim/plugins/treesitter.vim
 
-" Colors, combine this into one
 source ~/.config/nvim/plugins/solarized.vim
-source ~/.config/nvim/plugins/hexokinase.vim
-source ~/.config/nvim/plugins/colors.vim
 source ~/.config/nvim/plugins/tint.vim
 
 " Potentially deprecated if which-key will work
