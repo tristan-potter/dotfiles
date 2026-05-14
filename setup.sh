@@ -402,6 +402,7 @@ setup_tools() {
   brew_install "${step_name}" "vhs"
   brew_install "${step_name}" "gifsicle"
   brew_install "${step_name}" "tree-sitter"
+  brew_install "${step_name}" "libyaml"
 
   log "${step_name}" "Finished."
 }
