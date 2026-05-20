@@ -126,14 +126,10 @@ for func in ~/.config/zsh/zfunc/*(N-.x:t); autoload -Uz $func
 # Remove any duplicates from the path arrays so they aren't super long
 typeset -U path cdpath fpath manpath
 
-# Auto-generated
-[[ -x /opt/homebrew/bin/brew ]] && eval $(/opt/homebrew/bin/brew shellenv)
-
 if [ "$TMUX" = "" ]; then tmux new-session -As "$(basename "$PWD")" -c "$PWD"; fi
 
 . $(brew --prefix)/opt/asdf/libexec/asdf.sh
 
-if [[ -x /usr/local/go ]]; then path+=('/usr/local/go/bin'); fi
 path+=("$HOME/.config/bin")
 
 export PATH="$HOME/.local/bin:$PATH"
