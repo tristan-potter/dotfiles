@@ -51,3 +51,5 @@ tags
 
 personal/
 gitconfig.local
+
+**/.claude/settings.local.json
