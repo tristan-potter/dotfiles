@@ -9,14 +9,21 @@ if [[ -x $(command -v 'bat') ]]; then
 fi
 
 # Plugins
-# TODO this doesn't seem to be working
 [ -f $HOME/.config/zsh/antigenrc ] && source $HOME/.config/zsh/antigenrc
 
 tm () {
+    local folder=$(basename "$PWD")
+    local create_opt="New session: $folder"
     local session
-    newsession=${1:-new}
-    session=$(tmux list-sessions -F "#{session_name}" | \
-    fzf --query="$1" --select-1 --exit-0)  && tmux attach-session -t "$session" || tmux new-session -s $newsession
+    session=$( (echo "$create_opt"; tmux list-sessions -F "#{session_name}" 2>/dev/null) | \
+        fzf --query="${1:-}" --select-1 --exit-0)
+    if [[ "$session" == "$create_opt" ]]; then
+        tmux new-session -As "$folder" -c "$PWD"
+    elif [[ -n "$session" ]]; then
+        tmux attach-session -t "$session"
+    else
+        tmux new-session -As "${1:-$folder}" -c "$PWD"
+    fi
 }
 # Pulled from https://github.com/ohmyzsh/ohmyzsh/blob/master/lib/git.zsh
 # Remove once I get antigen working
@@ -86,11 +93,12 @@ bindkey -v
 
 alias vim="nvim"
 alias zshconfig="vim ~/.zshrc"
+alias zshreload="source ~/.zshrc"
 alias mkdir="mkdir -p"
 alias gs="git status"
+alias gts='gt submit --no-edit --restack --stack --update-only'
 alias gglog="git log --pretty=format:\"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]\" --decorate"
 alias today="date +'%Y-%m-%d'"
-alias tnew="tmux new-session -s \"${PWD##*/}\""
 alias ggpull="git pull origin $(git_current_branch)"
 alias ggpush="git push origin $(git_current_branch)"
 alias test_gglog="git log \
@@ -106,6 +114,9 @@ fi
 autoload -Uz compinit
 compinit
 
+# Add Zoxide completions
+eval "$(zoxide init zsh)"
+
 # Scripts in zfunc
 fpath=( ~/.config/zsh/zfunc "${fpath[@]}" )
 fpath=( ~/.config/zsh/zfunc "${fpath[@]}" )
@@ -115,12 +126,12 @@ for func in ~/.config/zsh/zfunc/*(N-.x:t); autoload -Uz $func
 # Remove any duplicates from the path arrays so they aren't super long
 typeset -U path cdpath fpath manpath
 
-# Auto-generated
-[[ -x /opt/homebrew/bin/brew ]] && eval $(/opt/homebrew/bin/brew shellenv)
-
-# if [ "$TMUX" = "" ]; then tmux new -As0; fi
+if [ "$TMUX" = "" ]; then tmux new-session -As "$(basename "$PWD")" -c "$PWD"; fi
 
 . $(brew --prefix)/opt/asdf/libexec/asdf.sh
 
-if [[ -x /usr/local/go ]]; then path+=('/usr/local/go/bin'); fi
 path+=("$HOME/.config/bin")
+
+export PATH="$HOME/.local/bin:$PATH"
+
+[[ -f ~/.zshrc.local ]] && source ~/.zshrc.local

@@ -144,6 +144,12 @@ setup_zsh(){
     error "${step_name}" "Linking configuration file failed with ${?}."
     return 1;
   fi
+  if ! [[ -f "$HOME/.zshrc.local" ]]; then
+    log "${step_name}" "No ~/.zshrc.local found. Copying template..."
+    cp "$(pwd)/zshrc.local" "$HOME/.zshrc.local"
+    log "${step_name}" "Copied zshrc.local to ~/.zshrc.local — edit it to fill in your values."
+  fi
+
   # TODO: Add something about zprofile
   log "$step_name" "Finished."
 }
@@ -327,6 +333,9 @@ setup_global_nodejs() {
   add_asdf_plugin ${step_name} "nodejs" "https://github.com/asdf-vm/asdf-nodejs.git"
   asdf_add_global "${step_name}" "nodejs"
 
+  rm -f "$HOME/.default-npm-packages"
+  ln -s "$(pwd)/asdf/default-npm-packages" "$HOME/.default-npm-packages"
+
   log "${step_name}" "Finished."
 }
 
@@ -347,7 +356,7 @@ setup_global_golang() {
   local step_name="Golang"
   log_step "${step_name}"
   # Can provide global golang packages with $HOME/.default-golang-pkgs
-  add_asdf_plugin ${step_name} "golang" "https://github.com/kennyp/asdf-golang.git"
+  add_asdf_plugin ${step_name} "golang" "https://github.com/asdf-community/asdf-golang.git"
   asdf_add_global "${step_name}" "golang"
 
   log "${step_name}" "Finished."
@@ -389,7 +398,26 @@ setup_tools() {
   brew_install "${step_name}" "qlvideo"
 
   brew_install "${step_name}" "fzf" "$(brew --prefix)/opt/fzf/install"
+  brew_install "${step_name}" "zoxide"
+  brew_install "${step_name}" "vhs"
+  brew_install "${step_name}" "gifsicle"
+  brew_install "${step_name}" "tree-sitter"
+  brew_install "${step_name}" "libyaml"
 
+  log "${step_name}" "Finished."
+}
+
+setup_zprofile() {
+  local step_name="zprofile"
+  log_step "${step_name}"
+
+  log "${step_name}" "Linking configuration files..."
+  rm -f "$HOME/.zprofile"
+  ln -s "$(pwd)/zprofile" "$HOME/.zprofile"
+  if (( $? != 0 )); then
+    error "${step_name}" "Linking configuration file failed with ${?}."
+    return 1;
+  fi
   log "${step_name}" "Finished."
 }
 
@@ -409,20 +437,17 @@ setup_bin() {
   fi
 }
 
-# Install:
-# - go: https://go.dev/doc/install
-# - rust: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+# Install manually (not automated):
 # - heads up for meetings in menu bar: https://github.com/leits/MeetingBar
 # - preview (quick look) for code and other text: https://github.com/sbarex/SourceCodeSyntaxHighlight
-# - preview (quick look) for markdown (rendered): https://github.com/sbarex/QLMarkdown
 # - spotify
-# - solargraph for ruby language server: gem install solargraph
 
 # Checkout raycast alfred replacement
 main() {
   setup_brew
   setup_kitty
   setup_zsh
+  setup_zprofile
   setup_bin
   setup_nvim
   setup_tmux

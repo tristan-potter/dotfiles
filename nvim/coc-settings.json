@@ -6,15 +6,15 @@
     "coc.preferences.formatOnSave": true
   },
 
+  "[css][markdown]": {
+    "coc.preferences.formatOnSave": false
+  },
+
   "[handlebars][hbs][html]": {
     "coc.preferences.semanticTokensHighlights": true,
     "coc.preferences.colorSupport": true
   },
 
-  "solargraph.diagnostics": true,
-  "solargraph.autoformat": true,
-  "solargraph.formatting": true,
-  "solargraph.hover": true,
 
   // coc-json - allows json language schemas
   "json.enable": true,
@@ -34,8 +34,8 @@
 
   "prettier.enable": true,
 
-  "eslint.autoFixOnSave": true,
+  "eslint.autoFixOnSave": false,
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true
+    "source.fixAll.eslint": false
   },
 }

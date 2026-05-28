@@ -12,7 +12,6 @@ let g:coc_global_extensions = [
       \'coc-tsserver',
       \'coc-css',
       \'coc-prettier',
-      \'coc-solargraph',
       \'coc-eslint',
       \'coc-html',
       \'coc-vimlsp',

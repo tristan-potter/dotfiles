@@ -1,8 +1,9 @@
 # This is Git's per-user configuration file.
 [user]
-# Please adapt and uncomment the following lines:
 	name = Tristan Potter
-	email = 4521510+DrTeePot@users.noreply.github.com
+
+[include]
+	path = ~/.gitconfig.local
 
 [alias]
 	ll = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ad) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative --branches --tags --remotes
@@ -41,3 +42,12 @@
 
 [init]
 	defaultBranch = main
+
+[filter "lfs"]
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+
+[gpg]
+	format = ssh

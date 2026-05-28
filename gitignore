@@ -48,3 +48,8 @@ tags
 
 # Persistent undo
 [._]*.un~
+
+personal/
+gitconfig.local
+
+**/.claude/settings.local.json
