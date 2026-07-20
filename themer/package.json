@@ -11,7 +11,7 @@
     "@themerdev/vscode": "^2.4.0",
     "@themerdev/wallpaper-block-wave": "^4.0.3",
     "@themerdev/xcode": "^2.1.1",
-    "themer": "^4.0.0",
+    "themer": "^6.9.1",
     "themer-tmux": "^1.0.4"
   },
   "scripts": {
